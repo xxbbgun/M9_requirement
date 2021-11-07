@@ -2,13 +2,12 @@ const mongoose = require("../config/database");
 const Schema = mongoose.Schema;
 
 const feed = new Schema({
-	name: String,
+	Title: String,
+	Headline: String,
 	description: String,
-	price: Number,
-	quantity: Number,
 	imageUrl: String,
+	DateTime: String,
 	type: String,
-	author: String,
 	status: String
 });
 

@@ -2,8 +2,9 @@ const mongoose = require("../config/database");
 const Schema = mongoose.Schema;
 
 const comment = new Schema({
-	name: String,
-	message: String,
+	Name: String,
+	Message: String,
+	Date: String,
 });
 
 const Comment = mongoose.model("comments", comment);
