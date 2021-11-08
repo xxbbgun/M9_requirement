@@ -6,6 +6,7 @@ import Signup from "./components/login/Signup";
 import NavUser from './components/navbar/NavUser';
 import AddNews from "./components/admin/AddNews";
 import Detail from "./components/admin/Detail";
+import EditNew from "./components/admin/EditNew";
 
 function App() {
   return (
@@ -25,6 +26,9 @@ function App() {
         </Route>
         <Route path="/add-news">
           <AddNews />
+        </Route>
+        <Route path="/edit-news">
+          <EditNew />
         </Route> 
         <Route path="/">
           <Signin />
