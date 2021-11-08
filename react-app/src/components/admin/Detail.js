@@ -1,17 +1,38 @@
 import React from "react";
 import styled from "styled-components";
 import Image from "react-bootstrap/Image";
-import { Form } from "react-bootstrap";
+import { Form, Button, Breadcrumb } from "react-bootstrap";
+import SendIcon from "@mui/icons-material/Send";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import { Link } from "react-router-dom";
 
 function Detail({ className }) {
   return (
     <div className={className}>
       <div className="container">
-        <div className="icon-group">
-          <h3>Hello</h3>
+        <div className="breadAndIcon">
+          <div className="breadcrumb-group">
+            <Breadcrumb>
+              <Breadcrumb.Item href="/home">Home</Breadcrumb.Item>
+              <Breadcrumb.Item active>Health & Medicine</Breadcrumb.Item>
+            </Breadcrumb>
+          </div>
+
+          <div className="icon-group">
+            <div className="edit-icon">
+              <Link to="/edit-news">
+                <EditIcon className="edit" />
+              </Link>
+            </div>
+            <div className="delete-icon">
+              <DeleteForeverIcon className="delete" />
+            </div>
+          </div>
         </div>
-        <div className="detail-title">
-          <h1 className="title-text">หัวข่าว Title</h1>
+
+        <div className="detail-headline">
+          <h1 className="headline-text">Headline</h1>
         </div>
 
         <div className="image-box">
@@ -41,13 +62,21 @@ function Detail({ className }) {
 
         <div className="comment-box">
           <Form.Group className="mb-3">
-            <Form.Label className="title-formlabel">Comment</Form.Label>
+            <Form.Label className="title-formlabel">Add New Comment</Form.Label>
             <Form.Control
-              type="text"
+              as="textarea"
+              rows={3}
               className="input-box"
               placeholder="Enter your Comment"
             />
           </Form.Group>
+
+          <div className="btn-comment">
+            <Button type="submit" className="text-comment">
+              <SendIcon className="send-icon" />
+              POST
+            </Button>
+          </div>
         </div>
       </div>
     </div>
@@ -55,12 +84,28 @@ function Detail({ className }) {
 }
 
 export default styled(Detail)`
-  .icon-group {
+  .breadAndIcon {
     display: flex;
     margin-top: 30px;
-    justify-content: right;
+    justify-content: space-between;
   }
-  .detail-title {
+  .icon-group {
+    display: flex;
+  }
+  .edit-icon {
+    margin-right: 10px;
+  }
+  .edit {
+    width: 38px;
+    height: 40px;
+    color: black;
+  }
+  .delete {
+    width: 40px;
+    height: 40px;
+    color: red;
+  }
+  .detail-headline {
     display: flex;
     margin-top: 30px;
   }
@@ -77,7 +122,22 @@ export default styled(Detail)`
     margin-top: 30px;
   }
   .comment-box {
-      margin-top: 50px;
-
+    margin-top: 50px;
+  }
+  .input-box {
+    border-radius: 15px;
+  }
+  .btn-comment {
+    display: flex;
+    margin-top: 20px;
+    justify-content: right;
+    margin-bottom: 50px;
+  }
+  .text-comment {
+    background: -webkit-linear-gradient(left, #eb1c01, #ff7f01);
+    border: none;
+  }
+  .send-icon {
+    margin-right: 5px;
   }
 `;

@@ -7,6 +7,8 @@ import Home from './components/user/Home';
 import Detail from "./components/admin/Detail";
 import AddNews from "./components/admin/AddNews";
 import UserDetail from "./components/user/UserDetail";
+import EditNew from "./components/admin/EditNew";
+
 function App() {
   return (
     <>
@@ -28,6 +30,9 @@ function App() {
         </Route>
         <Route path="/add-news">
           <AddNews />
+        </Route>
+        <Route path="/edit-news">
+          <EditNew />
         </Route> 
         <Route path="/">
           <Signin />

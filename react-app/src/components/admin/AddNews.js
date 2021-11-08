@@ -6,8 +6,8 @@ function AddNews({ className }) {
   return (
     <div className={className}>
       <div className="container">
-        <div className="addnews-title">
-          <h1 className="title-text">ADD NEWS</h1>
+        <div className="addnews-headline">
+          <h1 className="headline-text">ADD NEWS</h1>
         </div>
         <div className="addnews-form">
           <Form className="form-body">
@@ -63,11 +63,11 @@ function AddNews({ className }) {
 }
 
 export default styled(AddNews)`
-  .addnews-title {
+  .addnews-headline {
     display: flex;
     margin-top: 30px;
   }
-  .title-text {
+  .headline-text {
     color: #eb1c01;
   }
   .title-formlabel {
