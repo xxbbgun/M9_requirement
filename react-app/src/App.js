@@ -8,6 +8,7 @@ import Detail from "./components/admin/Detail";
 import AddNews from "./components/admin/AddNews";
 import UserDetail from "./components/user/UserDetail";
 import EditNew from "./components/admin/EditNew";
+import Comment from "./components/comment/Comment";
 
 function App() {
   return (
@@ -33,7 +34,10 @@ function App() {
         </Route>
         <Route path="/edit-news">
           <EditNew />
-        </Route> 
+        </Route>
+        <Route path="/comment">
+          <Comment />
+        </Route>
         <Route path="/">
           <Signin />
         </Route>
