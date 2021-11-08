@@ -23,6 +23,9 @@ function App() {
         <Route path="/admin-detail">
           <Detail />
         </Route>
+        <Route path="/add-news">
+          <AddNews />
+        </Route> 
         <Route path="/">
           <Signin />
         </Route>
