@@ -21,13 +21,23 @@ function AddNews({ className }) {
             </Form.Group>
 
             <Form.Group className="mb-3">
-              <Form.Label className="title-formlabel">Title</Form.Label>
-              <Form.Control type="text" className="input-box" placeholder="Enter your Title" />
+              <Form.Label className="title-formlabel">Headline</Form.Label>
+              <Form.Control
+                type="text"
+                className="input-box"
+                placeholder="Enter your Headline"
+              />
             </Form.Group>
 
             <Form.Group className="mb-3">
-              <Form.Label className="title-formlabel">Headline</Form.Label>
-              <Form.Control type="text" className="input-box" placeholder="Enter your Headline" />
+              <Form.Label className="title-formlabel">News Type</Form.Label>
+              <Form.Select className="input-box">
+                <option className="text-input">Select your News Type</option>
+                <option value="1" className="text-input">General News & Current Affairs</option>
+                <option value="2" className="text-input">Business, Finance & Economics</option>
+                <option value="3" className="text-input">Health & Medicine</option>
+                <option value="4" className="text-input">Entertainment, Art & Culture</option>
+              </Form.Select>
             </Form.Group>
 
             <Form.Group className="mb-3">
@@ -68,8 +78,11 @@ export default styled(AddNews)`
     border: none;
   }
   .input-box {
-      background-color: #F4F0F0;
-      border: none;
+    background-color: #f4f0f0;
+    border: none;
+  }
+  .text-input {
+    color: gray;
   }
   .btn-post {
     display: flex;
