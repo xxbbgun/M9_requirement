@@ -1,10 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import { Form, Button } from "react-bootstrap";
+import NavAdmin from "../navbar/NavAdmin";
+import Footer from "../footer/Footer";
 
 function AddNews({ className }) {
   return (
     <div className={className}>
+      <NavAdmin />
       <div className="container">
         <div className="addnews-headline">
           <h1 className="headline-text">ADD NEWS</h1>
@@ -33,10 +36,18 @@ function AddNews({ className }) {
               <Form.Label className="title-formlabel">News Type</Form.Label>
               <Form.Select className="input-box">
                 <option className="text-input">Select your News Type</option>
-                <option value="1" className="text-input">General News & Current Affairs</option>
-                <option value="2" className="text-input">Business, Finance & Economics</option>
-                <option value="3" className="text-input">Health & Medicine</option>
-                <option value="4" className="text-input">Entertainment, Art & Culture</option>
+                <option value="1" className="text-input">
+                  General News & Current Affairs
+                </option>
+                <option value="2" className="text-input">
+                  Business, Finance & Economics
+                </option>
+                <option value="3" className="text-input">
+                  Health & Medicine
+                </option>
+                <option value="4" className="text-input">
+                  Entertainment, Art & Culture
+                </option>
               </Form.Select>
             </Form.Group>
 
@@ -58,6 +69,7 @@ function AddNews({ className }) {
           </Form>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

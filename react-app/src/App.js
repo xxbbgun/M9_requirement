@@ -9,6 +9,7 @@ import AddNews from "./components/admin/AddNews";
 import UserDetail from "./components/user/UserDetail";
 import EditNew from "./components/admin/EditNew";
 import Comment from "./components/comment/Comment";
+import AddminHome from "./components/admin/AdminHome";
 
 function App() {
   return (
@@ -25,6 +26,9 @@ function App() {
         </Route>
         <Route path="/user-detail">
           <UserDetail />
+        </Route>
+        <Route path="/admin-home">
+          <AddminHome />
         </Route>
         <Route path="/admin-detail">
           <Detail />

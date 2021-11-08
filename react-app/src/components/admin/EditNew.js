@@ -1,10 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import { Form, Button } from "react-bootstrap";
+import NavAdmin from "../navbar/NavAdmin";
+import Footer from "../footer/Footer";
 
 function EditNew({ className }) {
   return (
     <div className={className}>
+      <NavAdmin />
       <div className="container">
         <div className="editnews-headline">
           <h1 className="headine-text">EDIT NEWS</h1>
@@ -66,6 +69,7 @@ function EditNew({ className }) {
           </Form>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

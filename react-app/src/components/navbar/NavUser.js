@@ -3,12 +3,13 @@ import styled from "styled-components";
 import { Navbar, Container } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+
 function NavUser({ className }) {
   return (
     <div className={className}>
       <Navbar className="navbar" variant="light">
         <Container>
-          <NavLink to="/" className="web-logo">
+          <NavLink to="/home" className="web-logo">
             <div className="logo">
               <img
                 src="https://i.pinimg.com/originals/26/91/f2/2691f2fa1a0f078f5f274edf7fea6763.png"
@@ -56,6 +57,8 @@ export default styled(NavUser)`
     justify-content: right;
   }
   .user-image {
-    color: black;
+    color: white;
+    width: 35px;
+    height: 35px;
   }
 `;

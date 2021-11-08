@@ -1,18 +1,45 @@
 import React from "react";
 import styled from "styled-components";
 import Image from "react-bootstrap/Image";
-import { Form } from "react-bootstrap";
-import Footer from "../footer/Footer";
-import SendIcon from '@mui/icons-material/Send';
+import { Form, Button, Breadcrumb } from "react-bootstrap";
+import SendIcon from "@mui/icons-material/Send";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import { Link } from "react-router-dom";
 import NavUser from "../navbar/NavUser";
+import Footer from "../footer/Footer";
 
-function UserDetail({ className }) {
+function Detail({ className }) {
   return (
     <div className={className}>
-      <NavUser/>
+      <NavUser />
       <div className="container">
-        <div className="detail-title">
-          <h1 className="title-text">หัวข่าว Title</h1>
+        <div className="breadAndIcon">
+          <div className="breadcrumb-group">
+            <Breadcrumb>
+              <Breadcrumb.Item href="/home" className="bread-home">
+                Home
+              </Breadcrumb.Item>
+              <Breadcrumb.Item className="bread-type" active>
+                Health & Medicine
+              </Breadcrumb.Item>
+            </Breadcrumb>
+          </div>
+
+          <div className="icon-group">
+            <div className="edit-icon">
+              <Link to="/edit-news">
+                <EditIcon className="edit" />
+              </Link>
+            </div>
+            <div className="delete-icon">
+              <DeleteForeverIcon className="delete" />
+            </div>
+          </div>
+        </div>
+
+        <div className="detail-headline">
+          <h1 className="headline-text">Headline</h1>
         </div>
 
         <div className="image-box">
@@ -42,26 +69,58 @@ function UserDetail({ className }) {
 
         <div className="comment-box">
           <Form.Group className="mb-3">
-            <Form.Label className="title-formlabel">Comment</Form.Label>
+            <Form.Label className="title-formlabel">Add New Comment</Form.Label>
             <Form.Control
-              type="text"
+              as="textarea"
+              rows={3}
               className="input-box"
               placeholder="Enter your Comment"
             />
           </Form.Group>
-          <SendIcon className="send-icon"/>
+
+          <div className="btn-comment">
+            <Button type="submit" className="text-comment">
+              <SendIcon className="send-icon" />
+              POST
+            </Button>
+          </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 }
 
-export default styled(UserDetail)`
-.container{
-  margin-top: 50px;
-}
-  .detail-title {
+export default styled(Detail)`
+  .breadAndIcon {
+    display: flex;
+    margin-top: 30px;
+    justify-content: space-between;
+  }
+  .bread-home a {
+    text-decoration: none;
+    color: gray;
+  }
+  .bread-type {
+    color: black;
+  }
+  .icon-group {
+    display: flex;
+  }
+  .edit-icon {
+    margin-right: 10px;
+  }
+  .edit {
+    width: 38px;
+    height: 40px;
+    color: black;
+  }
+  .delete {
+    width: 40px;
+    height: 40px;
+    color: red;
+  }
+  .detail-headline {
     display: flex;
     margin-top: 30px;
   }
@@ -78,15 +137,22 @@ export default styled(UserDetail)`
     margin-top: 30px;
   }
   .comment-box {
-      margin-top: 50px;
-      display: flex;
+    margin-top: 50px;
   }
-  .input-box{
-    width: 50vw;
-    border-radius: 30px;
+  .input-box {
+    border-radius: 15px;
   }
-  .send-icon{
-    margin-top: 37px;
-    margin-left: 20px;
+  .btn-comment {
+    display: flex;
+    margin-top: 20px;
+    justify-content: right;
+    margin-bottom: 50px;
+  }
+  .text-comment {
+    background: -webkit-linear-gradient(left, #eb1c01, #ff7f01);
+    border: none;
+  }
+  .send-icon {
+    margin-right: 5px;
   }
 `;

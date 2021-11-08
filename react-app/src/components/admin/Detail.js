@@ -6,16 +6,23 @@ import SendIcon from "@mui/icons-material/Send";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { Link } from "react-router-dom";
+import NavAdmin from "../navbar/NavAdmin";
+import Footer from "../footer/Footer";
 
 function Detail({ className }) {
   return (
     <div className={className}>
+      <NavAdmin />
       <div className="container">
         <div className="breadAndIcon">
           <div className="breadcrumb-group">
             <Breadcrumb>
-              <Breadcrumb.Item href="/home">Home</Breadcrumb.Item>
-              <Breadcrumb.Item active>Health & Medicine</Breadcrumb.Item>
+              <Breadcrumb.Item href="/admin-home" className="bread-home">
+                Home
+              </Breadcrumb.Item>
+              <Breadcrumb.Item className="bread-type" active>
+                Health & Medicine
+              </Breadcrumb.Item>
             </Breadcrumb>
           </div>
 
@@ -79,6 +86,7 @@ function Detail({ className }) {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
@@ -88,6 +96,13 @@ export default styled(Detail)`
     display: flex;
     margin-top: 30px;
     justify-content: space-between;
+  }
+  .bread-home a {
+    text-decoration: none;
+    color: gray;
+  }
+  .bread-type {
+    color: black;
   }
   .icon-group {
     display: flex;
