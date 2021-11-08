@@ -67,7 +67,7 @@ function Footer({ className }) {
 export default styled(Footer)`
 .site-footer
 {
-    margin-top: 20%;
+  margin-top: 10%;
   background-color:#26272b;
   padding:45px 0 20px;
   font-size:15px;
