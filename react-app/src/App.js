@@ -5,7 +5,7 @@ import Signin from "./components/login/Signin";
 import Signup from "./components/login/Signup";
 import Home from './components/user/Home';
 import Detail from "./components/admin/Detail";
-
+import AddNews from "./components/admin/AddNews";
 function App() {
   return (
     <>

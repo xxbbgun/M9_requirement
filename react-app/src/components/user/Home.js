@@ -2,6 +2,7 @@ import React from 'react'
 import styled from "styled-components";
 import { Col, FormControl, Button as RBButton, Carousel, Container, Card, Row } from "react-bootstrap";
 import { BiSearchAlt2 } from "react-icons/bi";
+import Footer from '../footer/Footer';
 function Home({ className }) {
     // const [search, setSearch] = useState('');
     // const [filterProduct, setFilterProduct] = useState([]);
@@ -132,6 +133,7 @@ function Home({ className }) {
                 </div>
 
             </Container>
+            <Footer/>
         </div >
     )
 }
