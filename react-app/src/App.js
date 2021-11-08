@@ -1,6 +1,6 @@
 import React from "react";
-import './App.css';
-import {Switch,Route} from "react-router";
+import "./App.css";
+import { Switch, Route } from "react-router";
 import Signin from "./components/login/Signin";
 import Signup from "./components/login/Signup";
 import NavUser from './components/navbar/NavUser';

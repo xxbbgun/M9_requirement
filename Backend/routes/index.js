@@ -1,9 +1,12 @@
 const router = require("express").Router()
 
-const admin = require("./admin")
+const feed = require("./feed")
+const comments = require("./comment")
+const information = require("./information")
 
-
-router.use("/admin",admin)
+router.use("/feed",feed)
+router.use("/comment",comments)
+router.use("/information",information)
 
 
 module.exports = router
