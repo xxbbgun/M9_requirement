@@ -5,6 +5,8 @@ const http = require("http")
 const cors = require('cors')
 const {Server} = require('socket.io')
 const router = require("./routes")
+require('dotenv').config()
+const multer = require("multer");
 
 //model
 const Comment = require("./model/Comment")
