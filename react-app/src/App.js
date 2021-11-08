@@ -3,8 +3,7 @@ import "./App.css";
 import { Switch, Route } from "react-router";
 import Signin from "./components/login/Signin";
 import Signup from "./components/login/Signup";
-import NavUser from './components/navbar/NavUser';
-import AddNews from "./components/admin/AddNews";
+import Home from './components/user/Home';
 import Detail from "./components/admin/Detail";
 
 function App() {
@@ -13,12 +12,12 @@ function App() {
       <Switch>
         <Route path="/sign-up" >
           <Signup />
-        </Route> 
+        </Route>
         <Route path="/sign-in">
           <Signin />
         </Route>
         <Route path="/home">
-          <NavUser />
+          <Home />
         </Route>
         <Route path="/admin-detail">
           <Detail />
