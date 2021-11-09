@@ -24,7 +24,9 @@ function Signin({ className }) {
         alertError(error.response.data);
       });
   };
+  const GoogleLogin = (event) => {
 
+  }
   function alertError(error) {
     Swa.fire({
       icon: "error",
@@ -72,6 +74,9 @@ function Signin({ className }) {
           <div className="signin">
             <Button className="button" onClick={login}>
               LOGIN
+            </Button>
+            <Button className="button" onClick={GoogleLogin}>
+              GoogleLogin
             </Button>
             <h1>If you are new user,</h1>
             <Link to="/sign-up" className="signup">
