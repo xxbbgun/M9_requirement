@@ -3,9 +3,6 @@ import styled from "styled-components";
 import Image from "react-bootstrap/Image";
 import { Form, Button, Breadcrumb } from "react-bootstrap";
 import SendIcon from "@mui/icons-material/Send";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import { Link } from "react-router-dom";
 import NavUser from "../navbar/NavUser";
 import Footer from "../footer/Footer";
 
@@ -24,17 +21,6 @@ function Detail({ className }) {
                 Health & Medicine
               </Breadcrumb.Item>
             </Breadcrumb>
-          </div>
-
-          <div className="icon-group">
-            <div className="edit-icon">
-              <Link to="/edit-news">
-                <EditIcon className="edit" />
-              </Link>
-            </div>
-            <div className="delete-icon">
-              <DeleteForeverIcon className="delete" />
-            </div>
           </div>
         </div>
 
@@ -103,22 +89,6 @@ export default styled(Detail)`
   }
   .bread-type {
     color: black;
-  }
-  .icon-group {
-    display: flex;
-  }
-  .edit-icon {
-    margin-right: 10px;
-  }
-  .edit {
-    width: 38px;
-    height: 40px;
-    color: black;
-  }
-  .delete {
-    width: 40px;
-    height: 40px;
-    color: red;
   }
   .detail-headline {
     display: flex;
