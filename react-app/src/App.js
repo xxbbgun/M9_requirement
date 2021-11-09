@@ -7,6 +7,10 @@ import Home from './components/user/Home';
 import Detail from "./components/admin/Detail";
 import AddNews from "./components/admin/AddNews";
 import UserDetail from "./components/user/UserDetail";
+import EditNew from "./components/admin/EditNew";
+import Comment from "./components/comment/Comment";
+import AddminHome from "./components/admin/AdminHome";
+
 function App() {
   return (
     <>
@@ -23,12 +27,21 @@ function App() {
         <Route path="/user-detail">
           <UserDetail />
         </Route>
+        <Route path="/admin-home">
+          <AddminHome />
+        </Route>
         <Route path="/admin-detail">
           <Detail />
         </Route>
         <Route path="/add-news">
           <AddNews />
-        </Route> 
+        </Route>
+        <Route path="/edit-news">
+          <EditNew />
+        </Route>
+        <Route path="/comment">
+          <Comment />
+        </Route>
         <Route path="/">
           <Signin />
         </Route>

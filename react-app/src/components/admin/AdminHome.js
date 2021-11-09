@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Col, FormControl, Button as RBButton, Carousel, Container, Card, Row } from "react-bootstrap";
 import { BiSearchAlt2 } from "react-icons/bi";
 import Footer from '../footer/Footer';
-import NavUser from '../navbar/NavUser';
+import NavAdmin from '../navbar/NavAdmin';
 
 function Home({ className }) {
     // const [search, setSearch] = useState('');
@@ -17,7 +17,7 @@ function Home({ className }) {
     //   }, [search, news])
     return (
         <div className={className}>
-            <NavUser />
+            <NavAdmin />
             <Container>
                 <Col md={3} className="search">
                     <div className="input-search">
