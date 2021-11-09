@@ -10,8 +10,12 @@ import UserDetail from "./components/user/UserDetail";
 import EditNew from "./components/admin/EditNew";
 import Comment from "./components/comment/Comment";
 import AddminHome from "./components/admin/AdminHome";
-
+import io from "socket.io-client";
+const socket = io.connect("http://localhost:5000");
 function App() {
+
+  console.log(socket)
+
   return (
     <>
       <Switch>
