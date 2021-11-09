@@ -24,8 +24,7 @@ function Signup({ className }) {
         event.preventDefault();
         localStorage.setItem(`token`, JSON.stringify(res.data.token));
         localStorage.setItem(`name`, JSON.stringify(res.data.user.name));
-        console.log(res)
-        //history.push("/home");
+        history.push("/home");
       })
       .catch((error) => {
         alertError(error.response.data.message);

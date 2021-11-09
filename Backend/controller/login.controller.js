@@ -24,16 +24,13 @@ module.exports = {
           const newuser = new login(data);
           await newuser.save(async (err,data) => {
             if (err) {
-              res
-                .status(400)
-                .json("Username that other User has already exist");
-              console.log(err);
+              res.status(400).json({ message: "Username that other User has already exist" });
             } else {
               const token = jwt.sign({ _id:data._id }, process.env.JWTPRIVATEKEY, {
                 expiresIn: "1d",
               });
-              const user ={}
-              res.status(200).json({ token, user:data.name });
+              const name = data.name 
+              res.status(200).json(({ token, user:{name}}));
             }
           });
         } else {
@@ -95,6 +92,50 @@ module.exports = {
       } else {
         res.status(400).json("not user");
       }
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
+  Facebook: async (req, res) => {
+    try {
+  
+      const email = req.body.user.email
+			const response = await axios({
+			  method: 'get',
+			  url: `https://graph.facebook.com/v6.0/oauth/access_token?grant_type=fb_exchange_token&client_id=411525907158319
+			  &client_secret=78f757065b20692a8bc46a94312cc44b&fb_exchange_token=${req.body.user.accessToken}`
+			})
+			const result = response.data
+			const Authenticate = await axios({
+			  method: 'get',
+			  url: `https://graph.facebook.com/v2.11/${req.body.user.userId}/?fields=id,name,email&access_token=${result.access_token}`
+			})
+			if(Authenticate){
+				let Get = await login.findOne({email})
+        console.log(Get)
+        if(Get){
+                  const token = jwt.sign({ _id: Get._id }, process.env.JWTPRIVATEKEY, {
+                    expiresIn: "1d",
+                  });
+					const {_id,name} = Get;
+					res.status(200).json({token,user:{_id,name}})
+				}else{
+          const password = bcrypt.hashSync(process.env.JWTPRIVATEKEY, 12);
+					let users = new login({name:Authenticate.data.name,email,password,role: "customer",type_account:"Facebook"})
+					await users.save(async (err, information) => {
+						if (err){
+						  return res.status(400).json({error:"error"})
+						}
+						const token = jwt.sign({ _id: information._id }, process.env.JWTPRIVATEKEY, {
+              expiresIn: "1d",
+            });
+						const {_id,name} = users;
+						res.status(200).json({token,user:{_id,name}})
+					  });
+				}
+			}else{
+				res.status(400).json('not user')
+			}
     } catch (error) {
       res.status(500).json(error);
     }

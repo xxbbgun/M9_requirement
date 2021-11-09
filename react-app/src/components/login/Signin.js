@@ -5,6 +5,7 @@ import { Form, Button } from "react-bootstrap";
 import axios from "axios";
 import Swa from "sweetalert2";
 import GoogleLogin from "react-google-login";
+import FacebookLogin from "react-facebook-login";
 
 function Signin({ className }) {
   const history = useHistory();
@@ -19,8 +20,9 @@ function Signin({ className }) {
         password: password,
       })
       .then((res) => {
-
-        //history.push("/home");
+        localStorage.setItem(`token`, JSON.stringify(res.data.token));
+        localStorage.setItem(`name`, JSON.stringify(res.data.user.name));
+        history.push("/home");
       })
       .catch((error) => {
         alertError(error.response.data);
@@ -38,7 +40,18 @@ function Signin({ className }) {
    })
 
  };
-
+ const signUserInFacebook = async (response) => {
+  const { name, email, accessToken, userID } = response;
+  const user = { name, email, accessToken, userId: userID };
+  const res = await axios({
+    method: "post",
+    url: "http://localhost:5000/user/signin/facebook",
+    data: { user },
+  });
+    localStorage.setItem(`token`, JSON.stringify(res.data.token));
+    localStorage.setItem(`name`, JSON.stringify(res.data.user.name));
+    history.push("/home");
+};
   function alertError(error) {
     Swa.fire({
       icon: "error",
@@ -79,6 +92,14 @@ function Signin({ className }) {
                 cookiePolicy={"single_host_origin"}
                 className="btnGoogle"
               />
+               <FacebookLogin
+                appId="411525907158319"
+                fields="name,email,picture"
+                scope="public_profile, email"
+                callback={signUserInFacebook}
+                cssClass="btnFacebook"
+                icon="fa-facebook"
+              />
               <Form.Control
                 type="email"
                 placeholder="Enter email"
@@ -111,6 +132,17 @@ function Signin({ className }) {
 }
 
 export default styled(Signin)`
+.btnFacebook { 
+  width: 192px;
+  height:47px;  
+  border-radius: 4px;
+  background: #3b5998;
+  color:white;
+  border:0px transparent;  
+  text-align: center;
+  margin:5px;
+  display: inline-block;
+}
   .body {
     display: flex;
   }
