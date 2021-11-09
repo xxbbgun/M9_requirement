@@ -4,7 +4,6 @@ const Schema = mongoose.Schema;
 const Feeds = require("../src/feed.json");
 
 const feed = new Schema({
-	Title: String,
 	Headline: String,
 	description: String,
 	imageUrl: String,

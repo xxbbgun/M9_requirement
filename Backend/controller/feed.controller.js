@@ -31,15 +31,14 @@ module.exports = {
   },
   AddFeed: async (req, res, next) => {
     try {
-      const { Title, Headline, description, DateTime, type, status } = req.body;
+      const { Headline, description, DateTime, type} = req.body;
       const data = {
-        Title: Title,
         Headline: Headline,
         description: description,
         imageUrl: req.file.originalname,
         DateTime: DateTime,
         type: type,
-        status: status,
+        status: 'ปกติ',
       };
       let feed = new Feed(data);
       await feed.save(async (err, data) => {
@@ -53,7 +52,7 @@ module.exports = {
   UpdateFeed: async (req, res, next) => {
     try {
       const { id } = req.params;
-      const { Title, Headline, description, DateTime, type, status } = req.body;
+      const { Title, Headline, description, DateTime, type} = req.body;
       const data = {
         Title: Title,
         Headline: Headline,
@@ -61,7 +60,7 @@ module.exports = {
         imageUrl: req.file.originalname,
         DateTime: DateTime,
         type: type,
-        status: status,
+        status: "อัพเดท",
       };
 
       let update = await Feed.findByIdAndUpdate(id, data, { new: true });
