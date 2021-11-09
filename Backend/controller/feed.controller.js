@@ -40,6 +40,7 @@ module.exports = {
         type: type,
         status: 'ปกติ',
       };
+      console.log(data)
       let feed = new Feed(data);
       await feed.save(async (err, data) => {
         if (err) res.status(400).json("Bad Request");
