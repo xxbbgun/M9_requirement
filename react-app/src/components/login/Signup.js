@@ -20,10 +20,12 @@ function Signup({ className }) {
         password: password,
         confirmpassword: confirmpassword,
       })
-      .then((response) => {
+      .then((res) => {
         event.preventDefault();
-        localStorage.setItem(`token`, JSON.stringify(response.data.token));
-        history.push("/home");
+        localStorage.setItem(`token`, JSON.stringify(res.data.token));
+        localStorage.setItem(`name`, JSON.stringify(res.data.user.name));
+        console.log(res)
+        //history.push("/home");
       })
       .catch((error) => {
         alertError(error.response.data.message);

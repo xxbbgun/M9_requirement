@@ -4,6 +4,8 @@ import { Link, useHistory } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
 import Swa from "sweetalert2";
+import GoogleLogin from "react-google-login";
+
 function Signin({ className }) {
   const history = useHistory();
   const [email, setEmail] = useState("");
@@ -17,16 +19,26 @@ function Signin({ className }) {
         password: password,
       })
       .then((res) => {
-        localStorage.setItem(`token`, JSON.stringify(res.data.token));
-        history.push("/home");
+
+        //history.push("/home");
       })
       .catch((error) => {
         alertError(error.response.data);
       });
   };
-  const GoogleLogin = (event) => {
+  const responseGoogle = async (response) => {
+    axios({
+     method: "post",
+     url: "http://localhost:5000/user/signin/google",
+     data: {tokenId:response.tokenId},
+   }).then((res) =>{
+    localStorage.setItem(`token`, JSON.stringify(res.data.token));
+    localStorage.setItem(`name`, JSON.stringify(res.data.user.name));
+    history.push("/home");
+   })
 
-  }
+ };
+
   function alertError(error) {
     Swa.fire({
       icon: "error",
@@ -55,8 +67,18 @@ function Signin({ className }) {
           <div className="title">
             <h1>LOGIN TO ชื่อเว็บ </h1>
           </div>
+          
           <Form className="form">
+            
             <Form.Group className="mb-3" controlId="formGroupEmail">
+            <GoogleLogin
+                clientId="292061599755-9ooqp99oqcankjdso51rqt1253s1fjbr.apps.googleusercontent.com"
+                buttonText="Login with Google"
+                onSuccess={responseGoogle}
+                onFailure={responseGoogle}
+                cookiePolicy={"single_host_origin"}
+                className="btnGoogle"
+              />
               <Form.Control
                 type="email"
                 placeholder="Enter email"
@@ -75,9 +97,8 @@ function Signin({ className }) {
             <Button className="button" onClick={login}>
               LOGIN
             </Button>
-            <Button className="button" onClick={GoogleLogin}>
-              GoogleLogin
-            </Button>
+           
+          
             <h1>If you are new user,</h1>
             <Link to="/sign-up" className="signup">
               Sign up here
