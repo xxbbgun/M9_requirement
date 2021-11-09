@@ -1,8 +1,23 @@
-import React from 'react';
+import React, { useState } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
+import axios from 'axios';
 function Signin({ className }) {
+    const history = useHistory();
+    const [email] = useState("");
+    const [password] = useState("");
+
+    const login = (event) => {
+        event.preventDefault();
+        axios.post('http://localhost:5000/user/sign-in', {
+          email: email,
+          password: password
+        }).then((res) => {
+          localStorage.setItem(`token`, JSON.stringify(res.data.token));
+          history.push('/home')
+        })
+      }
     return (
         <div className={className}>
             <div className="body">
@@ -30,7 +45,7 @@ function Signin({ className }) {
                         </Form.Group>
                     </Form>
                     <div className="signin">
-                        <Button className="button" fullWidth>LOGIN</Button>
+                        <Button className="button" onClick={login}>LOGIN</Button>
                         <h1>If you are new user,</h1>
                         <Link to="/sign-up" className="signup">Sign up here</Link>
                     </div>

@@ -1,8 +1,28 @@
-import React from 'react';
+import React,{useState} from 'react';
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
+import axios from "axios";
 function Signup({ className }) {
+    const [name] = useState("");
+    const [email] = useState("");
+    const [password] = useState("");
+    const [confirmpassword] = useState("");
+    const history = useHistory();
+
+    const addUser = (event) => {
+        event.preventDefault();
+        axios.post('http://localhost:5000/user/sign-up', {
+            name: name,
+            email: email,
+            password: password,
+            confirmpassword:confirmpassword
+        }).then((response) => {
+            //event.preventDefault()
+            localStorage.setItem(`token`, JSON.stringify(response.data.token));
+            history.push('/home')
+        });
+    };
     return (
         <div className={className}>
             <div className="body">
@@ -23,19 +43,19 @@ function Signup({ className }) {
                     </div>
                     <Form className="form">
                         <Form.Group className="mb-3" controlId="formGroupEmail">
-                            <Form.Control type="text" placeholder="Name" />
+                            <Form.Control type="text"  name="name" placeholder="Name" />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formGroupEmail">
-                            <Form.Control type="email" placeholder="Email" />
+                            <Form.Control type="email"  name="email" placeholder="Email" />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formGroupPassword">
-                            <Form.Control type="password" placeholder="Password" />
+                            <Form.Control type="password"  name="password" placeholder="Password" />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formGroupEmail">
-                            <Form.Control type="password" placeholder="Confirm Password" />
+                            <Form.Control type="password"  name="confirmpassword" placeholder="Confirm Password" />
                         </Form.Group>
                     </Form>
-                    <Button className="button" fullWidth>SIGNUP</Button>
+                    <Button className="button" fullWidth onClick={addUser}>SIGNUP</Button>
                     <div className="signup">
                         <h1>Already have account,</h1>
                         <Link to="/sign-in" className="signin">Sign in here</Link>
