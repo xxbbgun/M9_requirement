@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Link, useHistory } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
-import Swa from "sweetalert2";
+import Swal from "sweetalert2";
 import GoogleLogin from "react-google-login";
 import FacebookLogin from "react-facebook-login";
 
@@ -25,7 +25,11 @@ function Signin({ className }) {
         history.push("/home");
       })
       .catch((error) => {
-        alertError(error.response.data);
+        Swal.fire({
+          icon: 'error',
+          title: 'Login failed',
+          text: 'Invalid username or password'
+        })
       });
   };
   const responseGoogle = async (response) => {
@@ -52,13 +56,6 @@ function Signin({ className }) {
     localStorage.setItem(`name`, JSON.stringify(res.data.user.name));
     history.push("/home");
 };
-  function alertError(error) {
-    Swa.fire({
-      icon: "error",
-      text: error,
-      confirmButtonColor: "#005488",
-    });
-  }
   return (
     <div className={className}>
       <div className="body">
