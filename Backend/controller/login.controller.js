@@ -43,22 +43,25 @@ module.exports = {
   },
   signin: async (req, res) => {
     try {
-      const user = await login.findOne({ email: req.body.email });
-      if (!user) {
-        res.status(400).json("Email is not found!");
-      }
+      const {email} = req.body;
+      const user = await login.findOne({email});
       const password = req.body.password;
       const checkPassword = await bcrypt.compareSync(password, user.password);
-      if (checkPassword) {
-        const token = jwt.sign({ user }, process.env.JWTPRIVATEKEY, {
-          expiresIn: "1d",
-        });
-        res.status(200).json({ token, user });
-      } else {
-        res.status(400).json("Incorrect password!");
+      if (user) {
+        if (checkPassword) {
+          const token = jwt.sign({ _id: user._id }, process.env.JWTPRIVATEKEY, {
+            expiresIn: "1d",
+          });
+          const name = user.name 
+          res.status(200).json(({ token, user:{name}}));
+        } else {
+          res.status(400).json({ message: "Password is wrong" });
+        }   
+      }else{
+        res.status(400).json({ message: "Email not found" });
       }
     } catch (error) {
-      res.status(500).json(error);
+      res.status(400).json({ message: "Email not found" });
     }
   },
   Google: async (req, res) => {
