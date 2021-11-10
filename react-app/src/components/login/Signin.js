@@ -28,7 +28,7 @@ function Signin({ className }) {
         alertError(error.response.data);
       });
   };
-   function alertError(error) {
+  function alertError(error) {
     Swa.fire({
       icon: "error",
       text: error,
@@ -37,28 +37,28 @@ function Signin({ className }) {
   }
   const responseGoogle = async (response) => {
     axios({
-     method: "post",
-     url: "http://localhost:5000/user/signin/google",
-     data: {tokenId:response.tokenId},
-   }).then((res) =>{
-    localStorage.setItem(`token`, JSON.stringify(res.data.token));
-    localStorage.setItem(`name`, JSON.stringify(res.data.user.name));
-    history.push("/home");
-   })
+      method: "post",
+      url: "http://localhost:5000/user/signin/google",
+      data: { tokenId: response.tokenId },
+    }).then((res) => {
+      localStorage.setItem(`token`, JSON.stringify(res.data.token));
+      localStorage.setItem(`name`, JSON.stringify(res.data.user.name));
+      history.push("/home");
+    })
 
- };
- const signUserInFacebook = async (response) => {
-  const { name, email, accessToken, userID } = response;
-  const user = { name, email, accessToken, userId: userID };
-  const res = await axios({
-    method: "post",
-    url: "http://localhost:5000/user/signin/facebook",
-    data: { user },
-  });
+  };
+  const signUserInFacebook = async (response) => {
+    const { name, email, accessToken, userID } = response;
+    const user = { name, email, accessToken, userId: userID };
+    const res = await axios({
+      method: "post",
+      url: "http://localhost:5000/user/signin/facebook",
+      data: { user },
+    });
     localStorage.setItem(`token`, JSON.stringify(res.data.token));
     localStorage.setItem(`name`, JSON.stringify(res.data.user.name));
     history.push("/home");
-};
+  };
   return (
     <div className={className}>
       <div className="body">
@@ -80,18 +80,18 @@ function Signin({ className }) {
           <div className="title">
             <h1>LOGIN TO ชื่อเว็บ </h1>
           </div>
-          
+
           <Form className="form">
-            
+
             <Form.Group className="mb-3" controlId="formGroupEmail">
-               <FacebookLogin
+              <FacebookLogin
                 appId="411525907158319"
                 fields="name,email,picture"
                 scope="public_profile, email"
                 callback={signUserInFacebook}
                 cssClass="btnFacebook"
                 icon="fa-facebook"
-              /> 
+              />
               <GoogleLogin
                 clientId="292061599755-9ooqp99oqcankjdso51rqt1253s1fjbr.apps.googleusercontent.com"
                 buttonText="Login with Google"
@@ -100,6 +100,9 @@ function Signin({ className }) {
                 cookiePolicy={"single_host_origin"}
                 className="btnGoogle"
               />
+              <div className="or">
+                <h3>OR</h3>
+              </div>
               <Form.Control
                 type="email"
                 placeholder="Enter email"
@@ -118,8 +121,7 @@ function Signin({ className }) {
             <Button className="button" onClick={login}>
               LOGIN
             </Button>
-           
-          
+
             <h1>If you are new user,</h1>
             <Link to="/sign-up" className="signup">
               Sign up here
@@ -173,8 +175,16 @@ export default styled(Signin)`
   }
   .title > h1 {
     color: #eb1c01;
-    margin-left: 35%;
-    margin-top: 30px;
+    margin-left: 30%;
+    margin-top: 120px;
+    font-weight: 900;
+    font-size: 50px;
+  }
+  .or > h3 {
+    color: #eb1c01;
+    margin-left: 40%;
+    margin-top: 50px;
+
   }
   .form {
     width: 70vh;
@@ -206,5 +216,14 @@ export default styled(Signin)`
   }
   .fa-facebook{
     padding-right:10px ;
+  }
+  .btnFacebook{
+    border-radius: 8px;
+    margin-left: 40px;
+    height: 45px;
+  }
+  .btnGoogle{
+    border-radius: 80px;
+    margin-left: 20px;
   }
 `;
