@@ -32,7 +32,6 @@ module.exports = {
   },
   AddFeed: async (req, res, next) => {
     try {
-   
       const { Headline, description, DateTime, type} = req.body;
       const data = {
         Headline: Headline,
