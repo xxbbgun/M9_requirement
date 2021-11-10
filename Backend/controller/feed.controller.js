@@ -32,16 +32,16 @@ module.exports = {
   },
   AddFeed: async (req, res, next) => {
     try {
+   
       const { Headline, description, DateTime, type} = req.body;
       const data = {
         Headline: Headline,
         description: description,
         imageUrl: req.file.originalname,
-        DateTime: DateTime,
+        DateTime: req.body.DateTime,
         type: type,
-        status: 'ปกติ',
+        status: 'ใหม่',
       };
-      console.log(data)
       let feed = new Feed(data);
       await feed.save(async (err, data) => {
         if (err) res.status(400).json("Bad Request");
