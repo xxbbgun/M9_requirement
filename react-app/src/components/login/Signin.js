@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Link, useHistory } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
-import Swal from "sweetalert2";
+import Swa from "sweetalert2";
 import GoogleLogin from "react-google-login";
 import FacebookLogin from "react-facebook-login";
 
@@ -25,13 +25,16 @@ function Signin({ className }) {
         history.push("/home");
       })
       .catch((error) => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Login failed',
-          text: 'Invalid username or password'
-        })
+        alertError(error.response.data);
       });
   };
+   function alertError(error) {
+    Swa.fire({
+      icon: "error",
+      text: error,
+      confirmButtonColor: "#005488",
+    });
+  }
   const responseGoogle = async (response) => {
     axios({
      method: "post",
@@ -81,14 +84,6 @@ function Signin({ className }) {
           <Form className="form">
             
             <Form.Group className="mb-3" controlId="formGroupEmail">
-            <GoogleLogin
-                clientId="292061599755-9ooqp99oqcankjdso51rqt1253s1fjbr.apps.googleusercontent.com"
-                buttonText="Login with Google"
-                onSuccess={responseGoogle}
-                onFailure={responseGoogle}
-                cookiePolicy={"single_host_origin"}
-                className="btnGoogle"
-              />
                <FacebookLogin
                 appId="411525907158319"
                 fields="name,email,picture"
@@ -96,6 +91,13 @@ function Signin({ className }) {
                 callback={signUserInFacebook}
                 cssClass="btnFacebook"
                 icon="fa-facebook"
+              /> <GoogleLogin
+                clientId="292061599755-9ooqp99oqcankjdso51rqt1253s1fjbr.apps.googleusercontent.com"
+                buttonText="Login with Google"
+                onSuccess={responseGoogle}
+                onFailure={responseGoogle}
+                cookiePolicy={"single_host_origin"}
+                className="btnGoogle"
               />
               <Form.Control
                 type="email"
