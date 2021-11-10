@@ -36,6 +36,7 @@ module.exports = {
       const { Headline, description, DateTime, type} = req.body;
       const data = {
         Headline: Headline,
+        content: content,
         description: description,
         imageUrl: req.file.originalname,
         DateTime: req.body.DateTime,
@@ -58,6 +59,7 @@ module.exports = {
       const data = {
         Title: Title,
         Headline: Headline,
+        content: content,
         description: description,
         imageUrl: req.file.originalname,
         DateTime: DateTime,
