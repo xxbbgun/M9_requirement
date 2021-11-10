@@ -1,37 +1,15 @@
-import React, { useEffect,useState } from 'react'
+import React from "react";
 import styled from "styled-components";
-import axios from "axios";
-import { useParams } from "react-router-dom";
 import Image from "react-bootstrap/Image";
 import { Form, Button, Breadcrumb } from "react-bootstrap";
 import SendIcon from "@mui/icons-material/Send";
 import Footer from "../footer/Footer";
 
 
-
-function Detail(className) {
-  const [image, setImage] = useState('');
-  const [newsDetail, setNews] = useState('');
-    const { id } = useParams();
-    useEffect(() => {
-        const getNews = () => {
-          axios.get(`/feed/GetFeedById/${id}`)
-            .then((res) => {
-              console.log(res.data);
-              // setNews(res.data)
-              setImage(res.data.imageUrl)
-            })
-            .catch(() => {
-                console.log("error");
-            });
-        };
-        getNews();
-      }, [id]);
-      console.log(image)
+function GetDetail({ className, data }) {
+    console.log(data.imageUrl)
   return (
-    <div>
-      {console.log(image)}
-      <div className={className}>
+    <div className={className}>
       <div className="container">
         <div className="breadAndIcon">
           <div className="breadcrumb-group">
@@ -47,20 +25,21 @@ function Detail(className) {
         </div>
 
         <div className="detail-headline">
-          <h1 className="headline-text"> {newsDetail.Headline}</h1>
+          <h1 className="headline-text"> {data.Headline}</h1>
         </div>
+
         <div className="image-box">
-          
-          <img src={require(`../../uploads/${image}`).default.replace('.baa225db', '')} alt="tests" />
-          {/* <img
-            // src={require(`../../uploads/${image}`).defualt}
+          <Image
+            src={require(`../../uploads/${data.imageUrl}`).default}
+            fluid
             className="news-image"
             alt="news-image"
-          /> */}
+          />
         </div>
+
         <div className="detail-description">
           <label className="text-desc">
-           {newsDetail.description}
+           {data.description}
           </label>
         </div>
 
@@ -85,12 +64,10 @@ function Detail(className) {
       </div>
       <Footer />
     </div>
-    </div>
-    
-  )
+  );
 }
 
-export default styled(Detail)`
+export default styled(GetDetail)`
   .breadAndIcon {
     display: flex;
     margin-top: 20px;
@@ -139,3 +116,4 @@ export default styled(Detail)`
     margin-right: 5px;
   }
 `;
+

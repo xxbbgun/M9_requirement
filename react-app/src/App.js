@@ -30,7 +30,7 @@ function App() {
           <NavUser />
           <Home />
         </Route>
-        <Route path="/user-detail">
+        <Route path="/user-detail/:id">
           <NavUser />
           <Detail />
         </Route>

@@ -6,7 +6,7 @@ import axios from "axios";
 import { fetchNews } from "../../ActionAndStore/News/action";
 import { useSelector, useDispatch } from "react-redux";
 import GetNews from './GetNews';
-import Search from "./Search";
+// import Search from "./Search";
 
 function Home({ className }) {
     const news = useSelector((state) => state.news);
@@ -28,7 +28,7 @@ function Home({ className }) {
     return (
         <div className={className}>
             <Container>
-                <Search/>
+                {/* <Search/> */}
                 <div className="slide">
 
                     <Carousel>
@@ -86,9 +86,9 @@ function Home({ className }) {
 }
 
 export default styled(Home)`
-.search{
+/* .search{
     float: right;
-}
+} */
  .input-search {
     display: flex;
     width: 100%;

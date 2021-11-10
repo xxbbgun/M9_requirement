@@ -1,20 +1,33 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
 import { BiSearchAlt2 } from "react-icons/bi";
 import { useSelector } from 'react-redux';
 import {FormControl, Button as RBButton,Col,Row } from "react-bootstrap";
 import Home from "./Home"
+import axios from "axios";
+import { fetchNews } from "../../ActionAndStore/News/action";
+import { useDispatch } from "react-redux";
+import GetNews from "./GetNews";
 function Search({className}) {
-    const news = useSelector((state) => state.news);
+ 
     const [search, setSearch] = useState('');
     const [filterProduct, setFilterProduct] = useState([]);
+    const news = useSelector((state) => state.news);
+    const dispatch = useDispatch();
+
     useEffect(() => {
-        setFilterProduct(
-            news.filter(productSearch => {
-                return productSearch.headline.toLowerCase().includes(search.toLowerCase())
+        const getNews = () => {
+          axios.get(`/feed/Search/${search}`)
+            .then((res) => {
+              dispatch(fetchNews(res.data));
+              console.log(res)
             })
-        )
-    }, [search, news])
+            .catch(() => {
+                console.log("error");
+            });
+        };
+        getNews();
+      }, [dispatch]);
+
 
     return (
         <div className={className}>
@@ -26,20 +39,11 @@ function Search({className}) {
             </Col>
             <Row className="card-container">
                 {filterProduct.map((value) => {
-                    return <Home key={value.id} item={value} />;
+                    return <GetNews key={value.id} item={value} />;
                 })}
             </Row>
         </div>
     )
 }
 
-export default styled(Search)`
-.search{
-    float: right;
-}
- .input-search {
-    display: flex;
-    width: 100%;
-    margin: 50px
-}
-`;
+export default Search;
