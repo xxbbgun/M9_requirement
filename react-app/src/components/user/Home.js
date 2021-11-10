@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react'
 import styled from "styled-components";
-import { Col, FormControl, Button as RBButton, Carousel, Container, Card, Row } from "react-bootstrap";
-import { BiSearchAlt2 } from "react-icons/bi";
+import { Carousel, Container, Row } from "react-bootstrap";
 import Footer from '../footer/Footer';
 import axios from "axios";
 import { fetchNews } from "../../ActionAndStore/News/action";
 import { useSelector, useDispatch } from "react-redux";
 import GetNews from './GetNews';
+import Search from "./Search";
 
 function Home({ className }) {
     const news = useSelector((state) => state.news);
@@ -28,13 +28,8 @@ function Home({ className }) {
     return (
         <div className={className}>
             <Container>
-                <Col md={3} className="search">
-                    <div className="input-search">
-                        <FormControl className="form" type="text" placeholder="Search here..." />
-                        <RBButton variant="none" className="btn-search"><BiSearchAlt2 /></RBButton>
-                    </div>
-                </Col>
-                <div className="slice">
+                <Search/>
+                <div className="slide">
 
                     <Carousel>
                         <Carousel.Item>
@@ -75,74 +70,12 @@ function Home({ className }) {
                     </Carousel>
 
                 </div>
+
                 <div className="news">
                     <Row>
-                        {/* <Col lg={6}>
-                            <div className="news-image">
-                                <img src="https://www.kaohoon.com/wp-content/uploads/2019/05/%E0%B8%82%E0%B9%88%E0%B8%B2%E0%B8%A7%E0%B8%94%E0%B9%88%E0%B8%A7%E0%B8%99.jpg"
-                                    alt="news-img" style={{ width: '18rem' }} />
-                            </div>
-                        </Col> */}
                         {news.map((data) => {
                             return <GetNews key={data.id} data={data} />
                         })}
-                    </Row>
-                    <Row>
-                        <Col lg={12}>
-                            <Card.Body className="body">
-                                <h1>Title</h1>
-                                <h2>
-                                    Some quick example text to build on the card title and make up the bulk of
-                                    the card's content.
-                                </h2>
-                            </Card.Body>
-                        </Col>
-
-                    </Row>
-                </div>
-
-                <div className="news">
-                    <Row>
-                        <Col lg={6}>
-                            <div className="news-image">
-                                <img src="https://www.kaohoon.com/wp-content/uploads/2019/05/%E0%B8%82%E0%B9%88%E0%B8%B2%E0%B8%A7%E0%B8%94%E0%B9%88%E0%B8%A7%E0%B8%99.jpg"
-                                    alt="news-img" style={{ width: '18rem' }} />
-                            </div>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col lg={12}>
-                            <Card.Body className="body">
-                                <h1>Title</h1>
-                                <h2>
-                                    Some quick example text to build on the card title and make up the bulk of
-                                    the card's content.
-                                </h2>
-                            </Card.Body>
-                        </Col>
-                    </Row>
-                </div>
-
-                <div className="news">
-                    <Row>
-                        <Col lg={6}>
-                            <div className="news-image">
-                                <img src="https://www.kaohoon.com/wp-content/uploads/2019/05/%E0%B8%82%E0%B9%88%E0%B8%B2%E0%B8%A7%E0%B8%94%E0%B9%88%E0%B8%A7%E0%B8%99.jpg"
-                                    alt="news-img" style={{ width: '18rem' }} />
-                            </div>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col lg={12}>
-                            <Card.Body className="body">
-                                <h1>Title</h1>
-                                <h2>
-                                    Some quick example text to build on the card title and make up the bulk of
-                                    the card's content.
-                                </h2>
-                            </Card.Body>
-                        </Col>
-
                     </Row>
                 </div>
 

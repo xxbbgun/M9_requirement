@@ -11,7 +11,8 @@ module.exports = {
     try {
       const { keyword } = req.params;
       let data = await Feed.find();
-      let find = data.filter((p) => p.Title.includes(keyword));
+      let find = data.filter((p) => p.Headline.includes(keyword));
+      
       res.status(200).json(find);
     } catch (error) {
       res.status(500).json(error);
