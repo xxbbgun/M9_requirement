@@ -1,19 +1,30 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from "styled-components";
 import { Col, FormControl, Button as RBButton, Carousel, Container, Card, Row } from "react-bootstrap";
 import { BiSearchAlt2 } from "react-icons/bi";
 import Footer from '../footer/Footer';
+import axios from "axios";
+import { fetchNews } from "../../ActionAndStore/News/action";
+import { useSelector, useDispatch } from "react-redux";
+import GetNews from './GetNews';
 
 function Home({ className }) {
-    // const [search, setSearch] = useState('');
-    // const [filterProduct, setFilterProduct] = useState([]);
-    // useEffect(() => {
-    //     setFilterProduct(
-    //         news.filter( productSearch => {
-    //             return productSearch.name.toLowerCase().includes( search.toLowerCase() )
-    //         })
-    //     )
-    //   }, [search, news])
+    const news = useSelector((state) => state.news);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        const getNews = () => {
+          axios.get("/feed/GetFeed")
+            .then((res) => {
+              dispatch(fetchNews(res.data));
+            })
+            .catch(() => {
+                console.log("error");
+            });
+        };
+        getNews();
+      }, [dispatch]);
+
     return (
         <div className={className}>
             <Container>
@@ -66,12 +77,15 @@ function Home({ className }) {
                 </div>
                 <div className="news">
                     <Row>
-                        <Col lg={6}>
+                        {/* <Col lg={6}>
                             <div className="news-image">
                                 <img src="https://www.kaohoon.com/wp-content/uploads/2019/05/%E0%B8%82%E0%B9%88%E0%B8%B2%E0%B8%A7%E0%B8%94%E0%B9%88%E0%B8%A7%E0%B8%99.jpg"
                                     alt="news-img" style={{ width: '18rem' }} />
                             </div>
-                        </Col>
+                        </Col> */}
+                        {news.map((data) => {
+                            return <GetNews key={data.id} data={data} />
+                        })}
                     </Row>
                     <Row>
                         <Col lg={12}>
