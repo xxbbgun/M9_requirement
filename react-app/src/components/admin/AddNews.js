@@ -11,6 +11,7 @@ function AddNews({ className }) {
   const date = new Date().toLocaleString();
   const [Headline, setHeadline] = React.useState("");
   const [description, setDescription] = React.useState("");
+  const [content, setContent] = React.useState("");
   const [image, setImage] = React.useState("")
   const [dates, setDate] = React.useState(date)
   const [type, setType] = React.useState("")
@@ -18,19 +19,19 @@ function AddNews({ className }) {
 
 
   const addNews = (event) => {
-    console.log(Headline, description, image, dates, type)
     event.preventDefault();
     setDate(date);
     const formData = new FormData();
     formData.append("Headline", Headline);
+    formData.append("Content", content);
     formData.append("description", description);
     formData.append("image", image);    
     formData.append("DateTime", dates);
     formData.append("type", type);
     
     axios.post("http://localhost:5000/feed/AddFeed",formData).then((res) => {
-      alertSuccess();
-      history.push("/home");
+      
+      history.push("/admin-home");
     })
     .catch((error) => {
     
@@ -78,6 +79,17 @@ function AddNews({ className }) {
                 className="input-box"
                 placeholder="Enter your Headline"
                 onChange={(event) => setHeadline(event.target.value)}
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label className="title-formlabel">Content</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows={3}
+                className="input-box"
+                placeholder="Enter your Content"
+                onChange={(event) => setContent(event.target.value)}
               />
             </Form.Group>
 

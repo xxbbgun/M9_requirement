@@ -32,10 +32,10 @@ module.exports = {
   },
   AddFeed: async (req, res, next) => {
     try {
-      const { Headline, description, DateTime, type} = req.body;
+      const { Headline, description, DateTime, type,Content} = req.body;
       const data = {
         Headline: Headline,
-        content: content,
+        content: Content,
         description: description,
         imageUrl: req.file.originalname,
         DateTime: req.body.DateTime,
@@ -54,20 +54,17 @@ module.exports = {
   UpdateFeed: async (req, res, next) => {
     try {
       const { id } = req.params;
-      const { Title, Headline, description, DateTime, type} = req.body;
+      const { Headline, description,type,Content} = req.body;
       const data = {
-        Title: Title,
         Headline: Headline,
-        content: content,
+        content: Content,
         description: description,
         imageUrl: req.file.originalname,
-        DateTime: DateTime,
+        DateTime: req.body.DateTime,
         type: type,
-        status: "อัพเดท",
+        status: 'ใหม่',
       };
-
       let update = await Feed.findByIdAndUpdate(id, data, { new: true });
-
       res.status(200).json(update);
     } catch (error) {
       res.status(500).json(error.message);

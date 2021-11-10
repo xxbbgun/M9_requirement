@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import Image from "react-bootstrap/Image";
 import { Form, Button, Breadcrumb } from "react-bootstrap";
 import SendIcon from "@mui/icons-material/Send";
 import Footer from "../footer/Footer";
+import { Link } from "react-router-dom";
 
 function Detail(className) {
   const [newsDetail, setNews] = useState("");
@@ -41,14 +41,20 @@ function Detail(className) {
           </div>
 
           <div className="detail-headline">
+
+          <Link to={`/edit-news/${newsDetail._id}`}>
+             <Button type="submit" className="text-comment">
+                <SendIcon className="send-icon" />
+                editNews
+              </Button>
+          </Link>
+
+
+
             <h1 className="headline-text"> {newsDetail.Headline}</h1>
           </div>
           <div className="image-box">
-            <img
-              src={`/uploads/${newsDetail.imageUrl}`}
-              className="news-image"
-              alt="news-image"
-            />
+            <img src={`/uploads/${newsDetail.imageUrl}`}className="news-image" alt="test"/>
           </div>
           <div className="detail-description">
             <label className="text-desc">{newsDetail.description}</label>
