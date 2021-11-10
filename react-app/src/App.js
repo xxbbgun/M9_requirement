@@ -4,9 +4,8 @@ import { Switch, Route } from "react-router";
 import Signin from "./components/login/Signin";
 import Signup from "./components/login/Signup";
 import Home from './components/user/Home';
-import Detail from "./components/admin/Detail";
 import AddNews from "./components/admin/AddNews";
-import UserDetail from "./components/user/UserDetail";
+import Detail from "./components/user/Detail";
 import EditNew from "./components/admin/EditNew";
 import Comment from "./components/comment/Comment";
 import AddminHome from "./components/admin/AdminHome";
@@ -29,13 +28,13 @@ function App() {
           <Home />
         </Route>
         <Route path="/user-detail">
-          <UserDetail />
+          <Detail />
         </Route>
         <Route path="/admin-home">
           <AddminHome />
         </Route>
         <Route path="/admin-detail">
-          <Detail />
+         <Detail />
         </Route>
         <Route path="/add-news">
           <AddNews />

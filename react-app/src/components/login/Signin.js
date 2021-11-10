@@ -91,7 +91,8 @@ function Signin({ className }) {
                 callback={signUserInFacebook}
                 cssClass="btnFacebook"
                 icon="fa-facebook"
-              /> <GoogleLogin
+              /> 
+              <GoogleLogin
                 clientId="292061599755-9ooqp99oqcankjdso51rqt1253s1fjbr.apps.googleusercontent.com"
                 buttonText="Login with Google"
                 onSuccess={responseGoogle}
@@ -202,5 +203,8 @@ export default styled(Signin)`
     text-decoration: none;
     margin-top: 20px;
     color: -webkit-linear-gradient(left, #eb1c01, #ff7f01);
+  }
+  .fa-facebook{
+    padding-right:10px ;
   }
 `;
