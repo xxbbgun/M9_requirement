@@ -9,7 +9,7 @@ function GetNews({ className, data }) {
       <div className="news">
         <Col lg={3}>
           <div className="news-image">
-            <Link to="/user-detail">
+          <Link to={`/user-detail/${data._id}`}>
               <img
                 src={require(`../../uploads/${data.imageUrl}`).default}
                 alt={data.imageUrl}
