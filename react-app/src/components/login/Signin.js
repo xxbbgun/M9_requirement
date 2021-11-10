@@ -25,7 +25,7 @@ function Signin({ className }) {
         history.push("/home");
       })
       .catch((error) => {
-        alertError(error.response.data);
+        alertError(error.response.data.message);
       });
   };
   function alertError(error) {
