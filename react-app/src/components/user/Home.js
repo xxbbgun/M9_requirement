@@ -86,9 +86,9 @@ function Home({ className }) {
 }
 
 export default styled(Home)`
-.search{
+/* .search{
     float: right;
-}
+} */
  .input-search {
     display: flex;
     width: 100%;
