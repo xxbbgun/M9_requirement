@@ -5,6 +5,7 @@ const Feeds = require("../src/feed.json");
 
 const feed = new Schema({
 	Headline: String,
+	content: String,
 	description: String,
 	imageUrl: String,
 	DateTime: String,
