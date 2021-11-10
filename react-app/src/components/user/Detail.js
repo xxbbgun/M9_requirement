@@ -3,13 +3,11 @@ import styled from "styled-components";
 import Image from "react-bootstrap/Image";
 import { Form, Button, Breadcrumb } from "react-bootstrap";
 import SendIcon from "@mui/icons-material/Send";
-import NavUser from "../navbar/NavUser";
 import Footer from "../footer/Footer";
 
 function Detail({ className }) {
   return (
     <div className={className}>
-      <NavUser />
       <div className="container">
         <div className="breadAndIcon">
           <div className="breadcrumb-group">
@@ -80,7 +78,7 @@ function Detail({ className }) {
 export default styled(Detail)`
   .breadAndIcon {
     display: flex;
-    margin-top: 30px;
+    margin-top: 20px;
     justify-content: space-between;
   }
   .bread-home a {
@@ -92,7 +90,7 @@ export default styled(Detail)`
   }
   .detail-headline {
     display: flex;
-    margin-top: 30px;
+    margin-top: 15px;
   }
   .image-box {
     display: flex;
