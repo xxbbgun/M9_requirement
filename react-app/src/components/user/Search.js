@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { BiSearchAlt2 } from "react-icons/bi";
 import { useSelector } from 'react-redux';
-import {FormControl, Button as RBButton,Col,Row } from "react-bootstrap";
-import Home from "./Home"
+import {FormControl, Button as RBButton,Col } from "react-bootstrap";
 import axios from "axios";
 import { fetchNews } from "../../ActionAndStore/News/action";
 import { useDispatch } from "react-redux";
-import GetNews from "./GetNews";
+
 function Search({className}) {
  
     const [query, setQuery] = useState("");
