@@ -1,11 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 import { Navbar, Container } from "react-bootstrap";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useHistory } from "react-router-dom";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AddIcon from "@mui/icons-material/Add";
 
 function NavUser({ className }) {
+  const history = useHistory();
+  const logout = (event) => {
+    event.preventDefault();
+    localStorage.removeItem("token");
+    localStorage.removeItem("name");
+    history.push("/sign-in")
+  }
   return (
     <div className={className}>
       <Navbar className="navbar" variant="light">
@@ -27,6 +34,7 @@ function NavUser({ className }) {
             </div>
             <div className="user">
               <AccountCircleIcon className="user-image" />
+              <NavLink to="/" className="link" onClick={logout}>Log Out</NavLink>
             </div>
           </div>
         </Container>
@@ -70,5 +78,12 @@ export default styled(NavUser)`
     color: white;
     width: 35px;
     height: 35px;
+  }
+  .link{
+    text-decoration: none;
+    color:white;
+    font-size:18px;
+    margin-left: 15px;
+    margin-top: 5px;
   }
 `;
