@@ -56,16 +56,11 @@ function EditNew({ className }) {
     formData.append("image", image);
     formData.append("DateTime", dates);
     formData.append("type", type);
-  try{
-    let success = await axios.put(`http://localhost:5000/feed/UpdateFeed/${id}`, formData)
-    console.log(success)
-    if(success.status===200){
-      dispatch(fetchCustomer(user));
+
+    let data = axios.put(`http://localhost:5000/feed/UpdateFeed/${id}`, formData)
+    if(data){
       history.push("/admin-home");
     }
-  }catch(err){
-    console.log(err);
-  }
   };
 
   function alertSuccess() {

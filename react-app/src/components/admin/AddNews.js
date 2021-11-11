@@ -29,13 +29,11 @@ function AddNews({ className }) {
     formData.append("DateTime", dates);
     formData.append("type", type);
     
-    axios.post("http://localhost:5000/feed/AddFeed",formData).then((res) => {
-      
+    let data = axios.post("http://localhost:5000/feed/AddFeed",formData)
+    if(data){
       history.push("/admin-home");
-    })
-    .catch((error) => {
+    }
     
-    });
 
 
   

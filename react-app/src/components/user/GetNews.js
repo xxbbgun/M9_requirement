@@ -4,14 +4,12 @@ import { Col, Card, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 function GetNews({ className, data}) {
-  
-  const user = useSelector((state) => state.customer);
-
+  const [role] = React.useState(JSON.parse(localStorage.getItem("role")));
   return (
     <div className={className}>
       <div className="news">
         <Col lg={3}>
-        {user.user.role === 'admin' ? (
+        {role === 'admin' ? (
           <div className="news-image">
             <Link to={`/admin-detail/${data._id}`}>
               <img
