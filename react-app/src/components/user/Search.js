@@ -15,7 +15,7 @@ function Search({className}) {
         setQuery(event.target.value);   
     }
     function useSearch(event) {
-        axios.get(`/feed/Search/${query}`).then((res) => {
+        axios.get(`http://localhost:5000/feed/Search/${query}`).then((res) => {
            dispatch(fetchNews(res.data));
           })
           .catch((err) => {

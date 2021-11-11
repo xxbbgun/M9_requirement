@@ -13,7 +13,7 @@ function Detail(className) {
   useEffect(() => {
     const getNews = () => {
       axios
-        .get(`/feed/GetFeedById/${id}`)
+        .get(`http://localhost:5000/feed/GetFeedById/${id}`)
         .then((res) => {
           setNews(res.data);
         })

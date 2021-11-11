@@ -20,7 +20,7 @@ function Home({ className }) {
       }, [dispatch]);
     useEffect(() => {
         const getNews = () => {
-          axios.get("/feed/GetFeed")
+          axios.get("http://localhost:5000/feed/GetFeed")
             .then((res) => {
               dispatch(fetchNews(res.data));
             })
