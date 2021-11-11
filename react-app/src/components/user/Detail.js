@@ -30,22 +30,23 @@ function Detail(className) {
           <div className="breadAndIcon">
             <div className="breadcrumb-group">
               <Breadcrumb>
-                <Breadcrumb.Item href="/home" className="bread-home">
-                  Home
-                </Breadcrumb.Item>
+                <Breadcrumb.Item className="bread-home">Home</Breadcrumb.Item>
                 <Breadcrumb.Item className="bread-type" active>
-                  Health & Medicine
+                  {`${newsDetail.type}`}
                 </Breadcrumb.Item>
               </Breadcrumb>
             </div>
           </div>
 
           <div className="detail-headline">
-
             <h1 className="headline-text"> {newsDetail.Headline}</h1>
           </div>
           <div className="image-box">
-            <img src={`/uploads/${newsDetail.imageUrl}`}className="news-image" alt="test"/>
+            <img
+              src={`/uploads/${newsDetail.imageUrl}`}
+              className="news-image"
+              alt="test"
+            />
           </div>
           <div className="detail-description">
             <label className="text-desc">{newsDetail.description}</label>
