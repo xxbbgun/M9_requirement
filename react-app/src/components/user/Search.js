@@ -9,39 +9,31 @@ import { useDispatch } from "react-redux";
 import GetNews from "./GetNews";
 function Search({className}) {
  
-    const [search, setSearch] = useState('');
-    const [filterProduct, setFilterProduct] = useState([]);
+    const [query, setQuery] = useState("");
     const news = useSelector((state) => state.news);
     const dispatch = useDispatch();
-
-    useEffect(() => {
-        const getNews = () => {
-          axios.get(`/feed/Search/${search}`)
-            .then((res) => {
-              dispatch(fetchNews(res.data));
-              console.log(res)
-            })
-            .catch(() => {
-                console.log("error");
-            });
-        };
-        getNews();
-      }, [dispatch]);
+    function Set(event){
+        setQuery(event.target.value);   
+    }
+    function useSearch(event) {
+        axios.get(`/feed/Search/${query}`).then((res) => {
+           dispatch(fetchNews(res.data));
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    
 
 
     return (
         <div className={className}>
             <Col md={3} className="search">
                 <div className="input-search">
-                    <FormControl className="form" type="text" placeholder="Search here..." onChange={e => setSearch(e.target.value)} />
-                    <RBButton variant="none" className="btn-search"><BiSearchAlt2 /></RBButton>
+                    <FormControl className="form" type="text" placeholder="Search here..." onChange={Set} value={query} />
+                    <RBButton variant="none" className="btn-search" onClick={useSearch}><BiSearchAlt2/></RBButton>
                 </div>
             </Col>
-            <Row className="card-container">
-                {filterProduct.map((value) => {
-                    return <GetNews key={value.id} item={value} />;
-                })}
-            </Row>
         </div>
     )
 }

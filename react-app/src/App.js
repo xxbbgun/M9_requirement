@@ -46,7 +46,7 @@ function App() {
         <Route path="/add-news">
           <AddNews />
         </Route>
-        <Route path="/edit-news">
+        <Route path="/edit-news/:id">
           <EditNew />
         </Route>
         <Route path="/comment">

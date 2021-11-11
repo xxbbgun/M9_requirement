@@ -3,8 +3,55 @@ import styled from "styled-components";
 import { Form, Button } from "react-bootstrap";
 import NavAdmin from "../navbar/NavAdmin";
 import Footer from "../footer/Footer";
+import axios from "axios";
+import Swa from "sweetalert2";
+import {useHistory } from "react-router-dom";
 
 function AddNews({ className }) {
+  const date = new Date().toLocaleString();
+  const [Headline, setHeadline] = React.useState("");
+  const [description, setDescription] = React.useState("");
+  const [content, setContent] = React.useState("");
+  const [image, setImage] = React.useState("")
+  const [dates, setDate] = React.useState(date)
+  const [type, setType] = React.useState("")
+  const history = useHistory();
+
+
+  const addNews = (event) => {
+    event.preventDefault();
+    setDate(date);
+    const formData = new FormData();
+    formData.append("Headline", Headline);
+    formData.append("Content", content);
+    formData.append("description", description);
+    formData.append("image", image);    
+    formData.append("DateTime", dates);
+    formData.append("type", type);
+    
+    axios.post("http://localhost:5000/feed/AddFeed",formData).then((res) => {
+      
+      history.push("/admin-home");
+    })
+    .catch((error) => {
+    
+    });
+
+
+  
+   
+  }
+
+  
+  function alertSuccess() {
+    Swa.fire({
+      title: "success",
+      text: "success",
+      confirmButtonColor: "#005488",
+      
+    });
+  }
+
   return (
     <div className={className}>
       <NavAdmin />
@@ -13,13 +60,15 @@ function AddNews({ className }) {
           <h1 className="headline-text">ADD NEWS</h1>
         </div>
         <div className="addnews-form">
-          <Form className="form-body">
+          <Form className="form-body" onSubmit={addNews} enctype="multipart/form-data">
             <Form.Group className="mb-3">
               <Form.Label className="title-formlabel">Choose Image</Form.Label>
               <div className="btn-selectfile">
-                <Button type="submit" className="text-selectfile">
-                  Select files
-                </Button>
+                <Form.Control
+                type="file"
+                className="input-box"
+                onChange={(event) => setImage(event.target.files[0])}
+              />
               </div>
             </Form.Group>
 
@@ -29,25 +78,38 @@ function AddNews({ className }) {
                 type="text"
                 className="input-box"
                 placeholder="Enter your Headline"
+                onChange={(event) => setHeadline(event.target.value)}
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label className="title-formlabel">Content</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows={3}
+                className="input-box"
+                placeholder="Enter your Content"
+                onChange={(event) => setContent(event.target.value)}
               />
             </Form.Group>
 
             <Form.Group className="mb-3">
               <Form.Label className="title-formlabel">News Type</Form.Label>
-              <Form.Select className="input-box">
+              <Form.Select className="input-box" onChange={(event) => setType(event.target.value)}>
                 <option className="text-input">Select your News Type</option>
-                <option value="1" className="text-input">
+                <option value="General News & Current Affairs" className="text-input">
                   General News & Current Affairs
                 </option>
-                <option value="2" className="text-input">
+                <option value="Business, Finance & Economics" className="text-input">
                   Business, Finance & Economics
                 </option>
-                <option value="3" className="text-input">
+                <option value="Health & Medicine" className="text-input">
                   Health & Medicine
                 </option>
-                <option value="4" className="text-input">
+                <option value="Entertainment, Art & Culture" className="text-input">
                   Entertainment, Art & Culture
                 </option>
+                
               </Form.Select>
             </Form.Group>
 
@@ -58,6 +120,7 @@ function AddNews({ className }) {
                 rows={3}
                 className="input-box"
                 placeholder="Enter your Description"
+                onChange={(event) => setDescription(event.target.value)}
               />
             </Form.Group>
 

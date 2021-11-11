@@ -8,10 +8,10 @@ function GetNews({ className, data }) {
     <div className={className}>
       <div className="news">
         <Col lg={3}>
-          <div className="news-image">
+         <div className="news-image">
           <Link to={`/user-detail/${data._id}`}>
               <img
-                src={require(`../../uploads/${data.imageUrl}`).default}
+                src={`/uploads/${data.imageUrl}`}
                 alt={data.imageUrl}
                 style={{ width: "18rem" }}
               />
