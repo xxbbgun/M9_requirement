@@ -11,7 +11,7 @@ function GetNews({ className, data}) {
     <div className={className}>
       <div className="news">
         <Col lg={3}>
-        {user.role === 'admin' ? (
+        {user.user.role === 'admin' ? (
           <div className="news-image">
             <Link to={`/admin-detail/${data._id}`}>
               <img
