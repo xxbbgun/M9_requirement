@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
-import { Form, Button } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import NavAdmin from "../navbar/NavAdmin";
 import Footer from "../footer/Footer";
 import { useParams } from "react-router-dom";
@@ -47,8 +47,7 @@ function EditNew({ className }) {
   const [type, setType] = React.useState("");
   const history = useHistory();
   
-  const editNews = (event) => {
-    event.preventDefault();
+  const editNews = async () => {
     setDate(date);
     const formData = new FormData();
     formData.append("Headline", Headline);
@@ -57,11 +56,16 @@ function EditNew({ className }) {
     formData.append("image", image);
     formData.append("DateTime", dates);
     formData.append("type", type);
-    let success = axios.put(`http://localhost:5000/feed/UpdateFeed/${id}`, formData)
-    if(success){
+  try{
+    let success = await axios.put(`http://localhost:5000/feed/UpdateFeed/${id}`, formData)
+    console.log(success)
+    if(success.status===200){
       dispatch(fetchCustomer(user));
       history.push("/admin-home");
     }
+  }catch(err){
+    console.log(err);
+  }
   };
 
   function alertSuccess() {
@@ -81,7 +85,6 @@ function EditNew({ className }) {
         <div className="editnews-form">
           <Form
             className="form-body"
-            onSubmit={editNews}
             enctype="multipart/form-data"
           >
             <Form.Group className="mb-3">
@@ -153,9 +156,9 @@ function EditNew({ className }) {
             </Form.Group>
 
             <div className="btn-edit">
-              <Button type="submit" className="text-edit">
+              <button type="button" onClick={() => { editNews() }} className="text-edit">
                 EDIT NEWS
-              </Button>
+              </button>
             </div>
           </Form>
         </div>

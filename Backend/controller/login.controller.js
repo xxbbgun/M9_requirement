@@ -53,9 +53,11 @@ module.exports = {
           });
           const name = user.name 
           const role = user.role 
-          res.status(200).json(({ token, user:{name,role}}));
+          console.log(role)
+          return res.status(200).json({ token, user:{name,role}});
+          
         }
-        res.status(400).json({ message: "Password is wrong" });
+       return res.status(400).json({ message: "Password is wrong" });
       }else if(user.role === 'customer'){
         const password = req.body.password;
         const checkPassword = await bcrypt.compareSync(password, user.password);
@@ -65,7 +67,7 @@ module.exports = {
           });
           const name = user.name 
           const role = user.role
-          res.status(200).json(({ token, user:{name,role}}));
+          res.status(200).json({ token, user:{name,role}});
         } else {
           res.status(400).json({ message: "Password is wrong" });
         }
