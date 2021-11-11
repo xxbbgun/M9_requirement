@@ -9,6 +9,7 @@ function NavUser({ className }) {
   const logout = (event) => {
       event.preventDefault();
       localStorage.removeItem("token");
+      localStorage.removeItem("name");
       history.push("/sign-in")
     }
   return (
