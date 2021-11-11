@@ -42,15 +42,6 @@ function Detail(className) {
 
           <div className="detail-headline">
 
-          <Link to={`/edit-news/${newsDetail._id}`}>
-             <Button type="submit" className="text-comment">
-                <SendIcon className="send-icon" />
-                editNews
-              </Button>
-          </Link>
-
-
-
             <h1 className="headline-text"> {newsDetail.Headline}</h1>
           </div>
           <div className="image-box">

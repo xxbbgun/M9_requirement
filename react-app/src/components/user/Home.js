@@ -3,15 +3,21 @@ import styled from "styled-components";
 import { Carousel, Container, Row } from "react-bootstrap";
 import Footer from '../footer/Footer';
 import axios from "axios";
+import { fetchCustomer } from "../../ActionAndStore/Customer/action";
 import { fetchNews } from "../../ActionAndStore/News/action";
 import { useSelector, useDispatch } from "react-redux";
 import GetNews from './GetNews';
 import Search from "./Search";
-
 function Home({ className }) {
     const news = useSelector((state) => state.news);
+    const user = useSelector((state) => state.customer);
     const dispatch = useDispatch();
-
+    useEffect(() => {
+        const getNews = () => {
+            dispatch(fetchCustomer(user));
+        };
+        getNews();
+      }, [dispatch]);
     useEffect(() => {
         const getNews = () => {
           axios.get("/feed/GetFeed")
@@ -74,7 +80,7 @@ function Home({ className }) {
                 <div className="news">
                     <Row>
                         {news.map((data) => {
-                            return <GetNews key={data._id} data={data} />
+                            return <GetNews key={data._id} data={data}/>
                         })}
                     </Row>
                 </div>

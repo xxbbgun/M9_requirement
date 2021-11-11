@@ -30,7 +30,8 @@ module.exports = {
                 expiresIn: "1d",
               });
               const name = data.name 
-              res.status(200).json(({ token, user:{name}}));
+              const role = data.role 
+              res.status(200).json(({ token, user:{name,role}}));
             }
           });
         } else {
@@ -45,21 +46,33 @@ module.exports = {
     try {
       const {email} = req.body;
       const user = await login.findOne({email});
-      const password = req.body.password;
-      const checkPassword = await bcrypt.compareSync(password, user.password);
-      if (user) {
+      if(user.role === 'admin'){
+        if(user.password === req.body.password){
+          const token = jwt.sign({ _id:user._id }, process.env.JWTPRIVATEKEY, {
+            expiresIn: "1d",
+          });
+          const name = user.name 
+          const role = user.role 
+          res.status(200).json(({ token, user:{name,role}}));
+        }
+        res.status(400).json({ message: "Password is wrong" });
+      }else if(user.role === 'customer'){
+        const password = req.body.password;
+        const checkPassword = await bcrypt.compareSync(password, user.password);
         if (checkPassword) {
           const token = jwt.sign({ _id: user._id }, process.env.JWTPRIVATEKEY, {
             expiresIn: "1d",
           });
           const name = user.name 
-          res.status(200).json(({ token, user:{name}}));
+          const role = user.role
+          res.status(200).json(({ token, user:{name,role}}));
         } else {
           res.status(400).json({ message: "Password is wrong" });
-        }   
+        }
       }else{
         res.status(400).json({ message: "Email not found" });
       }
+         
     } catch (error) {
       res.status(400).json({ message: "Email not found" });
     }
@@ -78,8 +91,8 @@ module.exports = {
             const token = jwt.sign({ _id: find._id }, process.env.JWTPRIVATEKEY, {
                 expiresIn: "1d",
               });
-          const { _id, name, email } = find;
-          res.status(200).json({ token, user: { _id, name} });
+          const { _id, name, email,role} = find;
+          res.status(200).json({ token, user: { _id, name,role} });
         } else {
             const password = bcrypt.hashSync(process.env.JWTPRIVATEKEY, 12);
             let users = new login({name, email, password,role: "customer",type_account: "Google"});
@@ -88,8 +101,8 @@ module.exports = {
              return res.status(400).json({ message: "Something went worng..." });
             }
             const token = jwt.sign({ _id: data._id }, process.env.JWTPRIVATEKEY, {expiresIn: "1d", });
-            const { _id, name, email } = users;
-            res.status(200).json({ token, user: { _id, name} });
+            const { _id, name, email,role} = users;
+            res.status(200).json({ token, user: { _id, name ,role} });
           });
         }
       } else {
@@ -99,48 +112,5 @@ module.exports = {
       res.status(500).json(error);
     }
   },
-  Facebook: async (req, res) => {
-    try {
   
-      const email = req.body.user.email
-			const response = await axios({
-			  method: 'get',
-			  url: `https://graph.facebook.com/v6.0/oauth/access_token?grant_type=fb_exchange_token&client_id=411525907158319
-			  &client_secret=78f757065b20692a8bc46a94312cc44b&fb_exchange_token=${req.body.user.accessToken}`
-			})
-			const result = response.data
-			const Authenticate = await axios({
-			  method: 'get',
-			  url: `https://graph.facebook.com/v2.11/${req.body.user.userId}/?fields=id,name,email&access_token=${result.access_token}`
-			})
-			if(Authenticate){
-				let Get = await login.findOne({email})
-        console.log(Get)
-        if(Get){
-                  const token = jwt.sign({ _id: Get._id }, process.env.JWTPRIVATEKEY, {
-                    expiresIn: "1d",
-                  });
-					const {_id,name} = Get;
-					res.status(200).json({token,user:{_id,name}})
-				}else{
-          const password = bcrypt.hashSync(process.env.JWTPRIVATEKEY, 12);
-					let users = new login({name:Authenticate.data.name,email,password,role: "customer",type_account:"Facebook"})
-					await users.save(async (err, information) => {
-						if (err){
-						  return res.status(400).json({error:"error"})
-						}
-						const token = jwt.sign({ _id: information._id }, process.env.JWTPRIVATEKEY, {
-              expiresIn: "1d",
-            });
-						const {_id,name} = users;
-						res.status(200).json({token,user:{_id,name}})
-					  });
-				}
-			}else{
-				res.status(400).json('not user')
-			}
-    } catch (error) {
-      res.status(500).json(error);
-    }
-  },
 };

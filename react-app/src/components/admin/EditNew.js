@@ -7,9 +7,16 @@ import Footer from "../footer/Footer";
 import { useParams } from "react-router-dom";
 import Swa from "sweetalert2";
 import { useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchCustomer} from "../../ActionAndStore/Customer/action";
+
 function EditNew({ className }) {
   const [newsDetail, setNews] = useState("");
   const { id } = useParams();
+  const user = useSelector((state) => state.customer);
+  const dispatch = useDispatch();
+  
+
   useEffect(() => {
     
       axios
@@ -52,6 +59,7 @@ function EditNew({ className }) {
     formData.append("type", type);
     let success = axios.put(`http://localhost:5000/feed/UpdateFeed/${id}`, formData)
     if(success){
+      dispatch(fetchCustomer(user));
       history.push("/admin-home");
     }
   };

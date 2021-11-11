@@ -38,7 +38,7 @@ function App() {
           <NavAdmin />
           <Home />
         </Route>
-        <Route path="/admin-detail">
+        <Route path="/admin-detail/:id">
           <NavAdmin />
           <EditAndDeleteIcon />
           <Detail />

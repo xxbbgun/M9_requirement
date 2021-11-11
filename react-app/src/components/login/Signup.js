@@ -4,12 +4,20 @@ import { Link, useHistory } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
 import Swa from "sweetalert2";
+import { useDispatch } from "react-redux";
+import { fetchCustomer, getCustomer } from "../../ActionAndStore/Customer/action";
+
 function Signup({ className }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmpassword, setconfirmpassword] = useState("");
   const history = useHistory();
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    dispatch(getCustomer());
+  }, [dispatch]);
 
   const addUser = (event) => {
     event.preventDefault();
@@ -24,6 +32,7 @@ function Signup({ className }) {
         event.preventDefault();
         localStorage.setItem(`token`, JSON.stringify(res.data.token));
         localStorage.setItem(`name`, JSON.stringify(res.data.user.name));
+        dispatch(fetchCustomer(res.data));
         history.push("/home");
       })
       .catch((error) => {

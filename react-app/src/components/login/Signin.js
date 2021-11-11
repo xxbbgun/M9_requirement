@@ -5,12 +5,18 @@ import { Form, Button } from "react-bootstrap";
 import axios from "axios";
 import Swa from "sweetalert2";
 import GoogleLogin from "react-google-login";
-import FacebookLogin from "react-facebook-login";
+
+import { useDispatch } from "react-redux";
+import { fetchCustomer, getCustomer } from "../../ActionAndStore/Customer/action";
 
 function Signin({ className }) {
   const history = useHistory();
+  const dispatch = useDispatch();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+
 
   const login = (event) => {
     event.preventDefault();
@@ -22,7 +28,13 @@ function Signin({ className }) {
       .then((res) => {
         localStorage.setItem(`token`, JSON.stringify(res.data.token));
         localStorage.setItem(`name`, JSON.stringify(res.data.user.name));
-        history.push("/home");
+        dispatch(fetchCustomer(res.data));
+        if(res.data.user.role === "admin"){
+          history.push("/admin-home");
+        }else{
+          history.push("/home");
+        }
+       
       })
       .catch((error) => {
         alertError(error.response.data.message);
@@ -43,22 +55,12 @@ function Signin({ className }) {
     }).then((res) => {
       localStorage.setItem(`token`, JSON.stringify(res.data.token));
       localStorage.setItem(`name`, JSON.stringify(res.data.user.name));
+      dispatch(fetchCustomer(res.data));
       history.push("/home");
     })
 
   };
-  const signUserInFacebook = async (response) => {
-    const { name, email, accessToken, userID } = response;
-    const user = { name, email, accessToken, userId: userID };
-    const res = await axios({
-      method: "post",
-      url: "http://localhost:5000/user/signin/facebook",
-      data: { user },
-    });
-    localStorage.setItem(`token`, JSON.stringify(res.data.token));
-    localStorage.setItem(`name`, JSON.stringify(res.data.user.name));
-    history.push("/home");
-  };
+
   return (
     <div className={className}>
       <div className="body">
@@ -84,14 +86,6 @@ function Signin({ className }) {
           <Form className="form">
 
             <Form.Group className="mb-3" controlId="formGroupEmail">
-              <FacebookLogin
-                appId="411525907158319"
-                fields="name,email,picture"
-                scope="public_profile, email"
-                callback={signUserInFacebook}
-                cssClass="btnFacebook"
-                icon="fa-facebook"
-              />
               <GoogleLogin
                 clientId="292061599755-9ooqp99oqcankjdso51rqt1253s1fjbr.apps.googleusercontent.com"
                 buttonText="Login with Google"
