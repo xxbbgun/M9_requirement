@@ -18,6 +18,17 @@ module.exports = {
       res.status(500).json(error);
     }
   },
+  Category: async (req, res, next) => {
+    try {
+      const { keyword } = req.params;
+      let data = await Feed.find();
+      let find = data.filter((p) => p.type === keyword);
+      
+      return res.status(200).json(find);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
   GetFeedById: async (req, res, next) => {
     try {
       const { id } = req.params;

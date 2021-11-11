@@ -1,17 +1,36 @@
-import React from "react";
+import React, { useState ,useEffect} from "react";
 import styled from "styled-components";
-import { Navbar, Container, NavDropdown } from "react-bootstrap";
-import { NavLink ,useHistory} from "react-router-dom";
+import { Navbar, Container, Form } from "react-bootstrap";
+import { NavLink, useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import axios from "axios";
+import { fetchNews } from "../../ActionAndStore/News/action";
+
 
 function NavUser({ className }) {
   const history = useHistory();
   const logout = (event) => {
-      event.preventDefault();
-      localStorage.removeItem("token");
-      localStorage.removeItem("name");
-      history.push("/sign-in")
-    }
+    event.preventDefault();
+    localStorage.removeItem("token");
+    localStorage.removeItem("name");
+    history.push("/sign-in")
+  }
+
+  const [type, setType] = useState("");
+  const dispatch = useDispatch();
+
+  function useSearch(event) {
+    axios.get(`http://localhost:5000/feed/Category/${type}`).then((res) => {
+       dispatch(fetchNews(res.data));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+
+
   return (
     <div className={className}>
       <Navbar className="navbar" variant="light">
@@ -24,15 +43,30 @@ function NavUser({ className }) {
                 alt="logo"
               />
             </div>
-            
-            <NavDropdown title="Category" id="basic-nav-dropdown" className="nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">General News & Current Affairs</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">Business, Finance & Economics</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Health & Medicine</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Entertainment, Art & Culture</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">กระทู้</NavDropdown.Item>
-            </NavDropdown>
+
+            <Form.Group className="mb-3">
+              <Form.Select
+                className="input-box"
+                onChange={(event) => setType(event.target.value)}
+                onClick={useSearch}
+
+              >
+                <option className="text-input">Catergry</option>
+                <option value="General News & Current Affairs" className="text-input">
+                  General News & Current Affairs
+                </option>
+                <option value="Business, Finance & Economics" className="text-input">
+                  Business, Finance & Economics
+                </option>
+                <option value="Health & Medicine" className="text-input">
+                  Health & Medicine
+                </option>
+                <option value="Entertainment, Art & Culture" className="text-input">
+                  Entertainment, Art & Culture
+                </option>
+              </Form.Select>
+            </Form.Group>
+
           </NavLink>
 
           <div className="user">
