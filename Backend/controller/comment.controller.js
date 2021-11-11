@@ -5,11 +5,11 @@ module.exports = {
 		try{
 			const comment = await Comment.find({FeedId: req.params.id})
 		
-			res.status(200).json(comment)
+			return res.status(200).json(comment)
 			
 			
 		}catch (error) {
-			res.status(500).json({msg: error.message})
+			return res.status(500).json({msg: error.message})
 		}
 	},
 };

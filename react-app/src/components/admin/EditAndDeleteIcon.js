@@ -5,6 +5,8 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
+import Swa from "sweetalert2";
 function EditAndDeleteIcon({ className }) {
   const [newsDetail, setNews] = useState("");
   const { id } = useParams();
@@ -21,6 +23,30 @@ function EditAndDeleteIcon({ className }) {
     };
     getNews();
   }, [id]);
+
+  const history = useHistory();
+  const DeleteNews = async () => {
+    Swa.fire({
+      title: "โปรดยืนยัน",
+      text: "ท่านต้องการลบหรือไหม",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "ใช่",
+      cancelButtonText: "ไม่",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        let data = axios.delete(`http://localhost:5000/feed/DeleteFeed/${id}`)
+        if(data){
+          history.push("/admin-home");
+        }
+      }
+   
+    });
+    
+  };
+
   return (
     <div className={className}>
       <div className="container">
@@ -31,7 +57,7 @@ function EditAndDeleteIcon({ className }) {
             </Link>
           </div>
           <div className="delete-icon">
-            <DeleteForeverIcon className="delete" />
+            <DeleteForeverIcon className="delete" onClick={DeleteNews}/>
           </div>
         </div>
       </div>

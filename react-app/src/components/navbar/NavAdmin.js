@@ -11,6 +11,7 @@ function NavUser({ className }) {
     event.preventDefault();
     localStorage.removeItem("token");
     localStorage.removeItem("name");
+    localStorage.removeItem("role");
     history.push("/sign-in")
   }
   return (

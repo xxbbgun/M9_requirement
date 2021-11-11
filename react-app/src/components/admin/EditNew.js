@@ -57,11 +57,13 @@ function EditNew({ className }) {
     formData.append("DateTime", dates);
     formData.append("type", type);
 
-    let data = axios.put(`http://localhost:5000/feed/UpdateFeed/${id}`, formData)
+    let data = axios.put(`http://localhost:5000/feed/UpdateFeed/${id}`,)
     if(data){
       history.push("/admin-home");
     }
   };
+  
+
 
   function alertSuccess() {
     Swa.fire({

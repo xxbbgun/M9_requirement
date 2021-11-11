@@ -12,11 +12,11 @@ module.exports = {
         password == "" ||
         confirmpassword == ""
       ) {
-        res.status(400).json({ message: "Empty inputs fields" });
+        return  res.status(400).json({ message: "Empty inputs fields" });
       } else if (password.length < 8) {
-        res.status(400).json({ message: "Password is short" });
+        return  res.status(400).json({ message: "Password is short" });
       } else if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
-        res.status(400).json({ message: "Invalid email entered" });
+        return  res.status(400).json({ message: "Invalid email entered" });
       } else {
         if (password == confirmpassword) {
           const hashPassword = bcrypt.hashSync(password, 12);
@@ -35,11 +35,11 @@ module.exports = {
             }
           });
         } else {
-          res.status(400).json({ message: "Password not match" });
+          return  res.status(400).json({ message: "Password not match" });
         }
       }
     } catch (err) {
-      res.status(500).json(error);
+      return res.status(500).json(error);
     }
   },
   signin: async (req, res) => {
@@ -67,16 +67,16 @@ module.exports = {
           });
           const name = user.name 
           const role = user.role
-          res.status(200).json({ token, user:{name,role}});
+          return res.status(200).json({ token, user:{name,role}});
         } else {
-          res.status(400).json({ message: "Password is wrong" });
+          return  res.status(400).json({ message: "Password is wrong" });
         }
       }else{
-        res.status(400).json({ message: "Email not found" });
+        return  res.status(400).json({ message: "Email not found" });
       }
          
     } catch (error) {
-      res.status(400).json({ message: "Email not found" });
+      return res.status(400).json({ message: "Email not found" });
     }
   },
   Google: async (req, res) => {
@@ -94,7 +94,7 @@ module.exports = {
                 expiresIn: "1d",
               });
           const { _id, name, email,role} = find;
-          res.status(200).json({ token, user: { _id, name,role} });
+          return res.status(200).json({ token, user: { _id, name,role} });
         } else {
             const password = bcrypt.hashSync(process.env.JWTPRIVATEKEY, 12);
             let users = new login({name, email, password,role: "customer",type_account: "Google"});
@@ -104,14 +104,14 @@ module.exports = {
             }
             const token = jwt.sign({ _id: data._id }, process.env.JWTPRIVATEKEY, {expiresIn: "1d", });
             const { _id, name, email,role} = users;
-            res.status(200).json({ token, user: { _id, name ,role} });
+            return res.status(200).json({ token, user: { _id, name ,role} });
           });
         }
       } else {
-        res.status(400).json("not user");
+        return  res.status(400).json("not user");
       }
     } catch (error) {
-      res.status(500).json(error);
+      return res.status(500).json(error);
     }
   },
   
