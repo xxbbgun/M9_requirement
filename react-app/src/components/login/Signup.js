@@ -5,7 +5,7 @@ import { Form, Button } from "react-bootstrap";
 import axios from "axios";
 import Swa from "sweetalert2";
 import { useDispatch } from "react-redux";
-import { fetchCustomer, getCustomer } from "../../ActionAndStore/Customer/action";
+import { fetchUser  } from "../../ActionAndStore/user/action";
 
 function Signup({ className }) {
   const [name, setName] = useState("");
@@ -14,10 +14,6 @@ function Signup({ className }) {
   const [confirmpassword, setconfirmpassword] = useState("");
   const history = useHistory();
   const dispatch = useDispatch();
-
-  React.useEffect(() => {
-    dispatch(getCustomer());
-  }, [dispatch]);
 
   const addUser = (event) => {
     event.preventDefault();
@@ -32,7 +28,7 @@ function Signup({ className }) {
         event.preventDefault();
         localStorage.setItem(`token`, JSON.stringify(res.data.token));
         localStorage.setItem(`name`, JSON.stringify(res.data.user.name));
-        dispatch(fetchCustomer(res.data));
+        dispatch(fetchUser(res.data));
         history.push("/home");
       })
       .catch((error) => {

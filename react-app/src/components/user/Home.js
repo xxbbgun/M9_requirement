@@ -3,21 +3,15 @@ import styled from "styled-components";
 import { Carousel, Container, Row } from "react-bootstrap";
 import Footer from '../footer/Footer';
 import axios from "axios";
-import { fetchCustomer } from "../../ActionAndStore/Customer/action";
+import { fetchUser } from "../../ActionAndStore/user/action";
 import { fetchNews } from "../../ActionAndStore/News/action";
 import { useSelector, useDispatch } from "react-redux";
 import GetNews from './GetNews';
 import Search from "./Search";
 function Home({ className }) {
     const news = useSelector((state) => state.news);
-    const user = useSelector((state) => state.customer);
+    const user = useSelector((state) => state.user);
     const dispatch = useDispatch();
-    useEffect(() => {
-        const getNews = () => {
-            dispatch(fetchCustomer(user));
-        };
-        getNews();
-      }, [dispatch]);
     useEffect(() => {
         const getNews = () => {
           axios.get("/feed/GetFeed")

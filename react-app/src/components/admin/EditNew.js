@@ -8,7 +8,7 @@ import { useParams } from "react-router-dom";
 import Swa from "sweetalert2";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchCustomer} from "../../ActionAndStore/Customer/action";
+import { fetchUser} from "../../ActionAndStore/user/action";
 
 function EditNew({ className }) {
   const [newsDetail, setNews] = useState("");
@@ -59,7 +59,7 @@ function EditNew({ className }) {
     formData.append("type", type);
     let success = axios.put(`http://localhost:5000/feed/UpdateFeed/${id}`, formData)
     if(success){
-      dispatch(fetchCustomer(user));
+      dispatch(fetchUser(user));
       history.push("/admin-home");
     }
   };

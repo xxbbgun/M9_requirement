@@ -3,9 +3,10 @@ import styled from "styled-components";
 import { Col, Card, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+
 function GetNews({ className, data}) {
   
-  const user = useSelector((state) => state.customer);
+  const user = useSelector((state) => state.user);
 
   return (
     <div className={className}>

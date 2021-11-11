@@ -5,9 +5,8 @@ import { Form, Button } from "react-bootstrap";
 import axios from "axios";
 import Swa from "sweetalert2";
 import GoogleLogin from "react-google-login";
-
 import { useDispatch } from "react-redux";
-import { fetchCustomer, getCustomer } from "../../ActionAndStore/Customer/action";
+import { fetchUser,setUser} from "../../ActionAndStore/user/action";
 
 function Signin({ className }) {
   const history = useHistory();
@@ -16,6 +15,9 @@ function Signin({ className }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  React.useEffect(() => {
+    dispatch(fetchUser());
+  }, [dispatch]);
 
 
   const login = (event) => {
@@ -28,10 +30,11 @@ function Signin({ className }) {
       .then((res) => {
         localStorage.setItem(`token`, JSON.stringify(res.data.token));
         localStorage.setItem(`name`, JSON.stringify(res.data.user.name));
-        dispatch(fetchCustomer(res.data));
         if(res.data.user.role === "admin"){
+          dispatch(setUser(res.data));
           history.push("/admin-home");
         }else{
+          dispatch(setUser(res.data));
           history.push("/home");
         }
        
@@ -55,7 +58,7 @@ function Signin({ className }) {
     }).then((res) => {
       localStorage.setItem(`token`, JSON.stringify(res.data.token));
       localStorage.setItem(`name`, JSON.stringify(res.data.user.name));
-      dispatch(fetchCustomer(res.data));
+      dispatch(fetchUser(res.data));
       history.push("/home");
     })
 
