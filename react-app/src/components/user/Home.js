@@ -74,7 +74,7 @@ function Home({ className }) {
                 <div className="news">
                     <Row>
                         {news.map((data) => {
-                            return <GetNews key={data.id} data={data} />
+                            return <GetNews key={data._id} data={data} />
                         })}
                     </Row>
                 </div>

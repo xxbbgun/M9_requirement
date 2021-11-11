@@ -71,7 +71,7 @@ export default styled(Footer)`
   background-color:#26272b;
   padding:45px 0 20px;
   font-size:15px;
-  line-height:24px;
+  line-height:15px;
   color:#737373;
 }
 .site-footer hr

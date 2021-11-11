@@ -22,7 +22,7 @@ function GetNews({ className, data }) {
           <Col lg={12}>
             <Card.Body className="body">
               <h1>{data.Headline}</h1>
-              <h2>{data.description}</h2>
+              <h2>{data.content}</h2>
             </Card.Body>
           </Col>
         </Row>
