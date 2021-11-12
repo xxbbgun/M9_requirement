@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Row, Col, Card } from "react-bootstrap";
 
-function Comment({ className }) {
+function Comment({ className ,name,time,message}) {
   return (
     <div className={className}>
       <div className="container">
@@ -10,13 +10,11 @@ function Comment({ className }) {
           <Col className="each-card">
             <Card.Body className="card-body">
               <div className="comment-username">
-                <Card.Title>John Doe</Card.Title>
+                <Card.Title>{name}{time}</Card.Title>
               </div>
               <div className="comment-box">
                 <Card.Text>
-                  Masks offer the greatest protection indoors and during long
-                  exposures to people infected with the coronavirus — but other
-                  public-health measures matter, too.
+                 {message}
                 </Card.Text>
               </div>
             </Card.Body>

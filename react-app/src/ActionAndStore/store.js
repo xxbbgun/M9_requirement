@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import socket from "./Address/reducer";
+import socket from "./Socket/reducer";
 import news from "./News/reducer";
 import customersReducers from "./Customer/reducer"
 export default configureStore({
