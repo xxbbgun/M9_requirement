@@ -12,6 +12,7 @@ import { Row, Col, Card } from "react-bootstrap";
 const socket = io.connect("http://localhost:5000");
 
 function Detail(className) {
+  const { id } = useParams();
   const date = new Date().toLocaleString();
   const [name] = React.useState(JSON.parse(localStorage.getItem("name")));
   const [dates, setDate] = React.useState(date);
@@ -19,50 +20,40 @@ function Detail(className) {
   const [newsDetail, setNews] = useState("");
   const [message, setMessage] = useState("");
   const [chat, setChat] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const { id } = useParams();
-  console.log(newsDetail)
   useEffect(() => {
-   
-      axios
-        .get(`http://localhost:5000/feed/GetFeedById/${id}`)
-        .then((res) => {
-          setNews(res.data);
-        })
-        .catch(() => {
-          console.log("error");
-        });
- 
-
+    axios
+      .get(`http://localhost:5000/feed/GetFeedById/${id}`)
+      .then((res) => {
+        setNews(res.data);
+      })
+      .catch(() => {
+        console.log("error");
+      });
   }, [id]);
 
-  useState(() => {
-    setLoading(true);
+  useEffect(() => {
     axios.get(`http://localhost:5000/comment/commentById/${id}`).then((res) => {
       setChat(res.data);
-      setLoading(false);
     });
   }, [id]);
 
- 
 
-
-
-  useEffect(() => {
-    if(getSocket){
-     socket.on('sendCommentToClient',msg => {
-        setChat([ ...chat, msg ]);
-        console.log(chat)
-     })
-     return () => getSocket.off('sendCommentToClient');
-    }
-  }, [getSocket,id]);
+  console.log("chat" + chat);
 
   useEffect(() => {
-    if(getSocket){
-      getSocket.emit('joinRoom',id)
+    if (getSocket) {
+      socket.on("sendCommentToClient", (msg) => {
+        setChat([...chat, msg]);
+      });
+      return () => getSocket.off("sendCommentToClient");
     }
-  }, [getSocket,chat]);
+  }, [getSocket, id]);
+
+  useEffect(() => {
+    if (getSocket) {
+      getSocket.emit("joinRoom", id);
+    }
+  }, [getSocket, chat]);
 
   const onMessageSubmit = (e) => {
     setDate(date);
@@ -70,8 +61,6 @@ function Detail(className) {
     e.preventDefault();
     setMessage("");
   };
-
-  
 
   return (
     <div>
@@ -128,14 +117,9 @@ function Detail(className) {
             </div>
 
             <div className="btn-comment">
-              {
-                chat.map(chat =>(
-                  <Message key={chat._id} name={chat.Name} time={chat.DateTime} message={chat.Message} />
-                 
-                ))
-                
-              }
-             
+              {chat.map((chat) => {
+                return <Message key={chat._id} name={chat.Name} time={chat.DateTime} message={chat.Message}
+                />})}
             </div>
           </div>
         </div>

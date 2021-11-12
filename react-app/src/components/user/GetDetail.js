@@ -7,7 +7,6 @@ import Footer from "../footer/Footer";
 
 
 function GetDetail({ className, data }) {
-    console.log(data.imageUrl)
   return (
     <div className={className}>
       <div className="container">
