@@ -7,7 +7,6 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import axios from "axios";
 import { fetchNews } from "../../ActionAndStore/News/action";
 
-
 function NavUser({ className }) {
   const history = useHistory();
   const logout = (event) => {
@@ -15,37 +14,39 @@ function NavUser({ className }) {
     localStorage.removeItem("token");
     localStorage.removeItem("name");
     localStorage.removeItem("role");
-    history.push("/sign-in")
-  }
+    history.push("/sign-in");
+  };
 
   const [type, setType] = useState("");
   const dispatch = useDispatch();
 
   function useSearch(event) {
-    axios.get(`http://localhost:5000/feed/Category/${type}`).then((res) => {
-       dispatch(fetchNews(res.data));
+    axios
+      .get(`http://localhost:5000/feed/Category/${type}`)
+      .then((res) => {
+        dispatch(fetchNews(res.data));
       })
       .catch((err) => {
         console.log(err);
       });
   }
 
-
-
   return (
     <div className={className}>
       <Navbar className="navbar" variant="light">
         <Container>
-          <NavLink to="/home" className="web-logo">
+          <div className="web-logo">
             <div className="logo">
-              <img
-                src="https://i.pinimg.com/originals/26/91/f2/2691f2fa1a0f078f5f274edf7fea6763.png"
-                className="logo-image"
-                alt="logo"
-              />
+              <a href="/home">
+                <img
+                  src="https://i.pinimg.com/originals/26/91/f2/2691f2fa1a0f078f5f274edf7fea6763.png"
+                  className="logo-image"
+                  alt="logo"
+                />
+              </a>
             </div>
 
-            <Form.Group className="mb-3">
+            {/* <Form.Group className="mb-3">
               <Form.Select
                 className="input-box"
                 onChange={(event) => setType(event.target.value)}
@@ -66,13 +67,45 @@ function NavUser({ className }) {
                   Entertainment, Art & Culture
                 </option>
               </Form.Select>
-            </Form.Group>
+            </Form.Group> */}
+          </div>
 
-          </NavLink>
+          <Form.Group className="mb-2 mt-2">
+            <Form.Select
+              className="input-box"
+              onChange={(event) => setType(event.target.value)}
+              onClick={useSearch}
+            >
+              <option className="text-input">Category</option>
+              <option
+                value="General News & Current Affairs"
+                className="text-input"
+              >
+                General News & Current Affairs
+              </option>
+              <option
+                value="Business, Finance & Economics"
+                className="text-input"
+              >
+                Business, Finance & Economics
+              </option>
+              <option value="Health & Medicine" className="text-input">
+                Health & Medicine
+              </option>
+              <option
+                value="Entertainment, Art & Culture"
+                className="text-input"
+              >
+                Entertainment, Art & Culture
+              </option>
+            </Form.Select>
+          </Form.Group>
 
           <div className="user">
             <AccountCircleIcon className="user-image" />
-            <NavLink to="/" className="link" onClick={logout}>Log Out</NavLink>
+            <NavLink to="/" className="link" onClick={logout}>
+              Log Out
+            </NavLink>
           </div>
           {/* <div className="me-auto">
                         <NavLink to="/" className="menu-text">Home</NavLink>
@@ -114,16 +147,16 @@ export default styled(NavUser)`
     width: 35px;
     height: 35px;
   }
-  .link{
+  .link {
     text-decoration: none;
-    color:white;
-    font-size:18px;
+    color: white;
+    font-size: 18px;
     margin-left: 15px;
     margin-top: 5px;
   }
-  .nav-dropdown>a{
+  .nav-dropdown > a {
     text-decoration: none;
-    color:white;
-    font-size:18px;
+    color: white;
+    font-size: 18px;
   }
 `;

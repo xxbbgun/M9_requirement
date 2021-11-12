@@ -2,20 +2,29 @@ import React from "react";
 import styled from "styled-components";
 import { Row, Col, Card } from "react-bootstrap";
 
-function Comment({ className ,name,time,message}) {
+function Comment({ className, name, time, message }) {
   return (
     <div className={className}>
       <div className="container">
         <Row className="card-comment">
           <Col className="each-card">
             <Card.Body className="card-body">
-              <div className="comment-username">
-                <Card.Title>{name}{time}</Card.Title>
+              <div className="group-comment-title">
+                <div className="comment-username">
+                  <Card.Title>{name}</Card.Title>
+                </div>
+                <div className="comment-time">
+                  <Card.Title>{time}</Card.Title>
+                </div>
               </div>
+              {/* <div className="comment-username">
+                <Card.Title>
+                  {name}
+                  {time}
+                </Card.Title>
+              </div> */}
               <div className="comment-box">
-                <Card.Text>
-                 {message}
-                </Card.Text>
+                <Card.Text>{message}</Card.Text>
               </div>
             </Card.Body>
           </Col>
@@ -44,5 +53,11 @@ export default styled(Comment)`
   .card-body {
     margin-top: 10px;
     margin-bottom: 10px;
+  }
+  .group-comment-title {
+    display: flex;
+  }
+  .comment-username {
+    margin-right: 90px;
   }
 `;

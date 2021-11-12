@@ -5,13 +5,11 @@ import { useParams } from "react-router-dom";
 import { Form, Button, Breadcrumb } from "react-bootstrap";
 import SendIcon from "@mui/icons-material/Send";
 import Footer from "../footer/Footer";
-import { Link } from "react-router-dom";
 import io from "socket.io-client";
 import Message from "../../components/comment/Comment";
-import { Row, Col, Card } from "react-bootstrap";
 const socket = io.connect("http://localhost:5000");
 
-function Detail(className) {
+function Detail({ className }) {
   const { id } = useParams();
   const date = new Date().toLocaleString();
   const [name] = React.useState(JSON.parse(localStorage.getItem("name")));
@@ -111,7 +109,7 @@ function Detail(className) {
               </Button>
             </div>
 
-            <div className="btn-comment">
+            <div className="comment-box">
               {chat.map((chat) => {
                 return <Message key={chat._id} name={chat.Name} time={chat.DateTime} message={chat.Message}
                 />})}
