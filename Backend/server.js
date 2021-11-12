@@ -46,8 +46,6 @@ io.on('connection', socket => {
 						socket.leave(user.room)
 						socket.join(id)
 						user.room = id
-					}else{
-						
 					}
 	
 				}

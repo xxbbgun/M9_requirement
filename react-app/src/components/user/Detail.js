@@ -38,16 +38,11 @@ function Detail(className) {
   }, [id]);
 
 
-  console.log("chat" + chat);
-
   useEffect(() => {
-    if (getSocket) {
       socket.on("sendCommentToClient", (msg) => {
-        setChat([...chat, msg]);
+        setChat([ ...chat,msg])
       });
-      return () => getSocket.off("sendCommentToClient");
-    }
-  }, [getSocket, id]);
+  },);
 
   useEffect(() => {
     if (getSocket) {
