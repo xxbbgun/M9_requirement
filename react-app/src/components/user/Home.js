@@ -17,7 +17,7 @@ function Home({ className }) {
             dispatch(fetchCustomer(user));
         };
         getNews();
-      }, [dispatch]);
+      }, [dispatch,user]);
     useEffect(() => {
         const getNews = () => {
           axios.get("http://localhost:5000/feed/GetFeed")
