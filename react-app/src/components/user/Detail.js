@@ -6,12 +6,24 @@ import { Form, Button, Breadcrumb } from "react-bootstrap";
 import SendIcon from "@mui/icons-material/Send";
 import Footer from "../footer/Footer";
 import { Link } from "react-router-dom";
+import io from "socket.io-client";
+import Message from "../../components/comment/Comment";
+import { Row, Col, Card } from "react-bootstrap";
+const socket = io.connect("http://localhost:5000");
 
 function Detail(className) {
+  const date = new Date().toLocaleString();
+  const [name] = React.useState(JSON.parse(localStorage.getItem("name")));
+  const [dates, setDate] = React.useState(date);
+  const [getSocket, setSocket] = useState(socket);
   const [newsDetail, setNews] = useState("");
+  const [message, setMessage] = useState("");
+  const [chat, setChat] = useState([]);
+  const [loading, setLoading] = useState(false);
   const { id } = useParams();
+  console.log(newsDetail)
   useEffect(() => {
-    const getNews = () => {
+   
       axios
         .get(`http://localhost:5000/feed/GetFeedById/${id}`)
         .then((res) => {
@@ -20,9 +32,47 @@ function Detail(className) {
         .catch(() => {
           console.log("error");
         });
-    };
-    getNews();
+ 
+
   }, [id]);
+
+  useState(() => {
+    setLoading(true);
+    axios.get(`http://localhost:5000/comment/commentById/${id}`).then((res) => {
+      setChat(res.data);
+      setLoading(false);
+    });
+  }, [id]);
+
+ 
+
+
+
+  useEffect(() => {
+    if(getSocket){
+     socket.on('sendCommentToClient',msg => {
+        setChat([ ...chat, msg ]);
+        console.log(chat)
+     })
+     return () => getSocket.off('sendCommentToClient');
+    }
+  }, [getSocket,id]);
+
+  useEffect(() => {
+    if(getSocket){
+      getSocket.emit('joinRoom',id)
+    }
+  }, [getSocket,chat]);
+
+  const onMessageSubmit = (e) => {
+    setDate(date);
+    getSocket.emit("CreateComment", { id, message, name, dates });
+    e.preventDefault();
+    setMessage("");
+  };
+
+  
+
   return (
     <div>
       <div className={className}>
@@ -62,14 +112,30 @@ function Detail(className) {
                 rows={3}
                 className="input-box"
                 placeholder="Enter your Comment"
+                onChange={(event) => setMessage(event.target.value)}
               />
             </Form.Group>
 
             <div className="btn-comment">
-              <Button type="submit" className="text-comment">
+              <Button
+                type="submit"
+                className="text-comment"
+                onClick={onMessageSubmit}
+              >
                 <SendIcon className="send-icon" />
                 POST
               </Button>
+            </div>
+
+            <div className="btn-comment">
+              {
+                chat.map(chat =>(
+                  <Message key={chat._id} name={chat.Name} time={chat.DateTime} message={chat.Message} />
+                 
+                ))
+                
+              }
+             
             </div>
           </div>
         </div>

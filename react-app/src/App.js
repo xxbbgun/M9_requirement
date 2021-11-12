@@ -11,11 +11,10 @@ import Comment from "./components/comment/Comment";
 import NavUser from "./components/navbar/NavUser";
 import NavAdmin from "./components/navbar/NavAdmin";
 import EditAndDeleteIcon from "./components/admin/EditAndDeleteIcon";
-import io from "socket.io-client";
-const socket = io.connect("http://localhost:5000");
+
 
 function App() {
-  console.log(socket);
+ 
 
   return (
     <>
