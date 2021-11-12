@@ -4,7 +4,6 @@ import { Form, Button } from "react-bootstrap";
 import NavAdmin from "../navbar/NavAdmin";
 import Footer from "../footer/Footer";
 import axios from "axios";
-import Swa from "sweetalert2";
 import {useHistory } from "react-router-dom";
 
 function AddNews({ className }) {
@@ -41,14 +40,14 @@ function AddNews({ className }) {
   }
 
   
-  function alertSuccess() {
-    Swa.fire({
-      title: "success",
-      text: "success",
-      confirmButtonColor: "#005488",
+  // function alertSuccess() {
+  //   Swa.fire({
+  //     title: "success",
+  //     text: "success",
+  //     confirmButtonColor: "#005488",
       
-    });
-  }
+  //   });
+  // }
 
   return (
     <div className={className}>

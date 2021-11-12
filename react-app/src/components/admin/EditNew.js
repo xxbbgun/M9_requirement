@@ -5,16 +5,13 @@ import { Form } from "react-bootstrap";
 import NavAdmin from "../navbar/NavAdmin";
 import Footer from "../footer/Footer";
 import { useParams } from "react-router-dom";
-import Swa from "sweetalert2";
 import { useHistory } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { fetchCustomer} from "../../ActionAndStore/Customer/action";
 
 function EditNew({ className }) {
-  const [newsDetail, setNews] = useState("");
+  const [news,setNews] = useState("");
   const { id } = useParams();
-  const user = useSelector((state) => state.customer);
-  const dispatch = useDispatch();
+  // const user = useSelector((state) => state.customer);
+ 
   
 
   useEffect(() => {
@@ -65,13 +62,13 @@ function EditNew({ className }) {
   
 
 
-  function alertSuccess() {
-    Swa.fire({
-      title: "success",
-      text: "success",
-      confirmButtonColor: "#005488",
-    });
-  }
+  // function alertSuccess() {
+  //   Swa.fire({
+  //     title: "success",
+  //     text: "success",
+  //     confirmButtonColor: "#005488",
+  //   });
+  // }
   return (
     <div className={className}>
       <NavAdmin />

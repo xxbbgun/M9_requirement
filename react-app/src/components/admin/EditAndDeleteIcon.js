@@ -27,14 +27,13 @@ function EditAndDeleteIcon({ className }) {
   const history = useHistory();
   const DeleteNews = async () => {
     Swa.fire({
-      title: "โปรดยืนยัน",
-      text: "ท่านต้องการลบหรือไหม",
+      title: "Do you want to delete the news?",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "ใช่",
-      cancelButtonText: "ไม่",
+      confirmButtonText: "Yes",
+      cancelButtonText: "No",
     }).then((result) => {
       if (result.isConfirmed) {
         let data = axios.delete(`http://localhost:5000/feed/DeleteFeed/${id}`)

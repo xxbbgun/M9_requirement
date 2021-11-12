@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { BiSearchAlt2 } from "react-icons/bi";
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import {FormControl, Button as RBButton,Col } from "react-bootstrap";
 import axios from "axios";
 import { fetchNews } from "../../ActionAndStore/News/action";
@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 function Search({className}) {
  
     const [query, setQuery] = useState("");
-    const news = useSelector((state) => state.news);
+    // const news = useSelector((state) => state.news);
     const dispatch = useDispatch();
     function Set(event){
         setQuery(event.target.value);   

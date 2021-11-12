@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { Form, Button, Breadcrumb } from "react-bootstrap";
 import SendIcon from "@mui/icons-material/Send";
 import Footer from "../footer/Footer";
-import { Link } from "react-router-dom";
+
 
 function Detail(className) {
   const [newsDetail, setNews] = useState("");

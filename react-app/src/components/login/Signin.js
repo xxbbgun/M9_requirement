@@ -7,7 +7,7 @@ import Swa from "sweetalert2";
 import GoogleLogin from "react-google-login";
 
 import { useDispatch } from "react-redux";
-import { fetchCustomer, getCustomer } from "../../ActionAndStore/Customer/action";
+import { fetchCustomer } from "../../ActionAndStore/Customer/action";
 
 function Signin({ className }) {
   const history = useHistory();

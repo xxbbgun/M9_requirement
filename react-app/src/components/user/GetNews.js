@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Col, Card, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+
 function GetNews({ className, data}) {
   const [role] = React.useState(JSON.parse(localStorage.getItem("role")));
   return (

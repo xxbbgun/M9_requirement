@@ -1,9 +1,13 @@
-import React from "react";
+import React,{useState} from "react";
 import styled from "styled-components";
-import { Navbar, Container } from "react-bootstrap";
+import { Navbar, Container,Form } from "react-bootstrap";
 import { Link, NavLink, useHistory } from "react-router-dom";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AddIcon from "@mui/icons-material/Add";
+import axios from "axios";
+import { fetchNews } from "../../ActionAndStore/News/action";
+import { useDispatch } from "react-redux";
+
 
 function NavUser({ className }) {
   const history = useHistory();
@@ -14,6 +18,19 @@ function NavUser({ className }) {
     localStorage.removeItem("role");
     history.push("/sign-in")
   }
+
+  const [type, setType] = useState("");
+  const dispatch = useDispatch();
+
+  function useSearch(event) {
+    axios.get(`http://localhost:5000/feed/Category/${type}`).then((res) => {
+       dispatch(fetchNews(res.data));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   return (
     <div className={className}>
       <Navbar className="navbar" variant="light">
@@ -26,13 +43,38 @@ function NavUser({ className }) {
                 alt="logo"
               />
             </div>
-          </NavLink>
+          </NavLink> 
+          <Form.Group className="mb-3">
+              <Form.Select
+                className="input-box"
+                onChange={(event) => setType(event.target.value)}
+                onClick={useSearch}
+
+              >
+                <option className="text-input">Catergry</option>
+                <option value="General News & Current Affairs" className="text-input">
+                  General News & Current Affairs
+                </option>
+                <option value="Business, Finance & Economics" className="text-input">
+                  Business, Finance & Economics
+                </option>
+                <option value="Health & Medicine" className="text-input">
+                  Health & Medicine
+                </option>
+                <option value="Entertainment, Art & Culture" className="text-input">
+                  Entertainment, Art & Culture
+                </option>
+              </Form.Select>
+            </Form.Group>
           <div className="navbar-icon">
             <div className="add-icon">
               <Link to="/add-news">
                 <AddIcon className="add-image" />
               </Link>
             </div>
+
+           
+
             <div className="user">
               <AccountCircleIcon className="user-image" />
               <NavLink to="/" className="link" onClick={logout}>Log Out</NavLink>
