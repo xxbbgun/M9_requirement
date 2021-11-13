@@ -53,7 +53,7 @@ function EditNew({ className }) {
     formData.append("DateTime", dates);
     formData.append("type", type);
 
-    let data = axios.put(`http://localhost:5000/feed/UpdateFeed/${id}`,)
+    let data = axios.put(`http://localhost:5000/feed/UpdateFeed/${id}`,formData)
     if(data){
       history.push("/admin-home");
     }
@@ -78,7 +78,6 @@ function EditNew({ className }) {
         <div className="editnews-form">
           <Form
             className="form-body"
-            enctype="multipart/form-data"
           >
             <Form.Group className="mb-3">
               <Form.Label className="title-formlabel">Choose Image</Form.Label>

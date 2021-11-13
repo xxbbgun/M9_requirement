@@ -57,7 +57,7 @@ function AddNews({ className }) {
           <h1 className="headline-text">ADD NEWS</h1>
         </div>
         <div className="addnews-form">
-          <Form className="form-body" onSubmit={addNews} enctype="multipart/form-data">
+          <Form className="form-body" onSubmit={addNews} >
             <Form.Group className="mb-3">
               <Form.Label className="title-formlabel">Choose Image</Form.Label>
               <div className="btn-selectfile">
