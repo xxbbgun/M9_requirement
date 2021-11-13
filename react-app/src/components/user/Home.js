@@ -5,88 +5,69 @@ import Footer from '../footer/Footer';
 import axios from "axios";
 import { fetchCustomer } from "../../ActionAndStore/Customer/action";
 import { fetchNews } from "../../ActionAndStore/News/action";
+import { fetchCovid } from "../../ActionAndStore/Covid/action";
 import { useSelector, useDispatch } from "react-redux";
 import GetNews from './GetNews';
 import Search from "./Search";
+import Slide from './Slide';
 function Home({ className }) {
     const news = useSelector((state) => state.news);
     const user = useSelector((state) => state.customer);
+    const covid = useSelector((state) => state.covid);
     const dispatch = useDispatch();
     useEffect(() => {
         const getNews = () => {
             dispatch(fetchCustomer(user));
         };
         getNews();
-      }, [dispatch,user]);
+    }, [dispatch, user]);
     useEffect(() => {
         const getNews = () => {
-          axios.get("http://localhost:5000/feed/GetFeed")
+            axios.get("http://localhost:5000/feed/GetFeed")
+                .then((res) => {
+                    dispatch(fetchNews(res.data));
+                })
+                .catch(() => {
+                    console.log("error");
+                });
+        };
+        getNews();
+    }, [dispatch]);
+
+      useEffect(() => {
+          const getInformation = async() => {
+            await  axios.get("http://localhost:5000/information/getCovid")
             .then((res) => {
-              dispatch(fetchNews(res.data));
+                console.log(res.data)
+              dispatch(fetchCovid(res.data));
             })
             .catch(() => {
                 console.log("error");
             });
         };
-        getNews();
+        getInformation();
       }, [dispatch]);
 
     return (
         <div className={className}>
             <Container>
-                 <Search/> 
-                <div className="slide">
-
-                    <Carousel>
-                        <Carousel.Item>
-                            <img
-                                className="d-block w-100"
-                                src="https://www.kaohoon.com/wp-content/uploads/2019/05/%E0%B8%82%E0%B9%88%E0%B8%B2%E0%B8%A7%E0%B8%94%E0%B9%88%E0%B8%A7%E0%B8%99.jpg"
-                                alt="First slide"
-                            />
-                            <Carousel.Caption>
-                                <h3>First slide label</h3>
-                                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                            </Carousel.Caption>
-                        </Carousel.Item>
-                        <Carousel.Item>
-                            <img
-                                className="d-block w-100"
-                                src="https://www.kaohoon.com/wp-content/uploads/2019/05/%E0%B8%82%E0%B9%88%E0%B8%B2%E0%B8%A7%E0%B8%94%E0%B9%88%E0%B8%A7%E0%B8%99.jpg"
-                                alt="Second slide"
-                            />
-
-                            <Carousel.Caption>
-                                <h3>Second slide label</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            </Carousel.Caption>
-                        </Carousel.Item>
-                        <Carousel.Item>
-                            <img
-                                className="d-block w-100"
-                                src="https://www.kaohoon.com/wp-content/uploads/2019/05/%E0%B8%82%E0%B9%88%E0%B8%B2%E0%B8%A7%E0%B8%94%E0%B9%88%E0%B8%A7%E0%B8%99.jpg"
-                                alt="Third slide"
-                            />
-
-                            <Carousel.Caption>
-                                <h3>Third slide label</h3>
-                                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-                            </Carousel.Caption>
-                        </Carousel.Item>
-                    </Carousel>
-
+                <Search />
+                <Slide />
+                <div className="information">
+                    {covid.map((data,index) => {
+                        return <Slide key={index} data={data} />
+                    })}
                 </div>
-
                 <div className="news">
                     <Row>
                         {news.map((data) => {
-                            return <GetNews key={data._id} data={data}/>
+                            return <GetNews key={data._id} data={data} />
                         })}
                     </Row>
                 </div>
 
             </Container>
-            <Footer/>
+            <Footer />
         </div >
     )
 }

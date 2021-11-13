@@ -6,14 +6,13 @@ import NavAdmin from "../navbar/NavAdmin";
 import Footer from "../footer/Footer";
 import { useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-
+import {useSelector} from 'react-redux';
 function EditNew({ className }) {
   const [news,setNews] = useState("");
   const { id } = useParams();
-  // const user = useSelector((state) => state.customer);
+  const user = useSelector((state) => state.customer);
  
   
-
   useEffect(() => {
     
       axios
