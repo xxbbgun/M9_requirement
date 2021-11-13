@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { Navbar, Container, Form } from "react-bootstrap";
 import { NavLink, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import axios from "axios";
 import { fetchNews } from "../../ActionAndStore/News/action";
 
@@ -19,6 +18,7 @@ function NavUser({ className }) {
 
   const [type, setType] = useState("");
   const dispatch = useDispatch();
+  const [name] = React.useState(JSON.parse(localStorage.getItem("name")));
 
   function useSearch(event) {
     axios
@@ -46,28 +46,6 @@ function NavUser({ className }) {
               </a>
             </div>
 
-            {/* <Form.Group className="mb-3">
-              <Form.Select
-                className="input-box"
-                onChange={(event) => setType(event.target.value)}
-                onClick={useSearch}
-
-              >
-                <option className="text-input">Catergry</option>
-                <option value="General News & Current Affairs" className="text-input">
-                  General News & Current Affairs
-                </option>
-                <option value="Business, Finance & Economics" className="text-input">
-                  Business, Finance & Economics
-                </option>
-                <option value="Health & Medicine" className="text-input">
-                  Health & Medicine
-                </option>
-                <option value="Entertainment, Art & Culture" className="text-input">
-                  Entertainment, Art & Culture
-                </option>
-              </Form.Select>
-            </Form.Group> */}
           </div>
 
           <Form.Group className="mb-2 mt-2">
@@ -101,17 +79,20 @@ function NavUser({ className }) {
             </Form.Select>
           </Form.Group>
 
+          <div className="me-auto">
+            <NavLink to="/notification" className="menu-text">Notification</NavLink>
+            {/* <NavLink to="/" className="menu-text">Features</NavLink>
+            <NavLink to="/" className="menu-text">Pricing</NavLink> */}
+          </div>
+
           <div className="user">
-            <AccountCircleIcon className="user-image" />
+            {/* <AccountCircleIcon className="user-image" /> */}
+            <h3>Hello {name}</h3>
             <NavLink to="/" className="link" onClick={logout}>
               Log Out
             </NavLink>
           </div>
-          {/* <div className="me-auto">
-                        <NavLink to="/" className="menu-text">Home</NavLink>
-                        <NavLink to="/" className="menu-text">Features</NavLink>
-                        <NavLink to="/" className="menu-text">Pricing</NavLink>
-                    </div> */}
+
         </Container>
       </Navbar>
     </div>
@@ -141,6 +122,12 @@ export default styled(NavUser)`
   .user {
     display: flex;
     justify-content: right;
+  }
+  .user >h3{
+    color: white;
+    font-size: 18px;
+    margin-left: 15px;
+    margin-top: 8px;
   }
   .user-image {
     color: white;

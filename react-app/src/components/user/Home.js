@@ -1,19 +1,18 @@
 import React, { useEffect } from 'react'
 import styled from "styled-components";
-import { Carousel, Container, Row } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 import Footer from '../footer/Footer';
 import axios from "axios";
 import { fetchCustomer } from "../../ActionAndStore/Customer/action";
 import { fetchNews } from "../../ActionAndStore/News/action";
-import { fetchCovid } from "../../ActionAndStore/Covid/action";
 import { useSelector, useDispatch } from "react-redux";
 import GetNews from './GetNews';
 import Search from "./Search";
-import Slide from './Slide';
+
 function Home({ className }) {
     const news = useSelector((state) => state.news);
     const user = useSelector((state) => state.customer);
-    const covid = useSelector((state) => state.covid);
+    
     const dispatch = useDispatch();
     useEffect(() => {
         const getNews = () => {
@@ -34,30 +33,11 @@ function Home({ className }) {
         getNews();
     }, [dispatch]);
 
-      useEffect(() => {
-          const getInformation = async() => {
-            await  axios.get("http://localhost:5000/information/getCovid")
-            .then((res) => {
-                console.log(res.data)
-              dispatch(fetchCovid(res.data));
-            })
-            .catch(() => {
-                console.log("error");
-            });
-        };
-        getInformation();
-      }, [dispatch]);
 
     return (
         <div className={className}>
             <Container>
                 <Search />
-                <Slide />
-                <div className="information">
-                    {covid.map((data,index) => {
-                        return <Slide key={index} data={data} />
-                    })}
-                </div>
                 <div className="news">
                     <Row>
                         {news.map((data) => {

@@ -11,7 +11,8 @@ import Comment from "./components/comment/Comment";
 import NavUser from "./components/navbar/NavUser";
 import NavAdmin from "./components/navbar/NavAdmin";
 import EditAndDeleteIcon from "./components/admin/EditAndDeleteIcon";
-
+import Notification from "./components/Notification.js/Notification";
+import Footer from "./components/footer/Footer";
 
 function App() {
  
@@ -50,6 +51,11 @@ function App() {
         </Route>
         <Route path="/comment">
           <Comment />
+        </Route>
+        <Route path="/notification">
+        <NavUser />
+        <Notification/>
+        <Footer />
         </Route>
         <Route path="/">
           <Signin />
