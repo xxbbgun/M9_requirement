@@ -13,10 +13,11 @@ import NavAdmin from "./components/navbar/NavAdmin";
 import EditAndDeleteIcon from "./components/admin/EditAndDeleteIcon";
 import Notification from "./components/Notification.js/Notification";
 import Footer from "./components/footer/Footer";
+import Thread from "./components/Thread/Thread";
+import AddThread from "./components/Thread/AddThread";
+import GetThread from "./components/Thread/GetThread";
 
 function App() {
- 
-
   return (
     <>
       <Switch>
@@ -53,9 +54,20 @@ function App() {
           <Comment />
         </Route>
         <Route path="/notification">
-        <NavUser />
-        <Notification/>
-        <Footer />
+          <NavUser />
+          <Notification />
+          <Footer />
+        </Route>
+        <Route path="/user-thread">
+          <NavUser />
+          <Thread />
+        </Route>
+        <Route path="/user-addthread">
+          <NavUser />
+          <AddThread />
+        </Route>
+        <Route path="/get-thread">
+          <GetThread />
         </Route>
         <Route path="/">
           <Signin />
