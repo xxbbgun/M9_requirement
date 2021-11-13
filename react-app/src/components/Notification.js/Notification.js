@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect,useState } from 'react'
 import axios from "axios";
 import { fetchCovid } from "../../ActionAndStore/Covid/action";
 import { fetchWeather } from "../../ActionAndStore/Weather/action"
@@ -8,8 +8,9 @@ import Weather from '../Notification.js/Weather';
 
 function Notification() {
     const covid = useSelector((state) => state.covid);
-    const weather = useSelector((state) => state.weather);
+    const [weather, setWeather] = useState();
     const dispatch = useDispatch();
+    
     useEffect(() => {
         const getInformation = async() => {
           await  axios.get("http://localhost:5000/information/getCovid")
@@ -29,14 +30,15 @@ function Notification() {
         await  axios.get("http://localhost:5000/information/getWeather")
         .then((res) => {
           console.log(res.data)
-          dispatch(fetchWeather(res.data));
+          setWeather(res.data);
+          // dispatch(fetchWeather(res.data));
         })
         .catch(() => {
             console.log("error");
         });
     };
     getWeather();
-  }, [dispatch]);
+  }, []);
 
     return (
         <div>

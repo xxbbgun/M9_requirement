@@ -77,6 +77,11 @@ function NavUser({ className }) {
               </option>
             </Form.Select>
           </Form.Group>
+          
+          <div className="me-auto">
+            <NavLink to="/notification" className="menu-text">Notification</NavLink>
+          </div>
+
           <div className="navbar-icon">
             <div className="add-icon">
               <Link to="/add-news">

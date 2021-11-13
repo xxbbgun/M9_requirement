@@ -20,10 +20,10 @@ function Footer({ className }) {
                         <div className="col-xs-6 col-md-3">
                             <h6>Categories</h6>
                             <ul className="footer-links">
-                                <li><Link to="/">General News & Current Affairs</Link></li>
-                                <li><Link to="/">Business, Finance & Economics</Link></li>
-                                <li><Link to="/">Health & Medicine</Link></li>
-                                <li><Link to="/">Entertainment, Art & Culture</Link></li>
+                                <li><Link to="/home">General News & Current Affairs</Link></li>
+                                <li><Link to="/home">Business, Finance & Economics</Link></li>
+                                <li><Link to="/home">Health & Medicine</Link></li>
+                                <li><Link to="/home">Entertainment, Art & Culture</Link></li>
                             </ul>
                         </div>
 

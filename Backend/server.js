@@ -7,6 +7,8 @@ const { Server } = require('socket.io')
 const router = require("./routes")
 require('dotenv').config()
 const multer = require("multer");
+const swaggerJsdoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express')
 
 //model
 const Comment = require("./model/Comment")
@@ -76,6 +78,80 @@ io.on('connection', socket => {
 	})
 })
 
+//swagger
+const options = {
+	swaggerDefinition: {
+	  openapi: "3.0.1",
+	  info: {
+		title: "News API",
+		version: "1.0.0",
+	  },
+	  servers: [
+		{
+		  url: "http://localhost:5000",
+		}
+	  ]
+	},
+	apis: ["*.js"],
+  };
+  const swaggerSpecs = swaggerJsdoc(options);
+  
+  //path open swagger doc
+  app.use('/api-doc', swaggerUi.serve, swaggerUi.setup(swaggerSpecs))
+  
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Sign up:
+ *       type: object
+ *       required:
+ *         - name
+ *         - email
+ *         - password
+ *         - confirmpassword
+ * 	
+ *       properties:
+ *         id:
+ *           type: string
+ *           description: The auto-generated id of the book
+ *         name:
+ *           type: string
+ *           description: The name of user 
+ *         email:
+ *           type: string
+ *           description: The email of user 
+ *         password:
+ *           type: string
+ *           description: The password of user 
+ *         confirmpassword:
+ *           type: string
+ *           description: The confirm password of user 
+ *       example:
+ *         token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MThmY2NmMTI0YTJmOWJhZDYwNmI0YWEiLCJpYXQiOjE2MzY4MTQwNjYsImV4cCI6MTYzNjkwMDQ2Nn0.jQB6nkVshlAJ-3vrHRiFqic4axAfNbBHYcKgGyoJ1vc
+ *         user: 
+ *            name: Kanticha
+ *            role: customer
+ */
+
+
+/**
+ * @swagger
+ * /user/sign-up:
+ *   post:
+ *     summary: Returns the list of all the books
+ *     tags: [Sign up]
+ *     responses:
+ *       200:
+ *         description: The list of the books
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Sign up'
+ */
 // run server
 server.listen(5000, () => {
 	console.log("Server is running on port 5000");

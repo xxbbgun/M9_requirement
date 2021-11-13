@@ -5,6 +5,7 @@ const comments = require("./comment")
 const information = require("./information")
 const login = require("./login")
 
+
 router.use("/feed",feed)
 router.use("/comment",comments)
 router.use("/information",information)
