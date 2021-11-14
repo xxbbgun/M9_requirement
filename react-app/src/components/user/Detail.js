@@ -5,11 +5,10 @@ import { useParams } from "react-router-dom";
 import { Form, Button, Breadcrumb } from "react-bootstrap";
 import SendIcon from "@mui/icons-material/Send";
 import Footer from "../footer/Footer";
-import io from "socket.io-client";
 import Message from "../../components/comment/Comment";
-const socket = io.connect("http://localhost:5000");
 
-function Detail({ className }) {
+
+function Detail({ className ,socket}) {
   const { id } = useParams();
   const date = new Date().toLocaleString();
   const [name] = React.useState(JSON.parse(localStorage.getItem("name")));

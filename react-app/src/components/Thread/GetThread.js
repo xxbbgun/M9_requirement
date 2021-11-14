@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { Row, Col } from "react-bootstrap";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-
 function Comment({ className }) {
+
   return (
     <div className={className}>
       <div className="container">

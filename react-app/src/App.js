@@ -16,7 +16,8 @@ import Footer from "./components/footer/Footer";
 import Thread from "./components/Thread/Thread";
 import AddThread from "./components/Thread/AddThread";
 import GetThread from "./components/Thread/GetThread";
-
+import io from "socket.io-client";
+const socket = io.connect("http://localhost:5000");
 function App() {
   return (
     <>
@@ -33,7 +34,7 @@ function App() {
         </Route>
         <Route path="/user-detail/:id">
           <NavUser />
-          <Detail />
+          <Detail socket={socket} />
         </Route>
         <Route path="/admin-home">
           <NavAdmin />
@@ -42,7 +43,7 @@ function App() {
         <Route path="/admin-detail/:id">
           <NavAdmin />
           <EditAndDeleteIcon />
-          <Detail />
+          <Detail socket={socket} />
         </Route>
         <Route path="/add-news">
           <AddNews />
