@@ -15,8 +15,9 @@ import Notification from "./components/Notification.js/Notification";
 import Footer from "./components/footer/Footer";
 import Thread from "./components/Thread/Thread";
 import AddThread from "./components/Thread/AddThread";
-import GetThread from "./components/Thread/GetThread";
 import io from "socket.io-client";
+import ThreadDetail from "./components/Thread/ThreadDetail";
+
 const socket = io.connect("http://localhost:5000");
 function App() {
   return (
@@ -45,6 +46,18 @@ function App() {
           <EditAndDeleteIcon />
           <Detail socket={socket} />
         </Route>
+        <Route path="/admin-thread">
+          <NavAdmin />
+          <Thread />
+        </Route>
+        <Route path="/admin-threadDetail/:id">
+          <NavAdmin />
+          <ThreadDetail />
+        </Route>
+        <Route path="/admin-addthread">
+          <NavAdmin />
+          <AddThread />
+        </Route>
         <Route path="/add-news">
           <AddNews />
         </Route>
@@ -63,12 +76,13 @@ function App() {
           <NavUser />
           <Thread />
         </Route>
+        <Route path="/user-threadDetail/:id">
+          <NavUser />
+          <ThreadDetail />
+        </Route>
         <Route path="/user-addthread">
           <NavUser />
           <AddThread />
-        </Route>
-        <Route path="/get-thread">
-          <GetThread />
         </Route>
         <Route path="/">
           <Signin />

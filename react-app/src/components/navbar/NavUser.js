@@ -5,6 +5,7 @@ import { NavLink, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { fetchNews } from "../../ActionAndStore/News/action";
+import AddCommentIcon from '@mui/icons-material/AddComment';
 
 function NavUser({ className }) {
   const history = useHistory();
@@ -83,6 +84,12 @@ function NavUser({ className }) {
             <NavLink to="/notification" className="menu-text">Notification</NavLink>
             {/* <NavLink to="/" className="menu-text">Features</NavLink>
             <NavLink to="/" className="menu-text">Pricing</NavLink> */}
+          </div>
+
+          <div className="question-page">
+            <NavLink to="/user-thread" className="link">
+              <AddCommentIcon />
+            </NavLink>
           </div>
 
           <div className="user">

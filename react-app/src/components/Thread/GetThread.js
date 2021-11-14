@@ -2,8 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { Row, Col } from "react-bootstrap";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-function Comment({ className }) {
+import { Link } from "react-router-dom";
 
+function Comment({ className, data }) {
   return (
     <div className={className}>
       <div className="container">
@@ -11,11 +12,13 @@ function Comment({ className }) {
           <Row className="card-thread">
             <Col className="each-card">
               <div className="card-body">
+                <Link to={`/user-threadDetail/${data._id}`} className="link-threadDetail">
+                  <div className="thread-box">
+                    <h4>{data.title}</h4>
+                  </div>
+                </Link>
                 <div className="thread-box">
-                  <h3>title</h3>
-                </div>
-                <div className="thread-box">
-                  <label>WOW</label>
+                  <label className="content-text">{data.content}</label>
                 </div>
               </div>
             </Col>
@@ -41,7 +44,7 @@ export default styled(Comment)`
   .card-thread {
     margin-top: 30px;
     transition: 0.5s;
-    width: 80%;
+    width: 100%;
     border-radius: 15px;
     box-shadow: 0 2px 8px 0 whitesmoke, 0 6px 10px 0 whitesmoke;
     border: 1px solid whitesmoke;
@@ -53,26 +56,17 @@ export default styled(Comment)`
     display: flex;
     justify-content: left;
   }
-  /* .each-card {
-    transition: 0.5s;
-    width: 100%;
-    border-radius: 15px;
-    box-shadow: 0 2px 8px 0 whitesmoke, 0 6px 10px 0 whitesmoke;
-    border: 1px solid whitesmoke;
-  }
-  .each-card:hover {
-    box-shadow: 0 4px 8px 0 lightgray, 0 6px 20px 0 lightgray;
-  } */
   .card-body {
     margin-top: 10px;
     margin-bottom: 10px;
     width: 600px;
   }
-  .group-thread-title {
-    display: flex;
+  .link-threadDetail {
+    text-decoration: none;
+    color: #eb1c01;
   }
-  .thread-username {
-    margin-right: 90px;
+  .content-text {
+      color: gray;
   }
   .box-delete {
     margin-top: 30px;

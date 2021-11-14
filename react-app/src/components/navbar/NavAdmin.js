@@ -7,6 +7,7 @@ import AddIcon from "@mui/icons-material/Add";
 import axios from "axios";
 import { fetchNews } from "../../ActionAndStore/News/action";
 import { useDispatch } from "react-redux";
+import AddCommentIcon from "@mui/icons-material/AddComment";
 
 function NavUser({ className }) {
   const history = useHistory();
@@ -20,6 +21,7 @@ function NavUser({ className }) {
 
   const [type, setType] = useState("");
   const dispatch = useDispatch();
+  const [name] = React.useState(JSON.parse(localStorage.getItem("name")));
 
   function useSearch(event) {
     axios
@@ -77,25 +79,34 @@ function NavUser({ className }) {
               </option>
             </Form.Select>
           </Form.Group>
-          
+
           <div className="me-auto">
-            <NavLink to="/notification" className="menu-text">Notification</NavLink>
+            <NavLink to="/notification" className="menu-text">
+              Notification
+            </NavLink>
           </div>
 
-          <div className="navbar-icon">
+          {/* <div className="navbar-icon"> */}
             <div className="add-icon">
               <Link to="/add-news">
                 <AddIcon className="add-image" />
               </Link>
             </div>
 
+            <div className="question-page">
+              <NavLink to="/user-thread" className="link">
+                <AddCommentIcon />
+              </NavLink>
+            </div>
+
             <div className="user">
-              <AccountCircleIcon className="user-image" />
+              {/* <AccountCircleIcon className="user-image" /> */}
+              <h3>Hello {name}</h3>
               <NavLink to="/" className="link" onClick={logout}>
                 Log Out
               </NavLink>
             </div>
-          </div>
+          {/* </div> */}
         </Container>
       </Navbar>
     </div>
@@ -122,16 +133,26 @@ export default styled(NavUser)`
   .web-logo {
     display: flex;
   }
-  .navbar-icon {
+  /* .navbar-icon {
     display: flex;
-  }
-  .add-icon {
+  } */
+  /* .add-icon {
     margin-right: 10px;
-  }
+  } */
   .add-image {
     color: white;
     width: 35px;
     height: 35px;
+  }
+  .user {
+    display: flex;
+    justify-content: right;
+  }
+  .user >h3{
+    color: white;
+    font-size: 18px;
+    margin-left: 15px;
+    margin-top: 8px;
   }
   .user-image {
     color: white;
@@ -144,5 +165,10 @@ export default styled(NavUser)`
     font-size: 18px;
     margin-left: 15px;
     margin-top: 5px;
+  }
+  .nav-dropdown > a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
   }
 `;

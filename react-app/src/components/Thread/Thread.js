@@ -1,8 +1,33 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { Row, Col } from "react-bootstrap";
+import { useSelector, useDispatch } from "react-redux";
+import axios from "axios";
+import { fetchQuestions } from "../../ActionAndStore/Question/action";
+import GetThread from "./GetThread";
+import Button from "@mui/material/Button";
+import AddIcon from "@mui/icons-material/Add";
+import { Link } from "react-router-dom";
+import Footer from "../footer/Footer";
 
 function Thread({ className }) {
+  const question = useSelector((state) => state.question);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const getQuestion = () => {
+      axios
+        .get("http://localhost:5000/question/GetQuestion")
+        .then((res) => {
+          dispatch(fetchQuestions(res.data));
+        })
+        .catch(() => {
+          console.log("error");
+        });
+    };
+    getQuestion();
+  }, [dispatch]);
+
   return (
     <div className={className}>
       <div className="container">
@@ -94,7 +119,22 @@ function Thread({ className }) {
             </Col>
           </Row>
         </div>
+        <div className="btn-addthread">
+          <Link to="/user-addthread" className="link-addthread">
+            <Button variant="outlined" startIcon={<AddIcon />}>
+              ADD THREAD
+            </Button>
+          </Link>
+        </div>
+        <div className="question">
+          <Row>
+            {question.map((data) => {
+              return <GetThread key={data._id} data={data} />;
+            })}
+          </Row>
+        </div>
       </div>
+      <Footer />
     </div>
   );
 }
@@ -105,7 +145,7 @@ export default styled(Thread)`
     justify-content: center;
   }
   .card-container {
-      margin-top: 30px;
+    margin-top: 30px;
   }
   .card-image {
     display: flex;
@@ -115,6 +155,15 @@ export default styled(Thread)`
   .image-category {
     width: 80%;
     height: 150px;
+  }
+  .btn-addthread {
+    display: flex;
+    justify-content: right;
+    margin-top: 30px;
+    margin-right: 30px;
+  }
+  .link-addthread {
+    text-decoration: none;
   }
   .card-title {
     text-align: center;
