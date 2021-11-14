@@ -35,38 +35,38 @@ io.on('connection', socket => {
 	//console.log(socket.id + ' connection')
 
 	socket.on('joinRoom', id => {
-		const user = {userId:socket.id,room:id}
-		
+		const user = { userId: socket.id, room: id }
+
 		const check = users.every(user => user.userId !== socket.id)
-		if(check){
+		if (check) {
 			users.push(user)
 			socket.join(user.room)
-		}else{
+		} else {
 			users.map(user => {
-				if(user.userId === socket.id) {
-					if(user.room !== id) {
+				if (user.userId === socket.id) {
+					if (user.room !== id) {
 						socket.leave(user.room)
 						socket.join(id)
 						user.room = id
 					}
-	
+
 				}
 			})
 
 		}
-		
+
 		//console.log(users)
 		//console.log(socket.adapter.rooms)
 
 	})
 
 	socket.on('CreateComment', async msg => {
-		const { id, name,message ,dates} = msg
+		const { id, name, message, dates } = msg
 		const data = {
-			Name:name,
-			Message:message,
+			Name: name,
+			Message: message,
 			FeedId: id,
-			DateTime:dates
+			DateTime: dates
 		}
 		const newComment = new Comment(data)
 		await newComment.save()
@@ -89,187 +89,386 @@ const options = {
 	  servers: [
 		{
 		  url: "http://localhost:5000",
-		}
-	  ]
+		},
+	  ],
+	  components: {
+		securitySchemes: {
+		  bearerAuth: {
+			type: "http",
+			scheme: "bearer",
+			bearerFormat: "JWT",
+		  },
+		},
+	  },
+	  security: [
+		{
+		  bearerAuth: [],
+		},
+	  ],
 	},
 	apis: ["*.js"],
   };
-  const swaggerSpecs = swaggerJsdoc(options);
-  
-  //path open swagger doc
-  app.use('/api-doc', swaggerUi.serve, swaggerUi.setup(swaggerSpecs))
-  
+const swaggerSpecs = swaggerJsdoc(options);
+
+//path open swagger doc
+app.use('/api-doc', swaggerUi.serve, swaggerUi.setup(swaggerSpecs))
+
 
 /**
  * @swagger
- * components:
- *   schemas:
- *     Sign up:
- *       type: object
- *       required:
- *         - name
- *         - email
- *         - password
- *         - confirmpassword
- * 	
- *       properties:
- *         id:
- *           type: string
- *           description: The auto-generated id of the user
- *         name:
- *           type: string
- *           description: The name of user 
- *         email:
- *           type: string
- *           description: The email of user 
- *         password:
- *           type: string
- *           description: The password of user 
- *         confirmpassword:
- *           type: string
- *           description: The confirm password of user 
- *       example:
- *         token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MThmY2NmMTI0YTJmOWJhZDYwNmI0YWEiLCJpYXQiOjE2MzY4MTQwNjYsImV4cCI6MTYzNjkwMDQ2Nn0.jQB6nkVshlAJ-3vrHRiFqic4axAfNbBHYcKgGyoJ1vc
- *         user: 
- *            name: Kanticha
- *            role: customer
- *     Sign in:
- *       type: object
- *       required:
- *         - name
- *         - email
- *         - password
- *         - confirmpassword
- *       properties:
- *         id:
- *           type: string
- *           description: The auto-generated id of the user
- *         name:
- *           type: string
- *           description: The name of user 
- *         email:
- *           type: string
- *           description: The email of user 
- *         password:
- *           type: string
- *           description: The password of user 
- *         confirmpassword:
- *           type: string
- *           description: The confirm password of user 
- *       example:
- *         token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MThmY2NmMTI0YTJmOWJhZDYwNmI0YWEiLCJpYXQiOjE2MzY4MTQwNjYsImV4cCI6MTYzNjkwMDQ2Nn0.jQB6nkVshlAJ-3vrHRiFqic4axAfNbBHYcKgGyoJ1vc
- *         user: 
- *            name: Kanticha
- *            role: customer
- *     Feed:
- *       type: object
- *       properties:
+ * definitions:
+ *  Sign-up:
+ *   type: object
+ *   properties:
+ *    name:
+ *     type: string
+ *     description: Name of user
+ *     example: 'Kanticha'
+ *    email:
+ *     type: string
+ *     description: Email of user
+ *     example: 'Kanticha_33@gmail.com'
+ *    password:
+ *     type: string
+ *     description: Password of user
+ *     example: 'Kanticha35194'
+ *    confirmpassword:
+ *     type: string
+ *     description: Confirm password of user
+ *     example: 'Kanticha35194'
+ *  Sign-in:
+ *   type: object
+ *   properties:
+ *    email:
+ *     type: string
+ *     description: Email of user
+ *     example: 'Kanticha_33@gmail.com'
+ *    password:
+ *     type: string
+ *     description: Password of user
+ *     example: 'Kanticha35194'
+ *  Feed:
+ *   type: object
+ *   properties:
  *         id:
  *           type: string
  *           description: The auto-generated id of the news
+ *           example: 618e4aa01314e23cab3fd46e
  *         Headline:
  *           type: string
  *           description: Headline of news
+ *           example: National Flood Relief Appeal
  *         content:
  *           type: string
  *           description: Content of news
+ *           example: Australian charity, Rotary Australia World Community Service, today announced the creation of a national Flood Relief Appeal for people impacted by the recent floods up and down the Eastern seaboard. 
  *         description:
  *           type: string
  *           description: description of news
+ *           example: Australian charity, Rotary Australia World Community Service, today announced the creation of a national Flood Relief Appeal for people impacted by the recent floods up and down the Eastern seaboard. Australians impacted by the recent floods will be the beneficiaries of money raised by Flood Appeal and will be able to liaise with their local Rotary Club to advise of their needs. The fundraising campaign, which aims to raise in excess of $10 million, was launched this week to support the communities in need after yet another disaster impacting Australians. “The money raised from the Appeal will go directly and quickly to support those impacted, providing essential items and financial support where Disaster relief and Insurance claims won’t stretch,” said Rotary Australia World Community Service Ltd CEO Andrew Woodward. “The number of disasters Australians have endured in the last two years have been significant and left a lot of people in very difficult financial positions,” Mr Woodward said. Rotary Australia World Community Service has previously raised money for Bushfire and Drought affected areas and sees this disaster as just another where the network of Rotarians can step in to assist. Mr Woodward said that he expects the money to help people with the things that insurance or disaster relief funds cannot replace. Whether it be helping farmers build new fences or providing food and clothing to those that have lost everything, the money raised will be crucial in helping families get back on their feet as soon as possible.
  *         imageUrl:
  *           type: string
- *           description: Image og news 
+ *           description: Image of news 
+ *           example: flood.png
  *         DateTime:
  *           type: string
  *           description: Date Time create news
+ *           example: 11/14/2021, 12:52:58 AM
  *         type:
  *           type: string
  *           description: type of news
+ *           example: General News & Current Affairs
  *         status:
  *           type: string
  *           description: status of news
- *       example:
- *         _id: 618e4aa01314e23cab3fd46e
- *         Headline: National Flood Relief Appeal
- *         content: Australian charity, Rotary Australia World Community Service, today announced the creation of a national Flood Relief Appeal for people impacted by the recent floods up and down the Eastern seaboard. 
- *         description: Australian charity, Rotary Australia World Community Service, today announced the creation of a national Flood Relief Appeal for people impacted by the recent floods up and down the Eastern seaboard. Australians impacted by the recent floods will be the beneficiaries of money raised by Flood Appeal and will be able to liaise with their local Rotary Club to advise of their needs. The fundraising campaign, which aims to raise in excess of $10 million, was launched this week to support the communities in need after yet another disaster impacting Australians. “The money raised from the Appeal will go directly and quickly to support those impacted, providing essential items and financial support where Disaster relief and Insurance claims won’t stretch,” said Rotary Australia World Community Service Ltd CEO Andrew Woodward. “The number of disasters Australians have endured in the last two years have been significant and left a lot of people in very difficult financial positions,” Mr Woodward said. Rotary Australia World Community Service has previously raised money for Bushfire and Drought affected areas and sees this disaster as just another where the network of Rotarians can step in to assist. Mr Woodward said that he expects the money to help people with the things that insurance or disaster relief funds cannot replace. Whether it be helping farmers build new fences or providing food and clothing to those that have lost everything, the money raised will be crucial in helping families get back on their feet as soon as possible.
- *         imageUrl: flood.png
- *         DateTime: 11/14/2021, 12:52:58 AM
- *         type: General News & Current Affairs
- *         status: ปกติ
+ *           example: ปกติ
+ *  Covid:
+ *   type: object
+ *   properties:
+ *         txn_date:
+ *           type: string
+ *           description: Date Time
+ *           example: 2021-11-14
+ *         new_case:
+ *           type: string
+ *           description: new case of covid
+ *           example: 7079
+ *         total_case:
+ *           type: string
+ *           description: total case of covid
+ *           example: 2018410
+ *         new_case_excludeabroad:
+ *           type: string
+ *           description: new case excludeabroad of covid
+ *           example: 7070
+ *         total_case_excludeabroad:
+ *           type: string
+ *           description: total case excludeabroad of covid
+ *           example: 2011793
+ *         new_death:
+ *           type: string
+ *           description: new death of covid
+ *           example: 47
+ *         total_death:
+ *           type: string
+ *           description: total death of covid
+ *           example: 20036
+ *         new_recovered:
+ *           type: string
+ *           description: new recovered of covid
+ *           example: 6917
+ *         total_recovered:
+ *           type: string
+ *           description: total recovered of covid
+ *           example: 1903065
+ *         update_date:
+ *           type: string
+ *           description: time that data update
+ *           example: 2021-11-14 07:31:2
+ *  Weather:
+ *   type: object
+ *   properties:
+ *         name:
+ *           type: string
+ *           description: Country name
+ *           example: Thailand
+ *         sunrise:
+ *           type: string
+ *           description: sunrise coordinates
+ *           example: 1636845666
+ *         sunset:
+ *           type: string
+ *           description: sunset coordinates
+ *           example: 1636886875
+ *         description:
+ *           type: string
+ *           description: description of weather today
+ *           example: overcast clouds
+ *  Comment:
+ *   type: object
+ *   properties:
+ *         Name:
+ *           type: string
+ *           description: Username
+ *           example: Kanticha
+ *         Message:
+ *           type: string
+ *           description: comment
+ *           example: wow!
+ *         FeedId:
+ *           type: string
+ *           description: News feed ID
+ *           example: 618e4aa01314e23cab3fd46d
+ *         DateTime:
+ *           type: string
+ *           description: Date time comment
+ *           example: 11/14/2021, 12:52:58 AM
  */
-
 
 
 /**
- * @swagger
- * /user/sign-up:
- *   post:
- *     summary: Sign up
- *     tags: [Sign up]
- *     responses:
- *       200:
- *         description: Sign up
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/Sign up'
- * /user/sign-in:
- *   post:
- *     summary: Sign in
- *     tags: [Sign in]
- *     responses:
- *       200:
- *         description: Sign in
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/Sign in'
- * /user/sign-in/google:
- *   post:
- *     summary: Sign in
- *     tags: [Sign in with google]
- *     responses:
- *       200:
- *         description: Sign in
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/Sign in'
- * /feed/GetFeed:
- *   get:
- *     summary: News feed
- *     tags: [Feed]
- *     responses:
- *       200:
- *         description: News feed
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/Feed'
- */
+  * @swagger
+  * /user/sign-up:
+  *  post: 
+  *   summary: sign up user
+  *   tags: [Register Login]
+  *   description: sign up to use our web
+  *   requestBody:
+  *    content:
+  *     application/json:
+  *      schema:
+  *       $ref: '#/definitions/Sign-up'
+  *   responses:
+  *    200:
+  *     description: Sign up successful
+  *    500:
+  *     description: sorry, please sign up again
+  * /user/sign-in:
+  *  post:
+  *   summary: sign in user
+  *   tags: [Register Login]
+  *   description: sign in to website
+  *   requestBody:
+  *    content:
+  *     application/json:
+  *      schema:
+  *       $ref: '#/definitions/Sign-in'
+  *   responses:
+  *    200:
+  *     description: Sign in successful
+  *    500:
+  *     description: Error, please sign in again
+  * /signin/google:
+  *  post:
+  *   summary: sign in user with google account
+  *   tags: [Register Login]
+  *   description: sign in to website with google account
+  *   requestBody:
+  *    content:
+  *     application/json:
+  *      schema:
+  *       $ref: '#/definitions/Sign-in'
+  *   responses:
+  *    200:
+  *     description: Sign in successful
+  *    500:
+  *     description: Error, please sign in again
+  * /feed/GetFeed:
+  *  get:
+  *   summary: News feed
+  *   tags: [Feed]
+  *   description: News feed
+  *   requestBody:
+  *    content:
+  *     application/json:
+  *      schema:
+  *       $ref: '#/definitions/Feed'
+  *   responses:
+  *    200:
+  *     description: response news data
+  *    500:
+  *     description: Error cannot get news feed
+  * /feed/GetFeed:id:
+  *  get:
+  *   summary: Show news only at input id
+  *   tags: [Feed]
+  *   description: Show news only at input id
+  *   requestBody:
+  *    content:
+  *     application/json:
+  *      schema:
+  *       $ref: '#/definitions/Feed'
+  *   responses:
+  *    200:
+  *     description: response news data
+  *    500:
+  *     description: Error cannot get news feed
+  * /feed/Search/:keyword:
+  *  get:
+  *   summary: Show searched news
+  *   tags: [Feed]
+  *   description: Show searched news
+  *   requestBody:
+  *    content:
+  *     application/json:
+  *      schema:
+  *       $ref: '#/definitions/Feed'
+  *   responses:
+  *    200:
+  *     description: response news data
+  *    500:
+  *     description: Error cannot get news feed
+  * /feed/Category/:keyword:
+  *  get:
+  *   summary:  Show news by category
+  *   tags: [Feed]
+  *   description: Show news by category
+  *   requestBody:
+  *    content:
+  *     application/json:
+  *      schema:
+  *       $ref: '#/definitions/Feed'
+  *   responses:
+  *    200:
+  *     description: response news data by category
+  *    500:
+  *     description: Error cannot get news feed
+  * /feed/AddFeed:
+  *  post:
+  *   summary: Add News
+  *   tags: [Feed]
+  *   description: Add News
+  *   requestBody:
+  *    content:
+  *     application/json:
+  *      schema:
+  *       $ref: '#/definitions/Feed'
+  *   responses:
+  *    200:
+  *     description: response a newly added news
+  *    500:
+  *     description: Error cannot get news feed
+  * /feed/UpdateFeed/:id:
+  *  put:
+  *   summary: Update News 
+  *   tags: [Feed]
+  *   description: Update News 
+  *   requestBody:
+  *    content:
+  *     application/json:
+  *      schema:
+  *       $ref: '#/definitions/Feed'
+  *   responses:
+  *    200:
+  *     description: response a newly update news
+  *    500:
+  *     description: Error cannot update news feed
+  * /feedDeleteFeed/:id:
+  *  delete:
+  *   summary: Delete News 
+  *   tags: [Feed]
+  *   description: delete news by id
+  *   requestBody:
+  *    content:
+  *     application/json:
+  *      schema:
+  *       $ref: '#/definitions/Feed'
+  *   responses:
+  *    200:
+  *     description: Delete news successful
+  *    500:
+  *     description: Error cannot delete news 
+  * /information/getCovid:
+  *  get:
+  *   summary: Covid Information
+  *   tags: [Information]
+  *   description: Covid Information
+  *   requestBody:
+  *    content:
+  *     application/json:
+  *      schema:
+  *       $ref: '#/definitions/Covid'
+  *   responses:
+  *    200:
+  *     description: Covid news information
+  *    500:
+  *     description: Error cannot get covid news 
+  * /information/getWeather:
+  *  get:
+  *   summary: Weather Information
+  *   tags: [Information]
+  *   description: Weather Information
+  *   requestBody:
+  *    content:
+  *     application/json:
+  *      schema:
+  *       $ref: '#/definitions/Weather'
+  *   responses:
+  *    200:
+  *     description: Weather news information
+  *    500:
+  *     description: Error cannot get Weather news 
+  * /comment/commentById/:id:
+  *  get:
+  *   summary: Comment News
+  *   tags: [Comment]
+  *   description: Comment News
+  *   requestBody:
+  *    content:
+  *     application/json:
+  *      schema:
+  *       $ref: '#/definitions/Comment'
+  *   responses:
+  *    200:
+  *     description: Comment News successful
+  *    500:
+  *     description: Error cannot comment news 
+  */
+
+
+
+
 // run server
 server.listen(5000, () => {
 	console.log("Server is running on port 5000");
 });
-
-
-//  *       required:
-//  *         - Headline
-//  *         - content
-//  *         - description
-//  *         - imageUrl
-//  *         - DateTime
-//  *         - type
-//  *         - status
-
-// *       	type: General News & Current Affairs
-// * 		 	status: ปกติ
