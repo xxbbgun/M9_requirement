@@ -11,13 +11,8 @@ function Comment({ className }) {
           <Row className="card-thread">
             <Col className="each-card">
               <div className="card-body">
-                <div className="group-thread-title">
-                  <div className="thread-username">
-                    <h4>John</h4>
-                  </div>
-                  <div className="thread-time">
-                    <h4>14/11/2021, 4:42:56 PM</h4>
-                  </div>
+                <div className="thread-box">
+                  <h3>title</h3>
                 </div>
                 <div className="thread-box">
                   <label>WOW</label>

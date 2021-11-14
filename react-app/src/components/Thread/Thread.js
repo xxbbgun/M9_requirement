@@ -64,6 +64,34 @@ function Thread({ className }) {
                 </div>
               </div>
             </Col>
+            <Col className="category-group" lg={3} md={6} sm={12}>
+              <div className="category-card">
+                <div className="card-image">
+                  <img
+                    className="image-category"
+                    variant="top"
+                    src="https://dexam.co.uk/wp/wp-content/uploads/2019/06/beeswaxwrapsdexam.jpg"
+                  />
+                </div>
+                <div className="card-title">
+                  <h5>Food & Drink</h5>
+                </div>
+              </div>
+            </Col>
+            <Col className="category-group" lg={3} md={6} sm={12}>
+              <div className="category-card">
+                <div className="card-image">
+                  <img
+                    className="image-category"
+                    variant="top"
+                    src="https://media.glamourmagazine.co.uk/photos/6138a211aa3b5acf3b0dc453/16:9/w_2560%2Cc_limit/horroscope-hero.jpg"
+                  />
+                </div>
+                <div className="card-title">
+                  <h5>Horoscope</h5>
+                </div>
+              </div>
+            </Col>
           </Row>
         </div>
       </div>
