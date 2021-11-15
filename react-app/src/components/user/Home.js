@@ -62,7 +62,7 @@ function Home({ className }) {
 
 export default styled(Home)`
 .title>h1{
-  margin-top:20px;
+  margin-top:50px;
   font-weight: 600;
   font-size: 30px;
   margin-bottom: 0;
@@ -70,14 +70,14 @@ export default styled(Home)`
  .input-search {
     display: flex;
     width: 100%;
-    margin: 50px ;
+    margin: 15px ;
 }
 .search-tag{
     display: flex;
 }
 
 .category{
-    margin-top: 40px;
+    margin-top: 5px;
     width: 300px;
     margin-left: 300px;
 }

@@ -69,12 +69,12 @@ function Notification({ className }) {
         {weather ? (
           <Weather data={weather} />
         ) : (
-          <div>loading</div>
+          <div>Loading</div>
         )}
         {gold ? (
           <Gold data={gold} />
         ) : (
-          <div>loading</div>
+          <div>Loading</div>
         )}
         <iframe width="325" height="250" className="oil" src="https://www.bangchak.co.th/en/oilprice/widget" frameborder="0"></iframe>
       </div>
@@ -101,8 +101,11 @@ export default styled(Notification)`
 .information{
   display: flex;
   margin-left: 20px;
-}
+  box-shadow: 0 2px 8px 0 whitesmoke, 0 6px 10px 0 whitesmoke;
+  border: 1px solid whitesmoke;
+  margin-top: 30px;
+ }
 .oil{
-  margin-top: 50px;
+  margin-top: 20px;
 }
 `;

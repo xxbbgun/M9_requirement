@@ -1,12 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Navbar, Container, Form } from "react-bootstrap";
-import { Link, NavLink, useHistory } from "react-router-dom";
-import AddIcon from "@mui/icons-material/Add";
-import axios from "axios";
-import { fetchNews } from "../../ActionAndStore/News/action";
+import { NavLink, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import AddCommentIcon from "@mui/icons-material/AddComment";
+
 import { Redirect } from "react-router-dom";
 function NavUser({ className }) {
   const history = useHistory();
@@ -31,104 +27,79 @@ function NavUser({ className }) {
 
   return (
     <div className={className}>
-      <Navbar className="navbar" variant="light">
-        <Container>
-          <div to="/admin-home" className="web-logo">
-            <div className="logo">
-              <a href="/admin-home">
-                <img
-                  src="https://i.pinimg.com/originals/26/91/f2/2691f2fa1a0f078f5f274edf7fea6763.png"
-                  className="logo-image"
-                  alt="logo"
-                />
-              </a>
-            </div>
+      <div className="Navbar">
+        <div className="Wedsite">
+          <h3>The New York Times</h3>
+        </div>
+        <div className="detail">
+          <div className="nav">
+            <NavLink to="/admin-home" className="link">Home </NavLink>
+            <NavLink to="/admin-home" className="link">News </NavLink>
+            <NavLink to="/add-news" className="link">Add News </NavLink>
+            <NavLink to="/admin-thread" className="link">Thred </NavLink>
           </div>
-    
-
-          {/* <div className="navbar-icon"> */}
-            <div className="add-icon">
-              <Link to="/add-news">
-                <AddIcon className="add-image" />
-              </Link>
-            </div>
-
-            <div className="question-page">
-              <NavLink to="/admin-thread" className="link">
-                <AddCommentIcon />
-              </NavLink>
-            </div>
-
-            <div className="user">
-              {/* <AccountCircleIcon className="user-image" /> */}
-              <h3>Hello {name}</h3>
+          <div className="admin-logout">
+            <div className="admin">
+              <h3>Hello, {name}</h3>
               <NavLink to="/" className="link" onClick={logout}>
                 Log Out
               </NavLink>
             </div>
-          {/* </div> */}
-        </Container>
-      </Navbar>
+          </div>
+        </div>
+      </div>
+
     </div>
   );
 }
 
 export default styled(NavUser)`
-  .navbar {
-    background-color: #eb1c01;
-  }
-  .me-auto .menu-text {
-    color: white;
-    text-decoration: none;
-    margin-right: 15px;
-  }
-  .logo {
-    display: flex;
-    justify-content: left;
-    width: 100%;
-  }
-  .logo-image {
-    width: 80px;
-  }
-  .web-logo {
-    display: flex;
-  }
-  /* .navbar-icon {
-    display: flex;
-  } */
-  /* .add-icon {
-    margin-right: 10px;
-  } */
-  .add-image {
-    color: white;
-    width: 35px;
-    height: 35px;
-  }
-  .user {
-    display: flex;
-    justify-content: right;
-  }
-  .user >h3{
-    color: white;
-    font-size: 18px;
-    margin-left: 15px;
-    margin-top: 8px;
-  }
-  .user-image {
-    color: white;
-    width: 35px;
-    height: 35px;
-  }
-  .link {
-    text-decoration: none;
-    color: white;
-    font-size: 18px;
-    margin-left: 15px;
-    margin-top: 5px;
-  }
-  .nav-dropdown > a {
-    text-decoration: none;
-    color: white;
-    font-size: 18px;
-  }
+.Wedsite{
+  font-family: monospace;
+  text-align: center;
+  margin-top: 30px;
+}
+.Wedsite>h3{
+  font-size: 60px;
+}
+.detail {
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 100%;
+  height: 45px;
+  padding: 10px;
+  border-top: 1px solid lightgray;
+  border-bottom: double 5px black;
+  color: #868686;
+  position: relative;
+}
+.nav {
+  margin-left: 70px;
+}
+.admin {
+  display: flex;
+  justify-content: right;
+}
+.admin >h3{
+  color: black;
+  font-size: 15px;
+  margin-left: 50px;
+  margin-top: 2px;
+}
+.link {
+  text-decoration: none;
+  color: 	gray;
+  font-size: 15px;
+  margin-left: 40px;;
+
+}
+.user-logout {
+  margin-right: 100px;
+}
 `;
