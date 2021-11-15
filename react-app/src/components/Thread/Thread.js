@@ -76,11 +76,11 @@ function Thread({ className }) {
                 Entertainment, Art & Culture
               </option>
               <option
-                value="Food & drink
+                value="Food & Drink
                 "
                 className="text-input"
               >
-               Food & drink
+               Food & Drink
 
               </option>
               <option

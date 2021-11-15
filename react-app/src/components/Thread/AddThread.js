@@ -69,8 +69,8 @@ function AddThread({ className }) {
                 <option value="Entertainment, Art & Culture" className="text-input">
                   Entertainment, Art & Culture
                 </option>
-                <option value="Food & drink" className="text-input">
-                Food & drink
+                <option value="Food & Drink" className="text-input">
+                Food & Drink
                 </option>
                 
                 <option value="Horoscope" className="text-input">
