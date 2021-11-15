@@ -5,6 +5,7 @@ import customersReducers from "./Customer/reducer";
 import covid from "./Covid/reducer";
 import weather from"./Weather/reducer";
 import question from "./Question/reducer";
+import gold from "./Gold/reducer";
 export default configureStore({
   reducer: {
     socket: socket,
@@ -12,6 +13,7 @@ export default configureStore({
     customer: customersReducers,
     covid:covid,
     weather:weather,
-    question: question
+    question: question,
+    gold:gold
   },
 });

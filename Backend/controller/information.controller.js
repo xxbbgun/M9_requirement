@@ -19,4 +19,12 @@ module.exports = {
 			return res.status(500).json({msg: error.message})
 		}
 	},
+	GetGold: async (req, res, next) => {
+		try{
+			const GoldData = await axios.get(`https://thai-gold-api.herokuapp.com/latest?fbclid=IwAR0DqLx6Bo7Kj7wl4NT6jh3kR3BItoy_MbIzXr8oBv-g5Myj7MZ6vs6u00M`)
+			return res.status(200).json(GoldData.data)
+		}catch (error) {
+			return res.status(500).json({msg: error.message})
+		}
+	},
 };

@@ -61,8 +61,7 @@ export default styled(Weather)`
   padding-bottom: 10px;
   width:fit-content;
   margin-top: 50px;
-  margin-left: 50px;
-  padding-right: 120px;
+  margin-left: 30px;
 }
 .notiIcon{
     color:#8a2be2;
@@ -91,10 +90,11 @@ export default styled(Weather)`
 }
 .weather_headerText > h3 {
     font-size: 15px;
-    margin-bottom: 5px;
+
 }
 h4{
     font-size: 15px;
+    margin-top: 2px;
 }
 .weather_badge{
     font-size: 14px;

@@ -47,7 +47,7 @@ function NavUser({ className }) {
           </div>
 
           <div className="user">
-            <h3>Hello {name}</h3>
+            <h3>Hello, {name}</h3>
             <NavLink to="/" className="link" onClick={logout}>
               Log Out
             </NavLink>

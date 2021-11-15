@@ -1,8 +1,9 @@
 const router = require("express").Router()
-const {GetCovid,GetWeather} = require("../controller/information.controller");
+const {GetCovid,GetWeather,GetGold} = require("../controller/information.controller");
 
 router.get('/getCovid',GetCovid)
 router.get('/getWeather',GetWeather)
+router.get('/getGold',GetGold)
 
 
 

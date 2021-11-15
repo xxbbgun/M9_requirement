@@ -2,51 +2,49 @@ import React ,{Fragment}from 'react'
 import styled from "styled-components";
 import { Avatar } from '@mui/material';
 import VerifiedIcon from '@mui/icons-material/Verified';
-import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
-function Covid({ className, data }) {
+function Gold({ className, data }) {
+    console.log(data)
     if(!data){
         return  <Fragment ></Fragment>
     }
         return (
         <div className={className}>
               <div className="covid">
-                {/* <LocalFireDepartmentIcon className="notiIcon" /> */}
                 <div className="covid_avartar">
 
-                    <Avatar src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSC8BPi-LWJXgrEORMGyIsGniQC-taynuHriuXOYS0gCPCljYLdKZQ-MPCqXrK7LK1pva0&usqp=CAU" />
+                    <Avatar src="https://www.goldtraders.co/wp-content/uploads/2021/04/gold_icon.png?fbclid=IwAR28KHlO20aLYTkXsLm62rEPf5XfaIOxnPN9UUK5NhSLDZH63o5UKvZpSy0" />
                 </div>
                 <div className="covid_body">
                     <div className="covid_header">
                         <div className="covid_headerText">
 
-                            <h3>Covid-19 Update
+                            <h3>Gold Update
 
                                 <span className="covid_headerSpecial">
-                                    <VerifiedIcon className="covid_badge" />@Covid_19
+                                    <VerifiedIcon className="covid_badge" />@Gold
                                 </span>
                             </h3>
                         </div>
 
                         <div className="covid_headerDescription">
                             <h4>Date:</h4>
-                            <p>{data.txn_date}</p>
+                            <p>{data.date}</p>
                         </div>
 
                         <div className="covid_headerDescription">
-                            <h4>New Case:</h4>
-                            <p>{data.new_case}</p>
+                            <h4>Update Time:</h4>
+                            <p>{data.update_time}</p>
                         </div>
 
                         <div className="covid_headerDescription">
-                            <h4>Death:</h4>
-                            <p>{data.new_death}</p>
+                            <h4>Selling Price:</h4>
+                            <p>{data.price.gold.buy}</p>
                         </div>
 
                         <div className="covid_headerDescription">
-                            <h4>Total Case:</h4>
-                            <p>{data.total_case}</p>
+                            <h4>Purchase Price:</h4>
+                            <p>{data.price.gold.sell}</p>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -54,7 +52,7 @@ function Covid({ className, data }) {
     )
 }
 
-export default styled(Covid)`
+export default styled(Gold)`
 .covid{
   display: flex;
   align-items: flex-start;
@@ -65,7 +63,8 @@ export default styled(Covid)`
   padding-bottom: 10px;
   width:fit-content;
   margin-top: 50px;
-  padding-right: 20px;
+  margin-right: 80px;
+  margin-left: 80px;
 }
 .notiIcon{
     color:  #ff8c00;
@@ -108,6 +107,7 @@ h4{
     font-size: 12px;
     color: gray;
 }
+
 
 
 `;

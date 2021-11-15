@@ -56,7 +56,7 @@ function Home({ className }) {
 
 export default styled(Home)`
 .title>h1{
-  margin-top:50px;
+  margin-top:20px;
   font-weight: 600;
   font-size: 30px;
   margin-bottom: 0;
@@ -83,7 +83,7 @@ export default styled(Home)`
     /* margin-right: 10%; */
 }
 .news{
-    margin-top: 10px;
+    margin-top: 5px;
     display: flex;
 }
 .body>h1{
