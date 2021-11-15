@@ -3,8 +3,33 @@ import styled from "styled-components";
 import { Row, Col } from "react-bootstrap";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { Link } from "react-router-dom";
-
+import axios from "axios";
+import { fetchQuestions } from "../../ActionAndStore/Question/action";
+import { useSelector, useDispatch } from "react-redux";
+import Swa from "sweetalert2";
 function Comment({ className, data }) {
+  const [role] = React.useState(JSON.parse(localStorage.getItem("role")));
+  const dispatch = useDispatch();
+
+  function deleteItem() {
+    Swa.fire({
+      title: "Do you want to delete the Thread?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes",
+      cancelButtonText: "No",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios.delete(`http://localhost:5000/question/DeleteQuestionById/${data._id}`).then((result) => {
+          dispatch(fetchQuestions(result.data));
+        })
+       
+      }
+   
+    });
+  }
   return (
     <div className={className}>
       <div className="container">
@@ -22,13 +47,15 @@ function Comment({ className, data }) {
                 </div>
               </div>
             </Col>
+            {role === 'admin' ? (
             <Col className="box-delete">
               <div className="icon-group">
                 <div className="delete-icon">
-                  <DeleteForeverIcon className="delete" />
+                  <DeleteForeverIcon className="delete" onClick={deleteItem} />
                 </div>
               </div>
             </Col>
+             ):( null )}
           </Row>
         </div>
       </div>

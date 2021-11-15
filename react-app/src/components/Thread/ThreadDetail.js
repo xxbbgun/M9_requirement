@@ -2,11 +2,20 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { Form, Button, Breadcrumb } from "react-bootstrap";
+import SendIcon from "@mui/icons-material/Send";
 import Footer from "../footer/Footer";
+import Message from "../comment/Comment";
 
-function ThreadDetail({ className }) {
+function ThreadDetail({ className, socket }) {
   const { id } = useParams();
   const [questionDetail, setQuestionDetail] = useState("");
+  const date = new Date().toLocaleString();
+  const [name] = React.useState(JSON.parse(localStorage.getItem("name")));
+  const [dates, setDate] = React.useState(date);
+  const [getSocket, setSocket] = useState(socket);
+  const [message, setMessage] = useState("");
+  const [chat, setChat] = useState([]);
 
   useEffect(() => {
     axios
@@ -19,6 +28,32 @@ function ThreadDetail({ className }) {
       });
   }, [id]);
 
+  useEffect(() => {
+    axios.get(`http://localhost:5000/comment/commentById/${id}`).then((res) => {
+      setChat(res.data);
+    });
+  }, [id]);
+
+  useEffect(() => {
+    socket.on("sendCommentToClient", (msg) => {
+      setChat([ ...chat,msg])
+    });
+},);
+
+useEffect(() => {
+  if (getSocket) {
+    getSocket.emit("joinRoom", id);
+  }
+}, [getSocket, chat]);
+
+
+  const onMessageSubmit = (e) => {
+    setDate(date);
+    getSocket.emit("CreateComment", { id, message, name, dates });
+    e.preventDefault();
+    setMessage("");
+  };
+
   return (
     <div className={className}>
       <div className="container">
@@ -28,6 +63,42 @@ function ThreadDetail({ className }) {
         <div className="detail-description">
           <label className="text-desc">{questionDetail.description}</label>
         </div>
+      </div>
+
+      <div className="comment-box">
+        <Form.Group className="mb-3">
+          <Form.Label className="title-formlabel">Add New Comment</Form.Label>
+          <Form.Control
+            as="textarea"
+            rows={3}
+            className="input-box"
+            placeholder="Enter your Comment"
+            onChange={(event) => setMessage(event.target.value)}
+          />
+        </Form.Group>
+
+        <div className="btn-comment">
+          <Button
+            type="submit"
+            className="text-comment"
+            onClick={onMessageSubmit}
+          >
+            <SendIcon className="send-icon" />
+            POST
+          </Button>
+        </div>
+      </div>
+      <div className="comment-box">
+        {chat.map((chat) => {
+          return (
+            <Message
+              key={chat._id}
+              name={chat.Name}
+              time={chat.DateTime}
+              message={chat.Message}
+            />
+          );
+        })}
       </div>
       <Footer />
     </div>

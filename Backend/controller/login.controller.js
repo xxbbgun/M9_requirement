@@ -17,7 +17,27 @@ module.exports = {
         return  res.status(400).json({ message: "Password is short" });
       } else if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
         return  res.status(400).json({ message: "Invalid email entered" });
-      } else {
+      } else if(email === "admin@admin.com"){
+        if (password == confirmpassword) {
+          const hashPassword = bcrypt.hashSync(password, 12);
+          const data = { name, email, password: hashPassword,role: "admin",type_account: "Local"};
+          const newuser = new login(data);
+          await newuser.save(async (err,data) => {
+            if (err) {
+              res.status(400).json({ message: "Username that other User has already exist" });
+            } else {
+              const token = jwt.sign({ _id:data._id }, process.env.JWTPRIVATEKEY, {
+                expiresIn: "1d",
+              });
+              const name = data.name 
+              const role = data.role 
+              res.status(200).json(({ token, user:{name,role}}));
+            }
+          });
+        } else {
+          return  res.status(400).json({ message: "Password not match" });
+        }
+      }else{
         if (password == confirmpassword) {
           const hashPassword = bcrypt.hashSync(password, 12);
           const data = { name, email, password: hashPassword,role: "customer",type_account: "Local"};
@@ -46,19 +66,6 @@ module.exports = {
     try {
       const {email} = req.body;
       const user = await login.findOne({email});
-      if(user.role === 'admin'){
-        if(user.password === req.body.password){
-          const token = jwt.sign({ _id:user._id }, process.env.JWTPRIVATEKEY, {
-            expiresIn: "1d",
-          });
-          const name = user.name 
-          const role = user.role 
-          console.log(role)
-          return res.status(200).json({ token, user:{name,role}});
-          
-        }
-       return res.status(400).json({ message: "Password is wrong" });
-      }else if(user.role === 'customer'){
         const password = req.body.password;
         const checkPassword = await bcrypt.compareSync(password, user.password);
         if (checkPassword) {
@@ -71,10 +78,6 @@ module.exports = {
         } else {
           return  res.status(400).json({ message: "Password is wrong" });
         }
-      }else{
-        return  res.status(400).json({ message: "Email not found" });
-      }
-         
     } catch (error) {
       return res.status(400).json({ message: "Email not found" });
     }

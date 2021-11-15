@@ -78,7 +78,7 @@ function App() {
         </Route>
         <Route path="/user-threadDetail/:id">
           <NavUser />
-          <ThreadDetail />
+          <ThreadDetail socket={socket}  />
         </Route>
         <Route path="/user-addthread">
           <NavUser />
