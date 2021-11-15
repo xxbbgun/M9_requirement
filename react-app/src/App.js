@@ -52,7 +52,7 @@ function App() {
         </Route>
         <Route path="/admin-threadDetail/:id">
           <NavAdmin />
-          <ThreadDetail />
+          <ThreadDetail socket={socket} />
         </Route>
         <Route path="/admin-addthread">
           <NavAdmin />

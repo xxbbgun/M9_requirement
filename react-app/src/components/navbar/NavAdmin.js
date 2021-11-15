@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Navbar, Container, Form } from "react-bootstrap";
 import { Link, NavLink, useHistory } from "react-router-dom";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AddIcon from "@mui/icons-material/Add";
 import axios from "axios";
 import { fetchNews } from "../../ActionAndStore/News/action";
@@ -94,7 +93,7 @@ function NavUser({ className }) {
             </div>
 
             <div className="question-page">
-              <NavLink to="/user-thread" className="link">
+              <NavLink to="/admin-thread" className="link">
                 <AddCommentIcon />
               </NavLink>
             </div>

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import { Row, Col,Form } from "react-bootstrap";
+import { Row, Col, Form } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import { fetchQuestions } from "../../ActionAndStore/Question/action";
@@ -10,12 +10,11 @@ import AddIcon from "@mui/icons-material/Add";
 import { Link } from "react-router-dom";
 import Footer from "../footer/Footer";
 
-
 function Thread({ className }) {
   const question = useSelector((state) => state.question);
-  const [type, setType] = React.useState('');
+  const [role] = React.useState(JSON.parse(localStorage.getItem("role")));
+  const [type, setType] = React.useState("");
   const dispatch = useDispatch();
-
 
   function useSearch(event) {
     axios
@@ -47,69 +46,72 @@ function Thread({ className }) {
       <div className="container">
         <div className="thread-category">
           <Row className="card-container">
-          <Form.Group className="mb-2 mt-2">
-            <Form.Select
-              className="input-box"
-              onChange={(event) => setType(event.target.value)}
-              onClick={useSearch}
-            >
-              <option className="text-input">Category</option>
-              <option
-                value="General News & Current Affairs"
-                className="text-input"
+            <Form.Group className="mb-2 mt-2">
+              <Form.Select
+                className="input-box"
+                onChange={(event) => setType(event.target.value)}
+                onClick={useSearch}
               >
-                General News & Current Affairs
-              </option>
-              <option
-                value="Business, Finance & Economics"
-                className="text-input"
-              >
-                Business, Finance & Economics
-              </option>
-              <option value="Health & Medicine" className="text-input">
-                Health & Medicine
-              </option>
-              <option
-                value="Entertainment, Art & Culture"
-                className="text-input"
-              >
-                Entertainment, Art & Culture
-              </option>
-              <option
-                value="Food & Drink
+                <option className="text-input">Category</option>
+                <option
+                  value="General News & Current Affairs"
+                  className="text-input"
+                >
+                  General News & Current Affairs
+                </option>
+                <option
+                  value="Business, Finance & Economics"
+                  className="text-input"
+                >
+                  Business, Finance & Economics
+                </option>
+                <option value="Health & Medicine" className="text-input">
+                  Health & Medicine
+                </option>
+                <option
+                  value="Entertainment, Art & Culture"
+                  className="text-input"
+                >
+                  Entertainment, Art & Culture
+                </option>
+                <option
+                  value="Food & Drink
                 "
-                className="text-input"
-              >
-               Food & Drink
-
-              </option>
-              <option
-                value="Horoscope"
-                className="text-input"
-              >
-                Horoscope
-              </option>
-            </Form.Select>
-          </Form.Group>
+                  className="text-input"
+                >
+                  Food & Drink
+                </option>
+                <option value="Horoscope" className="text-input">
+                  Horoscope
+                </option>
+              </Form.Select>
+            </Form.Group>
           </Row>
         </div>
         <div className="btn-addthread">
-          <Link to="/user-addthread" className="link-addthread">
-            <Button variant="outlined" startIcon={<AddIcon />}>
-              ADD THREAD
-            </Button>
-          </Link>
+          {role === "admin" ? (
+            <Link to="/admin-addthread" className="link-addthread">
+              <Button variant="outlined" startIcon={<AddIcon />}>
+                ADD THREAD
+              </Button>
+            </Link>
+          ) : (
+            <Link to="/user-addthread" className="link-addthread">
+              <Button variant="outlined" startIcon={<AddIcon />}>
+                ADD THREAD
+              </Button>
+            </Link>
+          )}
         </div>
         <div className="question">
           <Row>
-            {question ?
-            (question.map((data) => {
-              return <GetThread key={data._id} data={data} />;
-            })
-            ):(
+            {question ? (
+              question.map((data) => {
+                return <GetThread key={data._id} data={data} />;
+              })
+            ) : (
               <div>loading...</div>
             )}
-
           </Row>
         </div>
       </div>

@@ -6,6 +6,7 @@ import {useHistory } from "react-router-dom";
 import { fetchQuestions } from "../../ActionAndStore/Question/action";
 import {useDispatch } from "react-redux";
 function AddThread({ className }) {
+  const [role] = React.useState(JSON.parse(localStorage.getItem("role")));
   const dispatch = useDispatch();
   const date = new Date().toLocaleString();
   const [Title, setTitle] = React.useState("");
@@ -25,7 +26,11 @@ function AddThread({ className }) {
       dates: dates
     }
     axios.post("http://localhost:5000/question/AddQuestion",data).then((res) => {
-      history.push("/user-thread");
+      if(role === 'admin'){
+        history.push("/admin-thread");
+      }else {
+        history.push("/user-thread");
+      }
     })
    
    
