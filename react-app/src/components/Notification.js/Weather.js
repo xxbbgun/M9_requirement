@@ -60,8 +60,8 @@ export default styled(Weather)`
   border-top:1px solid #e6ecf0; */
   padding-bottom: 10px;
   width:fit-content;
-  margin-top: 50px;
-  margin-left: 30px;
+  margin-top: 20px;
+  margin-left: 15px;
 }
 .notiIcon{
     color:#8a2be2;

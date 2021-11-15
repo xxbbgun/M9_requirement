@@ -57,15 +57,15 @@ function Covid({ className, data }) {
 export default styled(Covid)`
 .covid{
   display: flex;
-  align-items: flex-start;
   /* border-bottom: 1px solid #e6ecf0;
   border-left:1px solid #e6ecf0;
   border-right:1px solid #e6ecf0;
   border-top:1px solid #e6ecf0; */
   padding-bottom: 10px;
   width:fit-content;
-  margin-top: 50px;
-  padding-right: 20px;
+  margin-top: 20px;
+  margin-left: 50px;
+
 }
 .notiIcon{
     color:  #ff8c00;
