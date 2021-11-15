@@ -39,16 +39,19 @@ export default styled(Comment)`
     display: flex;
     justify-content: center;
   }
-  .each-card {
-    margin: 30px;
+  .card-comment {
+    margin-top: 30px;
     transition: 0.5s;
-    width: 100%;
+    width: 70%;
     border-radius: 15px;
     box-shadow: 0 2px 8px 0 whitesmoke, 0 6px 10px 0 whitesmoke;
     border: 1px solid whitesmoke;
   }
-  .each-card:hover {
+  .card-comment:hover {
     box-shadow: 0 4px 8px 0 lightgray, 0 6px 20px 0 lightgray;
+  }
+  .each-card {
+    display: flex;
   }
   .card-body {
     margin-top: 10px;

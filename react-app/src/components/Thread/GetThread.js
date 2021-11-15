@@ -22,12 +22,14 @@ function Comment({ className, data }) {
       cancelButtonText: "No",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`http://localhost:5000/question/DeleteQuestionById/${data._id}`).then((result) => {
-          dispatch(fetchQuestions(result.data));
-        })
-       
+        axios
+          .delete(
+            `http://localhost:5000/question/DeleteQuestionById/${data._id}`
+          )
+          .then((result) => {
+            dispatch(fetchQuestions(result.data));
+          });
       }
-   
     });
   }
   return (
@@ -36,26 +38,48 @@ function Comment({ className, data }) {
         <div className="group-thread">
           <Row className="card-thread">
             <Col className="each-card">
-              <div className="card-body">
-                <Link to={`/user-threadDetail/${data._id}`} className="link-threadDetail">
+              {role === "admin" ? (
+                <div className="card-body">
+                  <Link
+                    to={`/admin-threadDetail/${data._id}`}
+                    className="link-threadDetail"
+                  >
+                    <div className="thread-box">
+                      <h4>{data.title}</h4>
+                    </div>
+                  </Link>
                   <div className="thread-box">
-                    <h4>{data.title}</h4>
+                    <label className="content-text">{data.content}</label>
                   </div>
-                </Link>
-                <div className="thread-box">
-                  <label className="content-text">{data.content}</label>
                 </div>
-              </div>
-            </Col>
-            {role === 'admin' ? (
-            <Col className="box-delete">
-              <div className="icon-group">
-                <div className="delete-icon">
-                  <DeleteForeverIcon className="delete" onClick={deleteItem} />
+              ) : (
+                <div className="card-body">
+                  <Link
+                    to={`/user-threadDetail/${data._id}`}
+                    className="link-threadDetail"
+                  >
+                    <div className="thread-box">
+                      <h4>{data.title}</h4>
+                    </div>
+                  </Link>
+                  <div className="thread-box">
+                    <label className="content-text">{data.content}</label>
+                  </div>
                 </div>
-              </div>
+              )}
             </Col>
-             ):( null )}
+            {role === "admin" ? (
+              <Col className="box-delete">
+                <div className="icon-group">
+                  <div className="delete-icon">
+                    <DeleteForeverIcon
+                      className="delete"
+                      onClick={deleteItem}
+                    />
+                  </div>
+                </div>
+              </Col>
+            ) : null}
           </Row>
         </div>
       </div>
@@ -93,7 +117,7 @@ export default styled(Comment)`
     color: #eb1c01;
   }
   .content-text {
-      color: gray;
+    color: gray;
   }
   .box-delete {
     margin-top: 30px;

@@ -36,16 +36,15 @@ function ThreadDetail({ className, socket }) {
 
   useEffect(() => {
     socket.on("sendCommentToClient", (msg) => {
-      setChat([ ...chat,msg])
+      setChat([...chat, msg]);
     });
-},);
+  });
 
-useEffect(() => {
-  if (getSocket) {
-    getSocket.emit("joinRoom", id);
-  }
-}, [getSocket, chat]);
-
+  useEffect(() => {
+    if (getSocket) {
+      getSocket.emit("joinRoom", id);
+    }
+  }, [getSocket, chat]);
 
   const onMessageSubmit = (e) => {
     setDate(date);
@@ -63,42 +62,43 @@ useEffect(() => {
         <div className="detail-description">
           <label className="text-desc">{questionDetail.description}</label>
         </div>
-      </div>
 
-      <div className="comment-box">
-        <Form.Group className="mb-3">
-          <Form.Label className="title-formlabel">Add New Comment</Form.Label>
-          <Form.Control
-            as="textarea"
-            rows={3}
-            className="input-box"
-            placeholder="Enter your Comment"
-            onChange={(event) => setMessage(event.target.value)}
-          />
-        </Form.Group>
-
-        <div className="btn-comment">
-          <Button
-            type="submit"
-            className="text-comment"
-            onClick={onMessageSubmit}
-          >
-            <SendIcon className="send-icon" />
-            POST
-          </Button>
-        </div>
-      </div>
-      <div className="comment-box">
-        {chat.map((chat) => {
-          return (
-            <Message
-              key={chat._id}
-              name={chat.Name}
-              time={chat.DateTime}
-              message={chat.Message}
+        <div className="comment-box">
+          <Form.Group className="mb-3">
+            <Form.Label className="title-formlabel">Add New Comment</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={3}
+              className="input-box"
+              placeholder="Enter your Comment"
+              onChange={(event) => setMessage(event.target.value)}
             />
-          );
-        })}
+          </Form.Group>
+
+          <div className="btn-comment">
+            <Button
+              type="submit"
+              className="text-comment"
+              onClick={onMessageSubmit}
+            >
+              <SendIcon className="send-icon" />
+              POST
+            </Button>
+          </div>
+
+          <div className="comment-box">
+            {chat.map((chat) => {
+              return (
+                <Message
+                  key={chat._id}
+                  name={chat.Name}
+                  time={chat.DateTime}
+                  message={chat.Message}
+                />
+              );
+            })}
+          </div>
+        </div>
       </div>
       <Footer />
     </div>
@@ -112,5 +112,24 @@ export default styled(ThreadDetail)`
   }
   .text-desc {
     margin-top: 15px;
+  }
+  .comment-box {
+    margin-top: 50px;
+  }
+  .input-box {
+    border-radius: 15px;
+  }
+  .btn-comment {
+    display: flex;
+    margin-top: 20px;
+    justify-content: right;
+    margin-bottom: 50px;
+  }
+  .text-comment {
+    background: -webkit-linear-gradient(left, #eb1c01, #ff7f01);
+    border: none;
+  }
+  .send-icon {
+    margin-right: 5px;
   }
 `;
