@@ -32,7 +32,7 @@ const io = new Server(server, {
 
 let users = []
 io.on('connection', socket => {
-	console.log(socket.id + ' connection')
+	//console.log(socket.id + ' connection')
 
 	socket.on('joinRoom', id => {
 		const user = { userId: socket.id, room: id }
@@ -55,8 +55,8 @@ io.on('connection', socket => {
 
 		}
 
-		console.log(users)
-		console.log(socket.adapter.rooms)
+		//console.log(users)
+		//console.log(socket.adapter.rooms)
 
 	})
 
@@ -74,7 +74,7 @@ io.on('connection', socket => {
 	})
 
 	socket.on('disconnect', () => {
-		console.log(socket.id + ' disconnected')
+	//console.log(socket.id + ' disconnected')
 	})
 })
 

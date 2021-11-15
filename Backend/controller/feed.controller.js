@@ -22,6 +22,9 @@ module.exports = {
     try {
       const { keyword } = req.params;
       let data = await Feed.find();
+      if(keyword === 'Category'){
+        return res.status(200).json(data);
+      }
       let find = data.filter((p) => p.type === keyword);
       
       return res.status(200).json(find);

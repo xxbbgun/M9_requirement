@@ -65,6 +65,7 @@ function AddNews({ className }) {
                 type="file"
                 className="input-box"
                 onChange={(event) => setImage(event.target.files[0])}
+                required
               />
               </div>
             </Form.Group>
@@ -76,6 +77,7 @@ function AddNews({ className }) {
                 className="input-box"
                 placeholder="Enter your Headline"
                 onChange={(event) => setHeadline(event.target.value)}
+                required
               />
             </Form.Group>
 
@@ -87,6 +89,7 @@ function AddNews({ className }) {
                 className="input-box"
                 placeholder="Enter your Content"
                 onChange={(event) => setContent(event.target.value)}
+                required
               />
             </Form.Group>
 
@@ -118,6 +121,7 @@ function AddNews({ className }) {
                 className="input-box"
                 placeholder="Enter your Description"
                 onChange={(event) => setDescription(event.target.value)}
+                required
               />
             </Form.Group>
 

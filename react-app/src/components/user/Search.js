@@ -15,7 +15,7 @@ function Search({ className }) {
     function Set(event) {
         setQuery(event.target.value);
     }
-    function useSearch(event) {
+    function useSearchOne(event) {
         axios.get(`http://localhost:5000/feed/Search/${query}`).then((res) => {
             dispatch(fetchNews(res.data));
         })
@@ -47,7 +47,7 @@ function Search({ className }) {
                    <Col md={6} className="search">
                     <div className="input-search">
                         <FormControl className="form" type="text" placeholder="Search here..." onChange={Set} value={query} />
-                        <RBButton variant="none" className="btn-search" onClick={useSearch}><BiSearchAlt2 /></RBButton>
+                        <RBButton variant="none" className="btn-search" onClick={useSearchOne}><BiSearchAlt2 /></RBButton>
                     </div>
                 </Col>
                 <div className="category">

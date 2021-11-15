@@ -86,6 +86,7 @@ function EditNew({ className }) {
                 type="file"
                 className="input-box"
                 onChange={(event) => setImage(event.target.files[0])}
+                required
               />
               </div>
             </Form.Group>
@@ -98,6 +99,7 @@ function EditNew({ className }) {
                 placeholder="Enter your Headline"
                 value={Headline}
                 onChange={(event) => setHeadline(event.target.value)}
+                required
               />
             </Form.Group>
 
@@ -110,6 +112,7 @@ function EditNew({ className }) {
                 placeholder="Enter your Content"
                 value={content}
                 onChange={(event) => setContent(event.target.value)}
+                required
               />
             </Form.Group>
 
@@ -144,6 +147,7 @@ function EditNew({ className }) {
                 placeholder="Enter your Description"
                 value={description}
                 onChange={(event) => setDescription(event.target.value)}
+                required
               />
             </Form.Group>
 

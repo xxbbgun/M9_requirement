@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
 import styled from "styled-components";
 import { Navbar, Container, Form } from "react-bootstrap";
 import { NavLink, useHistory } from "react-router-dom";
@@ -19,6 +20,12 @@ function NavUser({ className }) {
   
   const dispatch = useDispatch();
   const [name] = React.useState(JSON.parse(localStorage.getItem("name")));
+
+  const [data] = React.useState(JSON.parse(localStorage.getItem("name")));
+  if (!data) {
+  return <Redirect to="/sign-in" />
+}
+
 
 
   return (

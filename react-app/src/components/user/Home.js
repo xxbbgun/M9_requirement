@@ -9,10 +9,12 @@ import { useSelector, useDispatch } from "react-redux";
 import GetNews from './GetNews';
 import Search from "./Search";
 import Notification from '../Notification.js/Notification';
-
+import { Redirect } from "react-router-dom";
 function Home({ className }) {
     const news = useSelector((state) => state.news);
     const user = useSelector((state) => state.customer);
+    const [data] = React.useState(JSON.parse(localStorage.getItem("name")));
+   
 
     const dispatch = useDispatch();
     useEffect(() => {
@@ -33,6 +35,10 @@ function Home({ className }) {
         };
         getNews();
     }, [dispatch]);
+    	
+	if (!data) {
+		return <Redirect to="/sign-in" />
+	}
 
 
     return (
