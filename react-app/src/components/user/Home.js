@@ -8,11 +8,12 @@ import { fetchNews } from "../../ActionAndStore/News/action";
 import { useSelector, useDispatch } from "react-redux";
 import GetNews from './GetNews';
 import Search from "./Search";
+import Notification from '../Notification.js/Notification';
 
 function Home({ className }) {
     const news = useSelector((state) => state.news);
     const user = useSelector((state) => state.customer);
-    
+
     const dispatch = useDispatch();
     useEffect(() => {
         const getNews = () => {
@@ -37,6 +38,7 @@ function Home({ className }) {
     return (
         <div className={className}>
             <Container>
+                <Notification />
                 <Search />
                 <div className="news">
                     <Row>
@@ -53,23 +55,35 @@ function Home({ className }) {
 }
 
 export default styled(Home)`
-/* .search{
-    float: right;
-} */
+.title>h1{
+  margin-top:50px;
+  font-weight: 600;
+  font-size: 30px;
+  margin-bottom: 0;
+}
  .input-search {
     display: flex;
     width: 100%;
-    margin: 50px
+    margin: 50px ;
+}
+.search-tag{
+    display: flex;
+}
+
+.category{
+    margin-top: 40px;
+    width: 300px;
+    margin-left: 300px;
 }
 .form{
       border-radius: 20px;
 }
 .btn-search {
     right: 0;
-    margin-right: 10%;
+    /* margin-right: 10%; */
 }
 .news{
-    margin-top: 50px;
+    margin-top: 10px;
     display: flex;
 }
 .body>h1{

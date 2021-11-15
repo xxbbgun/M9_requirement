@@ -11,7 +11,7 @@ function Covid({ className, data }) {
         return (
         <div className={className}>
               <div className="covid">
-                <LocalFireDepartmentIcon className="notiIcon" />
+                {/* <LocalFireDepartmentIcon className="notiIcon" /> */}
                 <div className="covid_avartar">
 
                     <Avatar src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSC8BPi-LWJXgrEORMGyIsGniQC-taynuHriuXOYS0gCPCljYLdKZQ-MPCqXrK7LK1pva0&usqp=CAU" />
@@ -59,14 +59,15 @@ export default styled(Covid)`
 .covid{
   display: flex;
   align-items: flex-start;
-  border-bottom: 1px solid #e6ecf0;
+  /* border-bottom: 1px solid #e6ecf0;
   border-left:1px solid #e6ecf0;
   border-right:1px solid #e6ecf0;
-  border-top:1px solid #e6ecf0;
+  border-top:1px solid #e6ecf0; */
   padding-bottom: 10px;
-  width:75vw;
-  margin-left: 200px;
+  width:fit-content;
   margin-top: 50px;
+  padding-right: 20px;
+  margin-left: 50px;
 }
 .notiIcon{
     color:  #ff8c00;
@@ -84,7 +85,7 @@ export default styled(Covid)`
     width: 70%;
 }
 .covid_headerDescription{
-    margin-top: 20px;
+    margin-top: 30px;
     margin-bottom: 15px;
     font-size: 15px;
     display: flex;
@@ -109,8 +110,6 @@ h4{
     font-size: 12px;
     color: gray;
 }
-.covid_avartar{
-    padding: 20px;
-}
+
 
 `;

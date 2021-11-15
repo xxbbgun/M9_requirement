@@ -12,7 +12,7 @@ function Weather({ className, data }) {
         <div className={className}>
 
             <div className="weather">
-                <AutoAwesomeIcon className="notiIcon" />
+                {/* <AutoAwesomeIcon className="notiIcon" /> */}
                 <div className="weather_avartar">
                     <Avatar src="http://p1.ifengimg.com/a/2017_39/f3be35858e72c66_size149_w500_h370.png" />
                 </div>
@@ -54,14 +54,15 @@ export default styled(Weather)`
 .weather{
   display: flex;
   align-items: flex-start;
-  border-bottom: 1px solid #e6ecf0;
+  /* border-bottom: 1px solid #e6ecf0;
   border-left:1px solid #e6ecf0;
   border-right:1px solid #e6ecf0;
-  border-top:1px solid #e6ecf0;
+  border-top:1px solid #e6ecf0; */
   padding-bottom: 10px;
-  width:75vw;
-  margin-left: 200px;
+  width:fit-content;
   margin-top: 50px;
+  margin-left: 50px;
+  padding-right: 120px;
 }
 .notiIcon{
     color:#8a2be2;
@@ -79,7 +80,7 @@ export default styled(Weather)`
     width: 70%;
 }
 .weather_headerDescription{
-    margin-top: 20px;
+    margin-top: 30px;
     margin-bottom: 15px;
     font-size: 15px;
     display: flex;
@@ -104,7 +105,5 @@ h4{
     font-size: 12px;
     color: gray;
 }
-.weather_avartar{
-    padding: 20px;
-}
+
 `;
