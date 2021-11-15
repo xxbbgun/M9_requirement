@@ -14,15 +14,9 @@ function Comment({ className, name, time, message }) {
                   <Card.Title>{name}</Card.Title>
                 </div>
                 <div className="comment-time">
-                  <Card.Title>{time}</Card.Title>
+                  <label>{time}</label>
                 </div>
               </div>
-              {/* <div className="comment-username">
-                <Card.Title>
-                  {name}
-                  {time}
-                </Card.Title>
-              </div> */}
               <div className="comment-box">
                 <Card.Text>{message}</Card.Text>
               </div>
@@ -42,7 +36,7 @@ export default styled(Comment)`
   .card-comment {
     margin-top: 30px;
     transition: 0.5s;
-    width: 70%;
+    width: 100%;
     border-radius: 15px;
     box-shadow: 0 2px 8px 0 whitesmoke, 0 6px 10px 0 whitesmoke;
     border: 1px solid whitesmoke;
@@ -52,6 +46,7 @@ export default styled(Comment)`
   }
   .each-card {
     display: flex;
+    
   }
   .card-body {
     margin-top: 10px;
@@ -59,8 +54,6 @@ export default styled(Comment)`
   }
   .group-comment-title {
     display: flex;
-  }
-  .comment-username {
-    margin-right: 90px;
+    justify-content: space-between;
   }
 `;
