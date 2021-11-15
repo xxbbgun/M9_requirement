@@ -62,6 +62,7 @@ function Detail({ className ,socket}) {
             <div className="breadcrumb-group">
               <Breadcrumb>
                 <Breadcrumb.Item className="bread-home">Home</Breadcrumb.Item>
+                
                 <Breadcrumb.Item className="bread-type" active>
                   {`${newsDetail.type}`}
                 </Breadcrumb.Item>
@@ -71,6 +72,13 @@ function Detail({ className ,socket}) {
 
           <div className="detail-headline">
             <h1 className="headline-text"> {newsDetail.Headline}</h1>
+          </div>
+          <div className="breadcrumb-group">
+            <Breadcrumb>
+              <Breadcrumb.Item className="create" active>
+                {`Create at ${newsDetail.DateTime}`}
+              </Breadcrumb.Item>
+            </Breadcrumb>
           </div>
           <div className="image-box">
             <img
@@ -134,6 +142,9 @@ export default styled(Detail)`
   .bread-type {
     color: black;
   }
+  /* .create{
+    font-size: 12px;
+  } */
   .detail-headline {
     display: flex;
     margin-top: 15px;
