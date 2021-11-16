@@ -15,6 +15,7 @@ import Thread from "./components/Thread/Thread";
 import AddThread from "./components/Thread/AddThread";
 import io from "socket.io-client";
 import ThreadDetail from "./components/Thread/ThreadDetail";
+import Notification from "./components/Notification/Notification";
 
 const socket = io.connect("http://localhost:5000");
 function App() {
@@ -29,6 +30,11 @@ function App() {
         </Route>
         <Route path="/home">
           <NavUser />
+          <Notification />
+          <Home />
+        </Route>
+        <Route path="/user-news">
+          <NavUser />
           <Home />
         </Route>
         <Route path="/user-detail/:id">
@@ -36,6 +42,11 @@ function App() {
           <Detail socket={socket} />
         </Route>
         <Route path="/admin-home">
+          <NavAdmin />
+          <Notification />
+          <Home />
+        </Route>
+        <Route path="/admin-news">
           <NavAdmin />
           <Home />
         </Route>

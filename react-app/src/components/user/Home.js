@@ -44,7 +44,6 @@ function Home({ className }) {
     return (
         <div className={className}>
             <Container>
-                <Notification />
                 <Search />
                 <div className="news">
                     <Row>
