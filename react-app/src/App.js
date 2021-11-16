@@ -11,13 +11,10 @@ import Comment from "./components/comment/Comment";
 import NavUser from "./components/navbar/NavUser";
 import NavAdmin from "./components/navbar/NavAdmin";
 import EditAndDeleteIcon from "./components/admin/EditAndDeleteIcon";
-import Notification from "./components/Notification.js/Notification";
-import Footer from "./components/footer/Footer";
 import Thread from "./components/Thread/Thread";
 import AddThread from "./components/Thread/AddThread";
 import io from "socket.io-client";
 import ThreadDetail from "./components/Thread/ThreadDetail";
-import GetNews from "./components/user/GetNews";
 
 const socket = io.connect("http://localhost:5000");
 function App() {
@@ -33,10 +30,6 @@ function App() {
         <Route path="/home">
           <NavUser />
           <Home />
-        </Route>
-        <Route path="/news">
-          <NavUser />
-          <GetNews />
         </Route>
         <Route path="/user-detail/:id">
           <NavUser />
@@ -71,11 +64,6 @@ function App() {
         </Route>
         <Route path="/comment">
           <Comment />
-        </Route>
-        <Route path="/notification">
-          <NavUser />
-          <Notification />
-          <Footer />
         </Route>
         <Route path="/user-thread">
           <NavUser />

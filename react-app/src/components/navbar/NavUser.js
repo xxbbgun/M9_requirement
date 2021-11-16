@@ -55,12 +55,12 @@ function NavUser({ className }) {
 export default styled(NavUser)`
 
 .Wedsite{
-  font-family: monospace;
+  font-family: UnifrakturCook;
   text-align: center;
   margin-top: 30px;
 }
 .Wedsite>h3{
-  font-size: 60px;
+  font-size: 30px;
 }
 .detail {
   display: flex;
