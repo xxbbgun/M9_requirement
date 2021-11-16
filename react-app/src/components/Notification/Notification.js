@@ -3,6 +3,7 @@ import styled from "styled-components";
 import axios from "axios";
 import { fetchCovid } from "../../ActionAndStore/Covid/action";
 import { useSelector, useDispatch } from "react-redux";
+import { Container, Row } from "react-bootstrap";
 import Covid from "../Notification/Covid";
 import Weather from '../Notification/Weather';
 import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
@@ -56,28 +57,31 @@ function Notification({ className }) {
 
   return (
     <div className={className}>
-      <div className="info-update">
-        <h1 className="update">UPDATED INFORMATION</h1>
-        <LocalFireDepartmentIcon className="Icon" />
-      </div>
-      <div className="information">
+      <Container>
+        <div className="info-update">
+          <h1 className="update">UPDATED INFORMATION</h1>
+          <LocalFireDepartmentIcon className="Icon" />
+        </div>
+        <div className="information">
 
-        {covid.map((data, index) => {
-          return <Covid key={index} data={data} />
-        })}
+          {covid.map((data, index) => {
+            return <Covid key={index} data={data} />
+          })}
 
-        {weather ? (
-          <Weather data={weather} />
-        ) : (
-          <div>Loading</div>
-        )}
-        {gold ? (
-          <Gold data={gold} />
-        ) : (
-          <div>Loading</div>
-        )}
-        <iframe width="325" height="250" className="oil" src="https://www.bangchak.co.th/en/oilprice/widget" frameborder="0"></iframe>
-      </div>
+          {weather ? (
+            <Weather data={weather} />
+          ) : (
+            <div>Loading</div>
+          )}
+          {gold ? (
+            <Gold data={gold} />
+          ) : (
+            <div>Loading</div>
+          )}
+          <iframe width="325" height="250" className="oil" src="https://www.bangchak.co.th/en/oilprice/widget" frameborder="0"></iframe>
+
+        </div>
+      </Container>
     </div>
   )
 }
