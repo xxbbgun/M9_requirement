@@ -24,7 +24,7 @@ function Comment({ className, data }) {
       if (result.isConfirmed) {
         axios
           .delete(
-            `http://localhost:5000/question/DeleteQuestionById/${data._id}`
+            `http://128.199.117.96:5000/question/DeleteQuestionById/${data._id}`
           )
           .then((result) => {
             dispatch(fetchQuestions(result.data));

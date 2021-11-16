@@ -24,7 +24,7 @@ function Home({ className }) {
   useEffect(() => {
     const getNews = () => {
       axios
-        .get("http://localhost:5000/feed/GetFeed")
+        .get("http://128.199.117.96:5000/feed/GetFeed")
         .then((res) => {
           dispatch(fetchNews(res.data));
         })

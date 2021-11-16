@@ -17,7 +17,7 @@ function Notification({ className }) {
 
   useEffect(() => {
     const getInformation = async () => {
-      await axios.get("http://localhost:5000/information/getCovid")
+      await axios.get("http://128.199.117.96:5000/information/getCovid")
         .then((res) => {
           dispatch(fetchCovid(res.data));
         })
@@ -30,7 +30,7 @@ function Notification({ className }) {
 
   useEffect(() => {
     const getWeather = async () => {
-      await axios.get("http://localhost:5000/information/getWeather")
+      await axios.get("http://128.199.117.96:5000/information/getWeather")
         .then((res) => {
           setWeather(res.data);
         })
@@ -43,7 +43,7 @@ function Notification({ className }) {
 
   useEffect(() => {
     const getGold = async () => {
-      await axios.get("http://localhost:5000/information/getGold")
+      await axios.get("http://128.199.117.96:5000/information/getGold")
         .then((res) => {
           setGold(res.data.response);
         })

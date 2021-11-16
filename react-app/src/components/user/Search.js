@@ -16,7 +16,7 @@ function Search({ className }) {
         setQuery(event.target.value);
     }
     function useSearchOne(event) {
-        axios.get(`http://localhost:5000/feed/Search/${query}`).then((res) => {
+        axios.get(`http://128.199.117.96:5000/feed/Search/${query}`).then((res) => {
             dispatch(fetchNews(res.data));
         })
             .catch((err) => {
@@ -26,7 +26,7 @@ function Search({ className }) {
 
     function useSearch(event) {
         axios
-            .get(`http://localhost:5000/feed/Category/${type}`)
+            .get(`http://128.199.117.96:5000/feed/Category/${type}`)
             .then((res) => {
                 dispatch(fetchNews(res.data));
             })

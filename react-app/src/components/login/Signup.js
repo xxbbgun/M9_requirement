@@ -22,7 +22,7 @@ function Signup({ className }) {
   const addUser = (event) => {
     event.preventDefault();
     axios
-      .post("http://localhost:5000/user/sign-up", {
+      .post("http://128.199.117.96:5000/user/sign-up", {
         name: name,
         email: email,
         password: password,

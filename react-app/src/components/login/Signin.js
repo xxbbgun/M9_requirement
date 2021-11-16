@@ -21,7 +21,7 @@ function Signin({ className }) {
   const login = (event) => {
     event.preventDefault();
     axios
-      .post("http://localhost:5000/user/sign-in", {
+      .post("http://128.199.117.96:5000/user/sign-in", {
         email: email,
         password: password,
       })
@@ -51,7 +51,7 @@ function Signin({ className }) {
   const responseGoogle = async (response) => {
     axios({
       method: "post",
-      url: "http://localhost:5000/user/signin/google",
+      url: "http://128.199.117.96:5000/user/signin/google",
       data: { tokenId: response.tokenId },
     }).then((res) => {
       localStorage.setItem(`token`, JSON.stringify(res.data.token));
@@ -73,7 +73,7 @@ function Signin({ className }) {
             />
           </div>
           <div className="name">
-            <h1> Website name </h1>
+            <h1>Camt Time  </h1>
           </div>
           <div className="description">
             <h1> Description </h1>
@@ -81,7 +81,7 @@ function Signin({ className }) {
         </div>
         <div className="login">
           <div className="title">
-            <h1>LOGIN TO ชื่อเว็บ </h1>
+            <h1>SIGN IN </h1>
           </div>
 
           <Form className="form">
@@ -155,9 +155,10 @@ export default styled(Signin)`
     margin-left: 8%;
   }
   .name > h1 {
-    font-size: 50px;
-    color: white;
+    font-size: 80px;
+    color: black;
     margin-left: 20%;
+    font-family: UnifrakturCook;
   }
   .description > h1 {
     font-size: 20px;
@@ -170,9 +171,9 @@ export default styled(Signin)`
   }
   .title > h1 {
     color: #eb1c01;
-    margin-left: 30%;
+    margin-left: 25%;
     margin-top: 120px;
-    font-weight: 900;
+    font-weight: 700;
     font-size: 50px;
   }
   .or > h3 {

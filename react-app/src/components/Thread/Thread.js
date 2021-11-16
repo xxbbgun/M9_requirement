@@ -18,7 +18,7 @@ function Thread({ className }) {
 
   function useSearch(event) {
     axios
-      .get(`http://localhost:5000/question/Category/${type}`)
+      .get(`http://128.199.117.96:5000/question/Category/${type}`)
       .then((res) => {
         dispatch(fetchQuestions(res.data));
       })
@@ -30,7 +30,7 @@ function Thread({ className }) {
   useEffect(() => {
     const getQuestion = () => {
       axios
-        .get("http://localhost:5000/question/GetQuestion")
+        .get("http://128.199.117.96:5000/question/GetQuestion")
         .then((res) => {
           dispatch(fetchQuestions(res.data));
         })

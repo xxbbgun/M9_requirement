@@ -25,7 +25,7 @@ function AddThread({ className }) {
       description: description,
       dates: dates
     }
-    axios.post("http://localhost:5000/question/AddQuestion",data).then((res) => {
+    axios.post("http://128.199.117.96:5000/question/AddQuestion",data).then((res) => {
       if(role === 'admin'){
         history.push("/admin-thread");
       }else {

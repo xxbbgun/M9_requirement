@@ -19,7 +19,7 @@ function ThreadDetail({ className, socket }) {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/question/GetQuestionById/${id}`)
+      .get(`http://128.199.117.96:5000/question/GetQuestionById/${id}`)
       .then((res) => {
         setQuestionDetail(res.data);
       })
@@ -29,7 +29,7 @@ function ThreadDetail({ className, socket }) {
   }, [id]);
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/comment/commentById/${id}`).then((res) => {
+    axios.get(`http://128.199.117.96:5000/comment/commentById/${id}`).then((res) => {
       setChat(res.data);
     });
   }, [id]);

@@ -16,7 +16,7 @@ function EditNew({ className }) {
   useEffect(() => {
     
       axios
-        .get(`http://localhost:5000/feed/GetFeedById/${id}`)
+        .get(`http://128.199.117.96:5000/feed/GetFeedById/${id}`)
         .then((res) => {
           setNews(res.data);
           setHeadline(res.data.Headline);
@@ -53,7 +53,7 @@ function EditNew({ className }) {
     formData.append("DateTime", dates);
     formData.append("type", type);
 
-    let data = axios.put(`http://localhost:5000/feed/UpdateFeed/${id}`,formData)
+    let data = axios.put(`http://128.199.117.96:5000/feed/UpdateFeed/${id}`,formData)
     if(data){
       history.push("/admin-home");
     }
