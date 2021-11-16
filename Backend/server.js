@@ -244,6 +244,25 @@ app.use('/api-doc', swaggerUi.serve, swaggerUi.setup(swaggerSpecs))
  *           type: string
  *           description: description of weather today
  *           example: overcast clouds
+ *  Gold:
+ *   type: object
+ *   properties:
+ *         date:
+ *           type: string
+ *           description: Date today
+ *           example: 16 พฤศจิกายน 2564
+ *         update_time:
+ *           type: string
+ *           description: Time that api update
+ *           example: เวลา 09:27 น.
+ *         buy:
+ *           type: string
+ *           description: selling price
+ *           example: 29,400.00
+ *         sell:
+ *           type: string
+ *           description: purchase price
+ *           example: 28,288.56
  *  Comment:
  *   type: object
  *   properties:
@@ -263,6 +282,37 @@ app.use('/api-doc', swaggerUi.serve, swaggerUi.setup(swaggerSpecs))
  *           type: string
  *           description: Date time comment
  *           example: 11/14/2021, 12:52:58 AM
+ *  Question:
+ *   type: object
+ *   properties:
+ *         _id:
+ *           type: string
+ *           description:  The auto-generated id of the thread
+ *           example: 619319c5822eac091a57f051
+ *         title:
+ *           type: string
+ *           description: Title of the thread
+ *           example: ชอบเรียนชีวะ เเต่ไม่อยากไปทางหมอพยาบาลเลย มีคณะไหนเเนะนำมั้ยคะ
+ *         content:
+ *           type: string
+ *           description: Content of the thread
+ *           example: ชอบเรียนวิชาชีวะมากๆเลยรู้สึกสนุกที่เรียน เเต่ตอนนี้ยังเลือกคณะที่อยากเรียนไม่ได้เลยค่ะ
+ *         description:
+ *           type: string
+ *           description: Description of the thread
+ *           example: ตอนนี้หนูอยู่ ม.5เเล้วค่ะ ชอบเรียนวิชาชีวะมากๆเลยรู้สึกสนุกที่เรียน เเต่ตอนนี้ยังเลือกคณะที่อยากเรียนไม่ได้เลยค่ะ ทางบ้านให้ไปทางพยาบาลเเต่หนูรู้สึกว่าไม่ชอบเลยค่ะTTเพราะเป็นคนที่ขี้อายมากๆไม่กล้าพูดคุยกับคนอื่นเท่าไหร่ พี่ๆคิดว่าควรไปทางไหนดีคะ
+ *         DateTime:
+ *           type: string
+ *           description: Date time created the thread
+ *           example: 27/09/2564 4:37:10 PM
+ *         type:
+ *           type: string
+ *           description: type of news
+ *           example: General News & Current Affairs
+ *         status:
+ *           type: string
+ *           description: status of news
+ *           example: ปกติ
  */
 
 
@@ -448,6 +498,21 @@ app.use('/api-doc', swaggerUi.serve, swaggerUi.setup(swaggerSpecs))
   *     description: Weather news information
   *    500:
   *     description: Error cannot get Weather news 
+  * /information/getGold:
+  *  get:
+  *   summary: Realtime gold Information
+  *   tags: [Information]
+  *   description: Realtime gold Information
+  *   requestBody:
+  *    content:
+  *     application/json:
+  *      schema:
+  *       $ref: '#/definitions/Gold'
+  *   responses:
+  *    200:
+  *     description: Gold news information
+  *    500:
+  *     description: Error cannot get Gold news 
   * /comment/commentById/:id:
   *  get:
   *   summary: Comment News
@@ -463,6 +528,82 @@ app.use('/api-doc', swaggerUi.serve, swaggerUi.setup(swaggerSpecs))
   *     description: Comment News successful
   *    500:
   *     description: Error cannot comment news 
+  * /question/GetQuestion:
+  *  get:
+  *   summary: Thread
+  *   tags: [Thread]
+  *   description: Thread
+  *   requestBody:
+  *    content:
+  *     application/json:
+  *      schema:
+  *       $ref: '#/definitions/Question'
+  *   responses:
+  *    200:
+  *     description: Thread News successful
+  *    500:
+  *     description: Error cannot post thread 
+  * /question/GetQuestionById/:id:
+  *  get:
+  *   summary: Show thread by Id
+  *   tags: [Thread]
+  *   description: Show thread by Id
+  *   requestBody:
+  *    content:
+  *     application/json:
+  *      schema:
+  *       $ref: '#/definitions/Question'
+  *   responses:
+  *    200:
+  *     description: Thread News successful
+  *    500:
+  *     description: Error cannot post thread 
+  * /question/Category/:keyword:
+  *  get:
+  *   summary: Show thread by category
+  *   tags: [Thread]
+  *   description: Show thread by category
+  *   requestBody:
+  *    content:
+  *     application/json:
+  *      schema:
+  *       $ref: '#/definitions/Question'
+  *   responses:
+  *    200:
+  *     description: Show thread by category
+  *    500:
+  *     description: Error cannot show thread information 
+  * /question/AddQuestion:
+  *  post:
+  *   summary: Add thread
+  *   tags: [Thread]
+  *   description: Add thread
+  *   requestBody:
+  *    content:
+  *     application/json:
+  *      schema:
+  *       $ref: '#/definitions/Question'
+  *   responses:
+  *    200:
+  *     description: Add Thread News successful
+  *    500:
+  *     description: Error cannot add new thread 
+  * /question/DeleteQuestionById/:id:
+  *  delete:
+  *   summary: Delete thread by Id
+  *   tags: [Thread]
+  *   description:  Delete thread by Id
+  *   requestBody:
+  *    content:
+  *     application/json:
+  *      schema:
+  *       $ref: '#/definitions/Question'
+  *   responses:
+  *    200:
+  *     description: Delete Thread News successful
+  *    500:
+  *     description: Error cannot delete thread 
+
   */
 
 
