@@ -21,7 +21,7 @@ function Signin({ className }) {
   const login = (event) => {
     event.preventDefault();
     axios
-      .post("http://128.199.117.96:5000/user/sign-in", {
+      .post(process.env.REACT_APP_BACKEND+"/user/sign-in", {
         email: email,
         password: password,
       })
@@ -51,7 +51,7 @@ function Signin({ className }) {
   const responseGoogle = async (response) => {
     axios({
       method: "post",
-      url: "http://128.199.117.96:5000/user/signin/google",
+      url: process.env.REACT_APP_BACKEND+"/user/signin/google",
       data: { tokenId: response.tokenId },
     }).then((res) => {
       localStorage.setItem(`token`, JSON.stringify(res.data.token));

@@ -19,7 +19,7 @@ function Detail({ className ,socket}) {
   const [chat, setChat] = useState([]);
   useEffect(() => {
     axios
-      .get(`http://128.199.117.96:5000/feed/GetFeedById/${id}`)
+      .get(process.env.REACT_APP_BACKEND+`/feed/GetFeedById/${id}`)
       .then((res) => {
         setNews(res.data);
       })
@@ -29,7 +29,7 @@ function Detail({ className ,socket}) {
   }, [id]);
 
   useEffect(() => {
-    axios.get(`http://128.199.117.96:5000/comment/commentById/${id}`).then((res) => {
+    axios.get(process.env.REACT_APP_BACKEND+`/comment/commentById/${id}`).then((res) => {
       setChat(res.data);
     });
   }, [id]);

@@ -22,7 +22,7 @@ function Signup({ className }) {
   const addUser = (event) => {
     event.preventDefault();
     axios
-      .post("http://128.199.117.96:5000/user/sign-up", {
+      .post(process.env.REACT_APP_BACKEND+"/user/sign-up", {
         name: name,
         email: email,
         password: password,

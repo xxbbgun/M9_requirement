@@ -28,7 +28,7 @@ function AddNews({ className }) {
     formData.append("DateTime", dates);
     formData.append("type", type);
     
-    let data = axios.post("http://128.199.117.96:5000/feed/AddFeed",formData)
+    let data = axios.post(process.env.REACT_APP_BACKEND+"/feed/AddFeed",formData)
     if(data){
       history.push("/admin-home");
     }

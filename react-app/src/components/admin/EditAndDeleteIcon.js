@@ -13,7 +13,7 @@ function EditAndDeleteIcon({ className }) {
   useEffect(() => {
     const getNews = () => {
       axios
-        .get(`http://128.199.117.96:5000/feed/GetFeedById/${id}`)
+        .get(process.env.REACT_APP_BACKEND +`/feed/GetFeedById/${id}`)
         .then((res) => {
           setNews(res.data);
         })
@@ -36,7 +36,7 @@ function EditAndDeleteIcon({ className }) {
       cancelButtonText: "No",
     }).then((result) => {
       if (result.isConfirmed) {
-        let data = axios.delete(`http://128.199.117.96:5000/feed/DeleteFeed/${id}`)
+        let data = axios.delete(process.env.REACT_APP_BACKEND+`/feed/DeleteFeed/${id}`)
         if(data){
           history.push("/admin-home");
         }
