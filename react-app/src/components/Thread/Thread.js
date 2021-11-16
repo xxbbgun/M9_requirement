@@ -108,7 +108,7 @@ function Thread({ className }) {
             {question ? (
               question.map((data) => {
                 return <GetThread key={data._id} data={data} />;
-              })
+              }).reverse()
             ) : (
               <div>loading...</div>
             )}

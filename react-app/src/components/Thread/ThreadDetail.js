@@ -110,6 +110,9 @@ export default styled(ThreadDetail)`
     display: flex;
     margin-top: 30px;
   }
+  .text-title {
+    color: #eb1c01;
+  }
   .text-desc {
     margin-top: 15px;
   }
