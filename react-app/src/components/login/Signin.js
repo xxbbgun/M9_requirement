@@ -130,24 +130,13 @@ function Signin({ className }) {
 }
 
 export default styled(Signin)`
-.btnFacebook { 
-  width: 192px;
-  height:47px;  
-  border-radius: 4px;
-  background: #3b5998;
-  color:white;
-  border:0px transparent;  
-  text-align: center;
-  margin:5px;
-  display: inline-block;
-}
   .body {
     display: flex;
   }
   .bg {
     height: 90vh;
     width: 40vw;
-    background: -webkit-linear-gradient(left, #eb1c01, #ff7f01);
+    background-color:#CC0000;
     margin-top: 40px;
   }
   .logo > img {
@@ -157,9 +146,9 @@ export default styled(Signin)`
     margin-left: 8%;
   }
   .name > h1 {
-    font-size: 80px;
-    color: black;
-    margin-left: 20%;
+    font-size: 50px;
+    color: white;
+    margin-left: 30%;
     font-family: UnifrakturCook;
   }
   .description > h1 {
@@ -182,8 +171,10 @@ export default styled(Signin)`
   }
   .or > h3 {
     color: #eb1c01;
-    margin-left: 40%;
-    margin-top: 50px;
+    margin-left: 10%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-size: 20px;
 
   }
   .form {
@@ -224,6 +215,5 @@ export default styled(Signin)`
   }
   .btnGoogle{
     border-radius: 80px;
-    margin-left: 20px;
   }
 `;

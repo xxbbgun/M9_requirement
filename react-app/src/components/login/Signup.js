@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Link, useHistory } from "react-router-dom";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button,Container} from "react-bootstrap";
 import axios from "axios";
 import Swa from "sweetalert2";
 import { useDispatch } from "react-redux";
@@ -55,6 +55,7 @@ function Signup({ className }) {
 
   return (
     <div className={className}>
+            <Container>
       <div className="body">
         <div className="bg">
           <div className="logo">
@@ -119,6 +120,7 @@ function Signup({ className }) {
           </div>
         </div>
       </div>
+      </Container>
     </div>
   );
 }
@@ -128,9 +130,10 @@ export default styled(Signup)`
     display: flex;
   }
   .bg {
-    height: 100vh;
+    height: 90vh;
     width: 40vw;
-    background: -webkit-linear-gradient(left, #eb1c01, #ff7f01);
+    background-color:#CC0000;
+    margin-top: 40px;
   }
   .logo > img {
     width: 80%;
@@ -149,13 +152,17 @@ export default styled(Signup)`
     margin-left: 20%;
   }
   .register {
-    height: 100vh;
+    height: 90vh;
     width: 60vw;
+    background-color: whitesmoke;
+    margin-top: 40px;
   }
   .title > h1 {
     color: #eb1c01;
-    margin-left: 37%;
+    margin-left: 20%;
     margin-top: 120px;
+    font-weight: 700;
+    font-size: 50px;
   }
   .form {
     width: 70vh;
