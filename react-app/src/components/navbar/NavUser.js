@@ -35,7 +35,7 @@ function NavUser({ className }) {
           <div className="nav">
             <NavLink to="/home" className="link">Home </NavLink>
             <NavLink to="/user-news" className="link">News </NavLink>
-            <NavLink to="/user-thread" className="link">Thred </NavLink>
+            <NavLink to="/user-thread" className="link">Thread </NavLink>
           </div>
           <div className="user-logout">
             <div className="user">
