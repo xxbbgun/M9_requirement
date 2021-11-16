@@ -29,7 +29,7 @@ function NavUser({ className }) {
     <div className={className}>
       <div className="Navbar">
         <div className="Wedsite">
-          <h3>The New York Times</h3>
+          <h3>Camt Times</h3>
         </div>
         <div className="detail">
           <div className="nav">
@@ -60,7 +60,7 @@ export default styled(NavUser)`
   margin-top: 30px;
 }
 .Wedsite>h3{
-  font-size: 30px;
+  font-size: 60px;
 }
 .detail {
   display: flex;

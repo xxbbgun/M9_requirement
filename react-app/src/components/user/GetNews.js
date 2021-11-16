@@ -48,9 +48,11 @@ export default styled(GetNews)`
   .news {
     margin-top: 50px;
     display: flex;
+    box-shadow: 0 2px 8px 0 whitesmoke, 0 6px 10px 0 whitesmoke;
+    border: 1px solid whitesmoke;
   }
   .body > h1 {
-    font-size: 20px;
+    font-size: 25px;
   }
   .body > h2 {
     font-size: 18px;
