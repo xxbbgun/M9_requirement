@@ -8,7 +8,6 @@ import { fetchNews } from "../../ActionAndStore/News/action";
 import { useSelector, useDispatch } from "react-redux";
 import GetNews from './GetNews';
 import Search from "./Search";
-import Notification from '../Notification.js/Notification';
 import { Redirect } from "react-router-dom";
 function Home({ className }) {
     const news = useSelector((state) => state.news);

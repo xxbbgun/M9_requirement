@@ -3,10 +3,10 @@ import styled from "styled-components";
 import axios from "axios";
 import { fetchCovid } from "../../ActionAndStore/Covid/action";
 import { useSelector, useDispatch } from "react-redux";
-import Covid from "../Notification.js/Covid";
-import Weather from '../Notification.js/Weather';
+import Covid from "../Notification/Covid";
+import Weather from '../Notification/Weather';
 import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
-import Gold from "../Notification.js/Gold";
+import Gold from "../Notification/Gold";
 
 function Notification({ className }) {
   const covid = useSelector((state) => state.covid);
