@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 mongoose.connect(
-	"mongodb://localhost:27017/RealTimeFeed",
+	"mongodb+srv://m9Project:m9Project@cluster0.ftihs.mongodb.net/RealTimeFeed",
 	{ useNewUrlParser: true },
 );
 
