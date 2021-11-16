@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Link, useHistory } from "react-router-dom";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button,Container } from "react-bootstrap";
 import axios from "axios";
 import Swa from "sweetalert2";
 import GoogleLogin from "react-google-login";
@@ -64,6 +64,7 @@ function Signin({ className }) {
 
   return (
     <div className={className}>
+      <Container>
       <div className="body">
         <div className="bg">
           <div className="logo">
@@ -85,7 +86,6 @@ function Signin({ className }) {
           </div>
 
           <Form className="form">
-
             <Form.Group className="mb-3" controlId="formGroupEmail">
               <GoogleLogin
                 clientId="292061599755-9ooqp99oqcankjdso51rqt1253s1fjbr.apps.googleusercontent.com"
@@ -124,6 +124,7 @@ function Signin({ className }) {
           </div>
         </div>
       </div>
+      </Container>
     </div>
   );
 }
@@ -144,9 +145,10 @@ export default styled(Signin)`
     display: flex;
   }
   .bg {
-    height: 100vh;
+    height: 90vh;
     width: 40vw;
     background: -webkit-linear-gradient(left, #eb1c01, #ff7f01);
+    margin-top: 40px;
   }
   .logo > img {
     width: 80%;
@@ -166,8 +168,10 @@ export default styled(Signin)`
     margin-left: 20%;
   }
   .login {
-    height: 100vh;
+    height: 90vh;
     width: 60vw;
+    background-color: whitesmoke;
+    margin-top: 40px;
   }
   .title > h1 {
     color: #eb1c01;
