@@ -99,7 +99,7 @@ export default styled(NavUser)`
   margin-left: 40px;;
 
 }
-.user-logout {
+.admin-logout {
   margin-right: 100px;
 }
 `;
