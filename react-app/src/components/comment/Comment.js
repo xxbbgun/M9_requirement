@@ -8,7 +8,7 @@ function Comment({ className, name, time, message }) {
       <div className="container">
         <Row className="card-comment">
           <Col className="each-card">
-            <Card.Body className="card-body">
+            <div className="card-body">
               <div className="group-comment-title">
                 <div className="comment-username">
                   <Card.Title>{name}</Card.Title>
@@ -18,9 +18,11 @@ function Comment({ className, name, time, message }) {
                 </div>
               </div>
               <div className="comment-box">
-                <Card.Text>{message}</Card.Text>
+                <div className="comment-text">
+                  <label>{message}</label>
+                </div>
               </div>
-            </Card.Body>
+            </div>
           </Col>
         </Row>
       </div>
@@ -46,11 +48,11 @@ export default styled(Comment)`
   }
   .each-card {
     display: flex;
-    
   }
   .card-body {
     margin-top: 10px;
     margin-bottom: 10px;
+    width: 100%;
   }
   .group-comment-title {
     display: flex;
