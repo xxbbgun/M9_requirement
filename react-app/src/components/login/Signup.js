@@ -32,8 +32,13 @@ function Signup({ className }) {
         event.preventDefault();
         localStorage.setItem(`token`, JSON.stringify(res.data.token));
         localStorage.setItem(`name`, JSON.stringify(res.data.user.name));
+        localStorage.setItem(`role`, JSON.stringify(res.data.user.role));
         dispatch(fetchCustomer(res.data));
-        history.push("/home");
+        if(res.data.user.role === "admin"){
+          history.push("/admin-home");
+        }else{
+          history.push("/home");
+        }
       })
       .catch((error) => {
         alertError(error.response.data.message);
