@@ -56,9 +56,17 @@ function ThreadDetail({ className, socket }) {
   return (
     <div className={className}>
       <div className="container">
+     
         <div className="detail-title">
           <h1 className="text-title">{questionDetail.title}</h1>
-        </div>
+        </div> 
+        <div className="breadcrumb-group">
+            <Breadcrumb>
+              <Breadcrumb.Item className="create" active>
+                {`Create at ${questionDetail.DateTime}`}
+              </Breadcrumb.Item>
+            </Breadcrumb>
+          </div>
         <div className="detail-description">
           <label className="text-desc">{questionDetail.description}</label>
         </div>
