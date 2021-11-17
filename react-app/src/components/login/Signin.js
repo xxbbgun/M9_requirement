@@ -137,7 +137,7 @@ export default styled(Signin)`
   .bg {
     height: 90vh;
     width: 40vw;
-    background-color:#CC0000;
+    background: -webkit-linear-gradient(left, #B90E29, #F20000);
     margin-top: 40px;
   }
   .logo > img {
