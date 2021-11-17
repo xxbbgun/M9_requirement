@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon server.js",
-    "start_local":"nodemon server.js",
+    "start_local": "nodemon server.js",
     "start": "NODE_ENV=local node server.js",
-    "start_prod":"NODE_ENV=production node server.js",
+    "start_prod": "NODE_ENV=production node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
