@@ -56,6 +56,7 @@ function Signin({ className }) {
     }).then((res) => {
       localStorage.setItem(`token`, JSON.stringify(res.data.token));
       localStorage.setItem(`name`, JSON.stringify(res.data.user.name));
+      localStorage.setItem(`role`, JSON.stringify(res.data.user.role));
       dispatch(fetchCustomer(res.data));
       history.push("/home");
     })

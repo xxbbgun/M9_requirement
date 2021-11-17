@@ -1,7 +1,6 @@
 
 const axios = require('axios')
 require('dotenv').config()
-console.log(process.env.WEATHER_API_KEY)
 module.exports = {
     GetCovid: async (req, res, next) => {
 		try{
