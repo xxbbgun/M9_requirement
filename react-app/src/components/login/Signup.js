@@ -61,23 +61,33 @@ function Signup({ className }) {
       <Container>
         <div className="body">
           <div className="bg">
-            <div className="logo">
-              <img
-                src="https://i.pinimg.com/originals/26/91/f2/2691f2fa1a0f078f5f274edf7fea6763.png"
-                alt="logo"
-              />
-            </div>
-            <div className="name">
-              <h1> Website name </h1>
-            </div>
-            <div className="description">
-              <h1> Description </h1>
+            <div className="box-logo">
+              <div className="logo">
+                <div className="logo-image">
+                  <img
+                    src="https://i.pinimg.com/originals/26/91/f2/2691f2fa1a0f078f5f274edf7fea6763.png"
+                    alt="logo"
+                  />
+                </div>
+              </div>
+              <div className="name">
+                <div className="name-text">
+                  <h1>Camt Time</h1>
+                </div>
+              </div>
+              <div className="description">
+                <div className="desc-text">
+                  <h1>Real Time News Website</h1>
+                </div>
+              </div>
             </div>
           </div>
           <div className="register">
             <div className="box-register">
               <div className="title">
-                <h1>REGISTER </h1>
+                <div className="title-text">
+                  <h1>REGISTER</h1>
+                </div>
               </div>
               <div className="box-form">
                 <Form className="form">
@@ -120,14 +130,22 @@ function Signup({ className }) {
             </div>
 
             <div className="box-btn">
-              <Button className="button" fullWidth onClick={addUser}>
-                SIGNUP
-              </Button>
-              <div className="signup">
-                <h1>Already have account,</h1>
-                <Link to="/sign-in" className="signin">
-                  Sign in here
-                </Link>
+              <div className="btnAndsignin">
+                <div className="btn-text">
+                  <Button className="button" fullWidth onClick={addUser}>
+                    SIGNUP
+                  </Button>
+                </div>
+                <div className="signup">
+                  <div className="signup-text">
+                    <h1>Already have account,</h1>
+                  </div>
+                  <div className="link-signin">
+                    <Link to="/sign-in" className="signin">
+                      <label>Sign in here</label>
+                    </Link>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -147,21 +165,34 @@ export default styled(Signup)`
     background: -webkit-linear-gradient(left, #b90e29, #f20000);
     margin-top: 40px;
   }
-  .logo > img {
+  .logo {
+    display: flex;
+    justify-content: center;
+  }
+  .logo-image > img {
     width: 80%;
     height: auto;
     margin-top: 120px;
-    margin-left: 8%;
+    margin-left: 10%;
   }
-  .name > h1 {
+  .name {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  .name-text > h1 {
     font-size: 50px;
     color: white;
-    margin-left: 20%;
+    font-family: UnifrakturCook;
   }
-  .description > h1 {
+  .description {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  .desc-text > h1 {
     font-size: 20px;
     color: white;
-    margin-left: 20%;
   }
   .register {
     height: 90vh;
@@ -169,48 +200,57 @@ export default styled(Signup)`
     background-color: whitesmoke;
     margin-top: 40px;
   }
-  .title > h1 {
+  .title {
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+  }
+  .title-text > h1 {
     color: #eb1c01;
-    margin-left: 10%;
-    margin-top: 120px;
     font-weight: 700;
     font-size: 50px;
   }
   .box-form {
     display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 20px;
   }
   .form {
-    width: 70vh;
-    margin-left: 10%;
-    margin-right: 8%;
-    margin-top: 50px;
+    width: 80%;
   }
   .box-btn {
     display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  .btnAndsignin {
+    display: flex;
+    width: 80%;
   }
   .button {
-    background: -webkit-linear-gradient(left, #eb1c01, #ff7f01);
+    background-color: #f20000;
     border: none;
     color: white;
     text-transform: inherit;
     border-radius: 5px;
     margin-top: 20px;
-    width: 15vw;
-    margin-left: 10%;
+    padding: 10px 15px;
   }
   .signup {
     display: flex;
-    margin-top: 10px;
-    margin-left: 0%;
+    margin-top: 23px;
+    width: 100%;
+    margin-left: 50px;
   }
-  .signup > h1 {
+  .signup-text > h1 {
     font-size: 20px;
-    margin-top: 20px;
-    margin-left: 30px;
+    margin-bottom: 0px;
+  }
+  .link-signin {
+    margin-left: 10px;
   }
   .signin {
     text-decoration: none;
-    margin-top: 20px;
-    color: -webkit-linear-gradient(left, #eb1c01, #ff7f01);
   }
 `;
