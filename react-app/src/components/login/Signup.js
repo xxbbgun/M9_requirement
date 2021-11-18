@@ -229,7 +229,7 @@ export default styled(Signup)`
     width: 80%;
   }
   .button {
-    background-color: #f20000;
+    background-color: #eb1c01;
     border: none;
     color: white;
     text-transform: inherit;

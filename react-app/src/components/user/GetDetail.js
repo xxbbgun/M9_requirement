@@ -108,7 +108,7 @@ export default styled(GetDetail)`
     margin-bottom: 50px;
   }
   .text-comment {
-    background: -webkit-linear-gradient(left, #eb1c01, #ff7f01);
+    background-color: -webkit-linear-gradient(left, #eb1c01, #ff7f01);
     border: none;
   }
   .send-icon {
